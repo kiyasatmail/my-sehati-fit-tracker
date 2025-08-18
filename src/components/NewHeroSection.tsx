@@ -1,10 +1,10 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Calculator, Ruler, Heart, Activity, TrendingUp, Clock, Calendar } from 'lucide-react';
+import { Calculator, Ruler, Heart, Activity, TrendingUp, Clock, Calendar, Package } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 interface NewHeroSectionProps {
-  onViewChange: (view: 'calories' | 'measurements' | 'cardio' | 'program') => void;
+  onViewChange: (view: 'calories' | 'measurements' | 'cardio' | 'program' | 'items') => void;
 }
 export const NewHeroSection: React.FC<NewHeroSectionProps> = ({
   onViewChange
@@ -41,6 +41,13 @@ export const NewHeroSection: React.FC<NewHeroSectionProps> = ({
     description: isRTL ? 'أنشئ برنامجك التدريبي الأسبوعي المخصص مع التمارين والمجموعات واحفظه محلياً على جهازك' : 'Create your custom weekly workout program with exercises and sets, saved locally on your device',
     buttonText: t('explore'),
     color: 'from-orange-500 to-orange-600'
+  }, {
+    key: 'items',
+    icon: Package,
+    title: t('myItems'),
+    description: t('myItemsDesc'),
+    buttonText: t('exploreItems'),
+    color: 'from-pink-500 to-pink-600'
   }];
   return <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
@@ -85,7 +92,7 @@ export const NewHeroSection: React.FC<NewHeroSectionProps> = ({
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="pt-0">
-                  <Button variant="default" size="lg" onClick={() => onViewChange(feature.key as 'calories' | 'measurements' | 'cardio' | 'program')} className="w-full bg-primary hover:bg-primary-light text-lg font-semibold">
+                  <Button variant="default" size="lg" onClick={() => onViewChange(feature.key as 'calories' | 'measurements' | 'cardio' | 'program' | 'items')} className="w-full bg-primary hover:bg-primary-light text-lg font-semibold">
                     {feature.buttonText}
                   </Button>
                 </CardContent>
