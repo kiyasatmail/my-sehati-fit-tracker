@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Calculator, Activity, Zap, Target, TrendingDown, TrendingUp, Minus } from 'lucide-react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Calculator, Activity, Zap, Target, TrendingDown, TrendingUp, Minus, Save, History, Trash2, Calendar } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { toast } from '@/hooks/use-toast';
 
 interface CalorieData {
   age: number;
@@ -34,6 +37,14 @@ interface Results {
   };
 }
 
+interface SavedCalculation {
+  id: string;
+  name: string;
+  date: string;
+  formData: CalorieData;
+  results: Results;
+}
+
 export const CalorieCalculator: React.FC = () => {
   const { t, isRTL } = useLanguage();
   const [formData, setFormData] = useState<CalorieData>({
@@ -44,6 +55,26 @@ export const CalorieCalculator: React.FC = () => {
     activityLevel: 1.55
   });
   const [results, setResults] = useState<Results | null>(null);
+  const [savedCalculations, setSavedCalculations] = useState<SavedCalculation[]>([]);
+  const [saveDialogOpen, setSaveDialogOpen] = useState(false);
+  const [calculationName, setCalculationName] = useState('');
+
+  // Load saved calculations from localStorage
+  useEffect(() => {
+    const saved = localStorage.getItem('sehati-calorie-calculations');
+    if (saved) {
+      try {
+        setSavedCalculations(JSON.parse(saved));
+      } catch (error) {
+        console.error('Error loading saved calculations:', error);
+      }
+    }
+  }, []);
+
+  // Save calculations to localStorage
+  useEffect(() => {
+    localStorage.setItem('sehati-calorie-calculations', JSON.stringify(savedCalculations));
+  }, [savedCalculations]);
 
   const calculateCalories = () => {
     const { age, gender, weight, height, activityLevel } = formData;
@@ -95,6 +126,46 @@ export const CalorieCalculator: React.FC = () => {
     });
   };
 
+  const saveCalculation = () => {
+    if (!results || !calculationName.trim()) return;
+
+    const newCalculation: SavedCalculation = {
+      id: Date.now().toString(),
+      name: calculationName.trim(),
+      date: new Date().toLocaleDateString('ar-SA'),
+      formData: { ...formData },
+      results: { ...results }
+    };
+
+    setSavedCalculations(prev => [newCalculation, ...prev]);
+    setCalculationName('');
+    setSaveDialogOpen(false);
+    
+    toast({
+      title: isRTL ? 'تم الحفظ بنجاح' : 'Saved Successfully',
+      description: `${calculationName} ${isRTL ? 'تم حفظه' : 'has been saved'}`,
+    });
+  };
+
+  const loadCalculation = (saved: SavedCalculation) => {
+    setFormData(saved.formData);
+    setResults(saved.results);
+    
+    toast({
+      title: isRTL ? 'تم التحميل' : 'Loaded',
+      description: `${saved.name} ${isRTL ? 'تم تحميله' : 'has been loaded'}`,
+    });
+  };
+
+  const deleteCalculation = (id: string) => {
+    setSavedCalculations(prev => prev.filter(calc => calc.id !== id));
+    
+    toast({
+      title: isRTL ? 'تم الحذف' : 'Deleted',
+      description: isRTL ? 'تم حذف الحساب' : 'Calculation has been deleted',
+    });
+  };
+
   const activityLevels = [
     { value: 1.2, label: t('sedentary') },
     { value: 1.375, label: t('lightlyActive') },
@@ -105,11 +176,31 @@ export const CalorieCalculator: React.FC = () => {
 
   return (
     <div className="space-y-8">
-      {/* Back to Home Button */}
+      {/* Header */}
       <div className="text-center">
         <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">حاسبة السعرات الحرارية</h1>
         <p className="text-gray-600 text-lg">احسب احتياجاتك اليومية من السعرات الحرارية</p>
       </div>
+
+      {/* Tabs for Calculator and Saved */}
+      <Tabs defaultValue="calculator" className="max-w-6xl mx-auto">
+        <TabsList className="grid w-full grid-cols-2 mb-6">
+          <TabsTrigger value="calculator" className="flex items-center gap-2">
+            <Calculator className="h-4 w-4" />
+            {isRTL ? 'الحاسبة' : 'Calculator'}
+          </TabsTrigger>
+          <TabsTrigger value="saved" className="flex items-center gap-2">
+            <History className="h-4 w-4" />
+            {isRTL ? 'المحفوظات' : 'Saved'}
+            {savedCalculations.length > 0 && (
+              <span className="bg-primary text-primary-foreground text-xs px-2 py-1 rounded-full ml-1">
+                {savedCalculations.length}
+              </span>
+            )}
+          </TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="calculator" className="space-y-6">
 
       <Card className="shadow-xl border-0 bg-white max-w-4xl mx-auto">
         <CardHeader className="bg-gradient-to-r from-green-500 to-green-600 text-white rounded-t-lg">
@@ -191,15 +282,62 @@ export const CalorieCalculator: React.FC = () => {
             </Select>
           </div>
 
-          <Button 
-            onClick={calculateCalories} 
-            variant="default" 
-            size="lg" 
-            className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-semibold"
-          >
-            <Calculator className="h-5 w-5" />
-            {t('calculate')}
-          </Button>
+          <div className="flex gap-3">
+            <Button 
+              onClick={calculateCalories} 
+              variant="default" 
+              size="lg" 
+              className="flex-1 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-semibold"
+            >
+              <Calculator className="h-5 w-5" />
+              {t('calculate')}
+            </Button>
+            
+            {results && (
+              <Dialog open={saveDialogOpen} onOpenChange={setSaveDialogOpen}>
+                <DialogTrigger asChild>
+                  <Button 
+                    variant="outline" 
+                    size="lg"
+                    className="px-6"
+                  >
+                    <Save className="h-5 w-5" />
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-md">
+                  <DialogHeader>
+                    <DialogTitle>{isRTL ? 'حفظ الحساب' : 'Save Calculation'}</DialogTitle>
+                    <DialogDescription>
+                      {isRTL ? 'اختر اسماً لحفظ هذا الحساب' : 'Choose a name to save this calculation'}
+                    </DialogDescription>
+                  </DialogHeader>
+                  
+                  <div className="space-y-4">
+                    <Input
+                      value={calculationName}
+                      onChange={(e) => setCalculationName(e.target.value)}
+                      placeholder={isRTL ? 'اسم الحساب' : 'Calculation name'}
+                      className="w-full"
+                    />
+                  </div>
+
+                  <DialogFooter>
+                    <Button variant="outline" onClick={() => setSaveDialogOpen(false)}>
+                      {t('cancel')}
+                    </Button>
+                    <Button 
+                      onClick={saveCalculation}
+                      disabled={!calculationName.trim()}
+                      className="bg-green-500 hover:bg-green-600"
+                    >
+                      <Save className="h-4 w-4 mr-2" />
+                      {t('save')}
+                    </Button>
+                  </DialogFooter>
+                </DialogContent>
+              </Dialog>
+            )}
+          </div>
         </CardContent>
       </Card>
 
@@ -410,6 +548,104 @@ export const CalorieCalculator: React.FC = () => {
           </Card>
         </div>
       )}
+        </TabsContent>
+
+        {/* Saved Calculations Tab */}
+        <TabsContent value="saved" className="space-y-6">
+          <Card className="shadow-xl border-0 bg-white">
+            <CardHeader className="bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-t-lg">
+              <div className="flex justify-center mb-4">
+                <div className="p-3 bg-white/20 rounded-full">
+                  <History className="h-8 w-8 text-white" />
+                </div>
+              </div>
+              <CardTitle className="text-2xl text-center">
+                {isRTL ? 'الحسابات المحفوظة' : 'Saved Calculations'}
+              </CardTitle>
+              <CardDescription className="text-center text-white/90 text-lg">
+                {isRTL ? 'اعرض واستخدم حساباتك السابقة' : 'View and use your previous calculations'}
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="p-6">
+              {savedCalculations.length === 0 ? (
+                <div className="text-center py-8 text-muted-foreground">
+                  <History className="h-12 w-12 mx-auto mb-4 opacity-50" />
+                  <p className="text-lg font-medium">
+                    {isRTL ? 'لا توجد حسابات محفوظة بعد' : 'No saved calculations yet'}
+                  </p>
+                  <p className="text-sm">
+                    {isRTL ? 'احسب أولاً ثم احفظ النتائج' : 'Calculate first then save your results'}
+                  </p>
+                </div>
+              ) : (
+                <div className="grid gap-4">
+                  {savedCalculations.map((saved) => (
+                    <Card key={saved.id} className="border border-gray-200 hover:shadow-md transition-shadow">
+                      <CardContent className="p-4">
+                        <div className="flex items-center justify-between">
+                          <div className="flex-1">
+                            <div className="flex items-center gap-3 mb-2">
+                              <h4 className="font-semibold text-lg text-gray-800">{saved.name}</h4>
+                              <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">
+                                {saved.date}
+                              </span>
+                            </div>
+                            
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                              <div>
+                                <span className="text-gray-600">
+                                  {isRTL ? 'العمر:' : 'Age:'}
+                                </span>
+                                <span className="font-medium ml-1">{saved.formData.age}</span>
+                              </div>
+                              <div>
+                                <span className="text-gray-600">
+                                  {isRTL ? 'الوزن:' : 'Weight:'}
+                                </span>
+                                <span className="font-medium ml-1">{saved.formData.weight}kg</span>
+                              </div>
+                              <div>
+                                <span className="text-blue-600 font-medium">
+                                  BMR: {saved.results.bmr.toLocaleString()}
+                                </span>
+                              </div>
+                              <div>
+                                <span className="text-green-600 font-medium">
+                                  TDEE: {saved.results.tdee.toLocaleString()}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          
+                          <div className="flex items-center gap-2 ml-4">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => loadCalculation(saved)}
+                              className="text-blue-600 hover:text-blue-700"
+                            >
+                              <Calculator className="h-4 w-4 mr-1" />
+                              {isRTL ? 'تحميل' : 'Load'}
+                            </Button>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => deleteCalculation(saved.id)}
+                              className="text-red-500 hover:text-red-700 hover:bg-red-50"
+                            >
+                              <Trash2 className="h-4 w-4" />
+                            </Button>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
     </div>
   );
 };
