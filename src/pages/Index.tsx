@@ -3,6 +3,7 @@ import { Header } from '@/components/Header';
 import { HeroSection } from '@/components/HeroSection';
 import { CalorieCalculator } from '@/components/CalorieCalculator';
 import { BodyMeasurements } from '@/components/BodyMeasurements';
+import { CardioConverter } from '@/components/CardioConverter';
 import { Navigation } from '@/components/Navigation';
 
 type ViewType = 'home' | 'calories' | 'measurements' | 'cardio';
@@ -25,12 +26,7 @@ const Index = () => {
       case 'measurements':
         return <BodyMeasurements />;
       case 'cardio':
-        return (
-          <div className="text-center py-12">
-            <h2 className="text-2xl font-bold mb-4">محول الكارديو</h2>
-            <p className="text-muted-foreground">قريباً في المرحلة الثالثة...</p>
-          </div>
-        );
+        return <CardioConverter />;
       default:
         return <HeroSection onStartTracking={handleStartTracking} />;
     }

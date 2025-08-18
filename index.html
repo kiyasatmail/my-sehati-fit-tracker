@@ -3,22 +3,44 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>my-sehati-fit-tracker</title>
-    <meta name="description" content="Lovable Generated Project" />
-    <meta name="author" content="Lovable" />
+    <title>صحتي - Sehati | تطبيق الصحة الشامل</title>
+    <meta name="description" content="تطبيق صحتي الشامل - احسب السعرات الحرارية، تتبع قياسات الجسم، وحول السعرات لدقائق التمارين" />
+    <meta name="author" content="Sehati Health App" />
+    <meta name="keywords" content="صحة، لياقة، سعرات حرارية، تمارين، قياسات الجسم، صحتي" />
+    
+    <!-- PWA Support -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#22c55e">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="صحتي">
+    <link rel="apple-touch-icon" href="/icon-192.png">
+    
+    <!-- Icons -->
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png">
 
-    <meta property="og:title" content="my-sehati-fit-tracker" />
-    <meta property="og:description" content="Lovable Generated Project" />
+    <meta property="og:title" content="صحتي - Sehati | تطبيق الصحة الشامل" />
+    <meta property="og:description" content="تطبيق صحتي الشامل - احسب السعرات الحرارية، تتبع قياسات الجسم، وحول السعرات لدقائق التمارين" />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <meta property="og:image" content="/icon-512.png" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@lovable_dev" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <meta name="twitter:title" content="صحتي - Sehati | تطبيق الصحة الشامل" />
+    <meta name="twitter:description" content="تطبيق صحتي الشامل - احسب السعرات الحرارية، تتبع قياسات الجسم، وحول السعرات لدقائق التمارين" />
+    <meta name="twitter:image" content="/icon-512.png" />
   </head>
 
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    
+    <!-- PWA Install prompt -->
+    <script>
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        window.deferredPrompt = e;
+      });
+    </script>
   </body>
 </html>

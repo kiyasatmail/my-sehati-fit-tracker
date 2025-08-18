@@ -57,6 +57,21 @@ const translations = {
     measurement: 'القياس',
     progress: 'التقدم',
     cm: 'سم',
+    
+    // Cardio Converter
+    caloriesInput: 'عدد السعرات المراد حرقها',
+    exerciseType: 'نوع التمرين',
+    running: 'الجري',
+    cycling: 'ركوب الدراجة',
+    swimming: 'السباحة',
+    walking: 'المشي',
+    jumpingRope: 'نط الحبل',
+    rowing: 'التجديف',
+    convert: 'تحويل',
+    timeNeeded: 'الوقت المطلوب',
+    minutes: 'دقيقة',
+    selectExercise: 'اختر نوع التمرين',
+    enterCalories: 'أدخل عدد السعرات',
   },
   en: {
     appName: 'Sehati',
@@ -105,6 +120,21 @@ const translations = {
     measurement: 'Measurement',
     progress: 'Progress',
     cm: 'cm',
+    
+    // Cardio Converter
+    caloriesInput: 'Calories to burn',
+    exerciseType: 'Exercise type',
+    running: 'Running',
+    cycling: 'Cycling',
+    swimming: 'Swimming',
+    walking: 'Walking',
+    jumpingRope: 'Jumping rope',
+    rowing: 'Rowing',
+    convert: 'Convert',
+    timeNeeded: 'Time needed',
+    minutes: 'minutes',
+    selectExercise: 'Select exercise type',
+    enterCalories: 'Enter calories',
   }
 };
 

@@ -1,0 +1,170 @@
+import React, { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Heart, Clock, Flame } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
+
+interface Exercise {
+  key: string;
+  caloriesPerMinute: number; // متوسط السعرات المحروقة في الدقيقة لشخص 70 كيلو
+}
+
+const exercises: Exercise[] = [
+  { key: 'running', caloriesPerMinute: 12 },
+  { key: 'cycling', caloriesPerMinute: 8 },
+  { key: 'swimming', caloriesPerMinute: 11 },
+  { key: 'walking', caloriesPerMinute: 4 },
+  { key: 'jumpingRope', caloriesPerMinute: 13 },
+  { key: 'rowing', caloriesPerMinute: 9 },
+];
+
+export const CardioConverter: React.FC = () => {
+  const { t, isRTL } = useLanguage();
+  const [calories, setCalories] = useState<number>(0);
+  const [selectedExercise, setSelectedExercise] = useState<string>('');
+  const [result, setResult] = useState<number | null>(null);
+
+  const handleConvert = () => {
+    if (calories > 0 && selectedExercise) {
+      const exercise = exercises.find(ex => ex.key === selectedExercise);
+      if (exercise) {
+        const timeInMinutes = Math.round(calories / exercise.caloriesPerMinute);
+        setResult(timeInMinutes);
+      }
+    }
+  };
+
+  const formatTime = (minutes: number) => {
+    if (minutes < 60) {
+      return `${minutes} ${t('minutes')}`;
+    } else {
+      const hours = Math.floor(minutes / 60);
+      const remainingMinutes = minutes % 60;
+      return remainingMinutes > 0 
+        ? `${hours} ساعة و ${remainingMinutes} ${t('minutes')}`
+        : `${hours} ساعة`;
+    }
+  };
+
+  return (
+    <div className="space-y-6">
+      <Card className="gradient-card shadow-card border-0">
+        <CardHeader className="text-center">
+          <div className="flex justify-center mb-4">
+            <div className="p-3 bg-success rounded-full">
+              <Heart className="h-8 w-8 text-white" />
+            </div>
+          </div>
+          <CardTitle className="text-2xl">{t('cardioConverter')}</CardTitle>
+          <CardDescription className="text-lg">
+            تحويل السعرات الحرارية إلى دقائق التمارين الرياضية
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="space-y-2">
+              <Label htmlFor="calories">{t('caloriesInput')}</Label>
+              <Input
+                id="calories"
+                type="number"
+                value={calories || ''}
+                onChange={(e) => setCalories(parseInt(e.target.value) || 0)}
+                className="h-12 text-lg"
+                placeholder={t('enterCalories')}
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <Label htmlFor="exercise">{t('exerciseType')}</Label>
+              <Select value={selectedExercise} onValueChange={setSelectedExercise}>
+                <SelectTrigger className="h-12 text-lg">
+                  <SelectValue placeholder={t('selectExercise')} />
+                </SelectTrigger>
+                <SelectContent>
+                  {exercises.map((exercise) => (
+                    <SelectItem key={exercise.key} value={exercise.key}>
+                      <div className="flex items-center gap-3">
+                        <span>{t(exercise.key)}</span>
+                        <span className="text-sm text-muted-foreground">
+                          ({exercise.caloriesPerMinute} {t('calories')}/دقيقة)
+                        </span>
+                      </div>
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+
+          <Button 
+            onClick={handleConvert} 
+            variant="hero" 
+            size="lg" 
+            className="w-full"
+            disabled={!calories || !selectedExercise}
+          >
+            <Flame className="h-5 w-5" />
+            {t('convert')}
+          </Button>
+        </CardContent>
+      </Card>
+
+      {result !== null && (
+        <Card className="gradient-card shadow-card border-0">
+          <CardContent className="p-8 text-center">
+            <div className="flex justify-center mb-6">
+              <div className="p-4 bg-primary rounded-full">
+                <Clock className="h-8 w-8 text-primary-foreground" />
+              </div>
+            </div>
+            <h3 className="text-2xl font-bold mb-4">{t('timeNeeded')}</h3>
+            <div className="space-y-4">
+              <p className="text-4xl font-bold text-primary">
+                {formatTime(result)}
+              </p>
+              <p className="text-lg text-muted-foreground">
+                من {t(selectedExercise)} لحرق {calories.toLocaleString()} {t('calories')}
+              </p>
+            </div>
+            
+            <div className="mt-6 p-4 bg-white/50 rounded-lg border border-white/20">
+              <p className="text-sm text-muted-foreground">
+                * الحسابات تقريبية وتعتمد على شخص بوزن 70 كيلو
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* معلومات إضافية عن التمارين */}
+      <Card className="gradient-card shadow-card border-0">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Heart className="h-5 w-5" />
+            نصائح التمارين الرياضية
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {exercises.map((exercise) => (
+              <div 
+                key={exercise.key}
+                className="p-4 bg-white/30 rounded-lg border border-white/20 hover:bg-white/40 transition-smooth"
+              >
+                <div className="flex justify-between items-center">
+                  <span className="font-medium">{t(exercise.key)}</span>
+                  <span className="text-sm text-primary font-semibold">
+                    {exercise.caloriesPerMinute} سعرة/دقيقة
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  );
+};

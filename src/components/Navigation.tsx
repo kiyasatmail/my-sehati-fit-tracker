@@ -9,10 +9,10 @@ interface NavigationProps {
 }
 
 export const Navigation: React.FC<NavigationProps> = ({ currentView, onViewChange }) => {
-  const { t } = useLanguage();
+  const { t, isRTL } = useLanguage();
 
   const navItems = [
-    { key: 'home', icon: Home, label: 'الرئيسية' },
+    { key: 'home', icon: Home, label: isRTL ? 'الرئيسية' : 'Home' },
     { key: 'calories', icon: Calculator, label: t('calorieCalculator') },
     { key: 'measurements', icon: Ruler, label: t('bodyMeasurements') },
     { key: 'cardio', icon: Heart, label: t('cardioConverter') },
