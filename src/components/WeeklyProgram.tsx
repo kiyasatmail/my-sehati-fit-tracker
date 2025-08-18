@@ -172,7 +172,19 @@ export const WeeklyProgram: React.FC = () => {
   const saveProgram = () => {
     if (!currentProgram) return;
 
-    const newPrograms = [...programs, currentProgram];
+    // Check if editing existing program or creating new one
+    const existingIndex = programs.findIndex(p => p.id === currentProgram.id);
+    let newPrograms;
+    
+    if (existingIndex >= 0) {
+      // Update existing program
+      newPrograms = [...programs];
+      newPrograms[existingIndex] = currentProgram;
+    } else {
+      // Add new program
+      newPrograms = [...programs, currentProgram];
+    }
+    
     saveToStorage(newPrograms);
     setCurrentProgram(null);
     setIsCreating(false);
@@ -408,18 +420,48 @@ export const WeeklyProgram: React.FC = () => {
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <div className="grid grid-cols-7 gap-2 text-center">
-                    {program.days.map((day, index) => {
-                      const dayName = daysOfWeek.find(d => d.key === day.day)?.label || day.day;
-                      return (
-                        <div key={day.day} className="text-xs">
-                          <div className="font-semibold">{dayName}</div>
-                          <div className="text-muted-foreground">
-                            {day.isRestDay ? t('rest') : `${day.exercises.length} ${isRTL ? 'تمارين' : 'exercises'}`}
+                  <div className="space-y-3">
+                    <div className="grid grid-cols-7 gap-2 text-center">
+                      {program.days.map((day) => {
+                        const dayName = daysOfWeek.find(d => d.key === day.day)?.label || day.day;
+                        return (
+                          <div key={`${program.id}-${day.day}`} className="text-xs">
+                            <div className="font-semibold">{dayName}</div>
+                            <div className="text-muted-foreground">
+                              {day.isRestDay ? t('rest') : `${day.exercises.length} ${isRTL ? 'تمارين' : 'exercises'}`}
+                            </div>
                           </div>
-                        </div>
-                      );
-                    })}
+                        );
+                      })}
+                    </div>
+                    
+                    {/* Program Summary */}
+                    <div className="pt-3 border-t">
+                      <div className="flex justify-between text-sm">
+                        <span className="text-muted-foreground">
+                          {isRTL ? 'مجموع التمارين:' : 'Total exercises:'}
+                        </span>
+                        <span className="font-medium">
+                          {program.days.reduce((total, day) => total + day.exercises.length, 0)}
+                        </span>
+                      </div>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-muted-foreground">
+                          {isRTL ? 'أيام التدريب:' : 'Training days:'}
+                        </span>
+                        <span className="font-medium">
+                          {program.days.filter(day => !day.isRestDay).length}/7
+                        </span>
+                      </div>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-muted-foreground">
+                          {isRTL ? 'أيام الراحة:' : 'Rest days:'}
+                        </span>
+                        <span className="font-medium">
+                          {program.days.filter(day => day.isRestDay).length}
+                        </span>
+                      </div>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
