@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { Globe, Menu, Home, Calculator, Ruler, Heart } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
@@ -10,6 +11,7 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ currentView, onViewChange }) => {
   const { language, setLanguage, t, isRTL } = useLanguage();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleLanguage = () => {
     setLanguage(language === 'ar' ? 'en' : 'ar');
@@ -28,9 +30,44 @@ export const Header: React.FC<HeaderProps> = ({ currentView, onViewChange }) => 
         {/* Top bar with logo and language switcher */}
         <div className="flex items-center justify-between py-4 border-b border-white/20">
           <div className="flex items-center gap-3">
-            <Button variant="ghost" size="icon" className="text-primary-foreground hover:bg-white/10 md:hidden">
-              <Menu className="h-6 w-6" />
-            </Button>
+            <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon" className="text-primary-foreground hover:bg-white/10 md:hidden">
+                  <Menu className="h-6 w-6" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side={isRTL ? "right" : "left"} className="w-80">
+                <SheetHeader>
+                  <SheetTitle className="text-right text-xl font-bold mb-6">
+                    {t('appName')}
+                  </SheetTitle>
+                </SheetHeader>
+                <div className="flex flex-col gap-4 mt-6">
+                  {navItems.map((item) => {
+                    const Icon = item.icon;
+                    const isActive = currentView === item.key;
+                    
+                    return (
+                      <Button
+                        key={item.key}
+                        variant="ghost"
+                        size="lg"
+                        onClick={() => {
+                          onViewChange(item.key);
+                          setIsMenuOpen(false);
+                        }}
+                        className={`justify-start gap-3 h-12 text-base ${
+                          isActive ? 'bg-primary/10 text-primary' : 'text-gray-700 hover:bg-gray-100'
+                        }`}
+                      >
+                        <Icon className="h-5 w-5" />
+                        {item.label}
+                      </Button>
+                    );
+                  })}
+                </div>
+              </SheetContent>
+            </Sheet>
             <h1 className="text-2xl font-bold">{t('appName')}</h1>
           </div>
           
