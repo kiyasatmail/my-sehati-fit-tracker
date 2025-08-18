@@ -6,7 +6,8 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Plus, Trash2, Edit2, Calendar } from 'lucide-react';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import { Plus, Trash2, Edit2, Calendar, Eye, ChevronDown, ChevronUp } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { toast } from '@/hooks/use-toast';
 
@@ -39,6 +40,8 @@ export const WeeklyProgram: React.FC = () => {
   const [programName, setProgramName] = useState('');
   const [selectedDay, setSelectedDay] = useState('sunday');
   const [isCreating, setIsCreating] = useState(false);
+  const [viewingProgram, setViewingProgram] = useState<WeeklyProgramData | null>(null);
+  const [expandedDays, setExpandedDays] = useState<{ [key: string]: boolean }>({});
 
   const daysOfWeek = [
     { key: 'sunday', label: t('sunday') },
@@ -214,7 +217,10 @@ export const WeeklyProgram: React.FC = () => {
             <Button onClick={saveProgram} className="bg-green-600 hover:bg-green-700">
               {t('saveProgram')}
             </Button>
-            <Button variant="outline" onClick={() => setIsCreating(false)}>
+            <Button variant="outline" onClick={() => {
+              setIsCreating(false);
+              setCurrentProgram(null);
+            }}>
               {t('cancel') || 'إلغاء'}
             </Button>
           </div>
@@ -337,6 +343,95 @@ export const WeeklyProgram: React.FC = () => {
     );
   }
 
+  // Program Details View
+  if (viewingProgram) {
+    return (
+      <div className="space-y-6">
+        <div className="flex justify-between items-center">
+          <h2 className="text-2xl font-bold">{viewingProgram.name}</h2>
+          <Button variant="outline" onClick={() => setViewingProgram(null)}>
+            {isRTL ? 'رجوع' : 'Back'}
+          </Button>
+        </div>
+
+        <div className="grid gap-4">
+          {daysOfWeek.map(day => {
+            const dayProgram = viewingProgram.days.find(d => d.day === day.key);
+            if (!dayProgram) return null;
+
+            const isExpanded = expandedDays[day.key];
+
+            return (
+              <Card key={day.key}>
+                <Collapsible
+                  open={isExpanded}
+                  onOpenChange={(open) => setExpandedDays(prev => ({ ...prev, [day.key]: open }))}
+                >
+                  <CollapsibleTrigger asChild>
+                    <CardHeader className="cursor-pointer hover:bg-muted/50 transition-colors">
+                      <div className="flex justify-between items-center">
+                        <div>
+                          <CardTitle className="flex items-center gap-2">
+                            {day.label}
+                            {dayProgram.isRestDay && (
+                              <span className="text-sm bg-secondary px-2 py-1 rounded-full">
+                                {t('rest')}
+                              </span>
+                            )}
+                          </CardTitle>
+                          <CardDescription>
+                            {dayProgram.isRestDay 
+                              ? (isRTL ? 'يوم راحة' : 'Rest day')
+                              : `${dayProgram.exercises.length} ${isRTL ? 'تمارين' : 'exercises'}`
+                            }
+                          </CardDescription>
+                        </div>
+                        {isExpanded ? (
+                          <ChevronUp className="h-4 w-4" />
+                        ) : (
+                          <ChevronDown className="h-4 w-4" />
+                        )}
+                      </div>
+                    </CardHeader>
+                  </CollapsibleTrigger>
+                  
+                  <CollapsibleContent>
+                    {!dayProgram.isRestDay && dayProgram.exercises.length > 0 && (
+                      <CardContent className="pt-0">
+                        <div className="space-y-3">
+                          {dayProgram.exercises.map((exercise, index) => (
+                            <div key={exercise.id} className="p-3 bg-muted/30 rounded-lg">
+                              <div className="flex justify-between items-start mb-2">
+                                <h4 className="font-medium">{exercise.name || `${isRTL ? 'تمرين' : 'Exercise'} ${index + 1}`}</h4>
+                                <span className="text-xs text-muted-foreground">
+                                  {exercise.sets} × {exercise.reps} {exercise.weight > 0 && `@ ${exercise.weight}kg`}
+                                </span>
+                              </div>
+                              <div className="grid grid-cols-3 gap-2 text-xs text-muted-foreground">
+                                <div>{t('sets')}: {exercise.sets}</div>
+                                <div>{t('reps')}: {exercise.reps}</div>
+                                <div>{t('exerciseWeight')}: {exercise.weight}kg</div>
+                              </div>
+                              {exercise.notes && (
+                                <div className="mt-2 text-xs text-muted-foreground">
+                                  <strong>{t('notes')}:</strong> {exercise.notes}
+                                </div>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      </CardContent>
+                    )}
+                  </CollapsibleContent>
+                </Collapsible>
+              </Card>
+            );
+          })}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-6">
       <div className="text-center">
@@ -401,10 +496,19 @@ export const WeeklyProgram: React.FC = () => {
                       <Button
                         variant="outline"
                         size="sm"
+                        onClick={() => setViewingProgram(program)}
+                        title={isRTL ? 'عرض التفاصيل' : 'View Details'}
+                      >
+                        <Eye className="h-4 w-4" />
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="sm"
                         onClick={() => {
                           setCurrentProgram(program);
                           setIsCreating(true);
                         }}
+                        title={isRTL ? 'تعديل' : 'Edit'}
                       >
                         <Edit2 className="h-4 w-4" />
                       </Button>
@@ -413,6 +517,7 @@ export const WeeklyProgram: React.FC = () => {
                         size="sm"
                         onClick={() => deleteProgram(program.id)}
                         className="text-red-500 hover:text-red-700"
+                        title={isRTL ? 'حذف' : 'Delete'}
                       >
                         <Trash2 className="h-4 w-4" />
                       </Button>
