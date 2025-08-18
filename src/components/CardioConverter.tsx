@@ -50,16 +50,22 @@ export const CardioConverter: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6">
-      <Card className="gradient-card shadow-card border-0">
-        <CardHeader className="text-center">
+    <div className="space-y-8">
+      {/* Page Header */}
+      <div className="text-center">
+        <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">محول الكارديو</h1>
+        <p className="text-gray-600 text-lg">تحويل السعرات الحرارية إلى دقائق التمارين الرياضية</p>
+      </div>
+
+      <Card className="shadow-xl border-0 bg-white max-w-4xl mx-auto">
+        <CardHeader className="bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-t-lg">
           <div className="flex justify-center mb-4">
-            <div className="p-3 bg-success rounded-full">
+            <div className="p-3 bg-white/20 rounded-full">
               <Heart className="h-8 w-8 text-white" />
             </div>
           </div>
-          <CardTitle className="text-2xl">{t('cardioConverter')}</CardTitle>
-          <CardDescription className="text-lg">
+          <CardTitle className="text-2xl text-center">{t('cardioConverter')}</CardTitle>
+          <CardDescription className="text-center text-white/90 text-lg">
             تحويل السعرات الحرارية إلى دقائق التمارين الرياضية
           </CardDescription>
         </CardHeader>
@@ -101,9 +107,9 @@ export const CardioConverter: React.FC = () => {
 
           <Button 
             onClick={handleConvert} 
-            variant="hero" 
+            variant="default" 
             size="lg" 
-            className="w-full"
+            className="w-full bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white font-semibold"
             disabled={!calories || !selectedExercise}
           >
             <Flame className="h-5 w-5" />
@@ -113,25 +119,25 @@ export const CardioConverter: React.FC = () => {
       </Card>
 
       {result !== null && (
-        <Card className="gradient-card shadow-card border-0">
+        <Card className="shadow-lg border-0 bg-white max-w-4xl mx-auto">
           <CardContent className="p-8 text-center">
             <div className="flex justify-center mb-6">
-              <div className="p-4 bg-primary rounded-full">
-                <Clock className="h-8 w-8 text-primary-foreground" />
+              <div className="p-4 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full">
+                <Clock className="h-8 w-8 text-white" />
               </div>
             </div>
-            <h3 className="text-2xl font-bold mb-4">{t('timeNeeded')}</h3>
+            <h3 className="text-2xl font-bold mb-4 text-gray-800">{t('timeNeeded')}</h3>
             <div className="space-y-4">
-              <p className="text-4xl font-bold text-primary">
+              <p className="text-4xl font-bold text-purple-600">
                 {formatTime(result)}
               </p>
-              <p className="text-lg text-muted-foreground">
+              <p className="text-lg text-gray-600">
                 من {t(selectedExercise)} لحرق {calories.toLocaleString()} {t('calories')}
               </p>
             </div>
             
-            <div className="mt-6 p-4 bg-white/50 rounded-lg border border-white/20">
-              <p className="text-sm text-muted-foreground">
+            <div className="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+              <p className="text-sm text-gray-600">
                 * الحسابات تقريبية وتعتمد على شخص بوزن 70 كيلو
               </p>
             </div>
@@ -140,9 +146,9 @@ export const CardioConverter: React.FC = () => {
       )}
 
       {/* معلومات إضافية عن التمارين */}
-      <Card className="gradient-card shadow-card border-0">
+      <Card className="shadow-lg border-0 bg-white max-w-4xl mx-auto">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2">
+          <CardTitle className="flex items-center gap-2 text-gray-800">
             <Heart className="h-5 w-5" />
             نصائح التمارين الرياضية
           </CardTitle>
@@ -152,11 +158,11 @@ export const CardioConverter: React.FC = () => {
             {exercises.map((exercise) => (
               <div 
                 key={exercise.key}
-                className="p-4 bg-white/30 rounded-lg border border-white/20 hover:bg-white/40 transition-smooth"
+                className="p-4 bg-gray-50 rounded-lg border border-gray-200 hover:bg-gray-100 transition-smooth"
               >
                 <div className="flex justify-between items-center">
-                  <span className="font-medium">{t(exercise.key)}</span>
-                  <span className="text-sm text-primary font-semibold">
+                  <span className="font-medium text-gray-800">{t(exercise.key)}</span>
+                  <span className="text-sm text-purple-600 font-semibold">
                     {exercise.caloriesPerMinute} سعرة/دقيقة
                   </span>
                 </div>

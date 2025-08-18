@@ -56,16 +56,22 @@ export const CalorieCalculator: React.FC = () => {
   ];
 
   return (
-    <div className="space-y-6">
-      <Card className="gradient-card shadow-card border-0">
-        <CardHeader className="text-center">
+    <div className="space-y-8">
+      {/* Back to Home Button */}
+      <div className="text-center">
+        <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">حاسبة السعرات الحرارية</h1>
+        <p className="text-gray-600 text-lg">احسب احتياجاتك اليومية من السعرات الحرارية</p>
+      </div>
+
+      <Card className="shadow-xl border-0 bg-white max-w-4xl mx-auto">
+        <CardHeader className="bg-gradient-to-r from-green-500 to-green-600 text-white rounded-t-lg">
           <div className="flex justify-center mb-4">
-            <div className="p-3 bg-primary rounded-full">
-              <Calculator className="h-8 w-8 text-primary-foreground" />
+            <div className="p-3 bg-white/20 rounded-full">
+              <Calculator className="h-8 w-8 text-white" />
             </div>
           </div>
-          <CardTitle className="text-2xl">{t('calorieCalculator')}</CardTitle>
-          <CardDescription className="text-lg">
+          <CardTitle className="text-2xl text-center">{t('calorieCalculator')}</CardTitle>
+          <CardDescription className="text-center text-white/90 text-lg">
             {t('trackCalories')}
           </CardDescription>
         </CardHeader>
@@ -139,9 +145,9 @@ export const CalorieCalculator: React.FC = () => {
 
           <Button 
             onClick={calculateCalories} 
-            variant="hero" 
+            variant="default" 
             size="lg" 
-            className="w-full"
+            className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-semibold"
           >
             <Calculator className="h-5 w-5" />
             {t('calculate')}
@@ -150,30 +156,30 @@ export const CalorieCalculator: React.FC = () => {
       </Card>
 
       {results && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Card className="gradient-card shadow-card border-0">
-            <CardContent className="p-6 text-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          <Card className="shadow-lg border-0 bg-white">
+            <CardContent className="p-8 text-center">
               <div className="flex justify-center mb-4">
-                <div className="p-3 bg-info rounded-full">
+                <div className="p-3 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full">
                   <Zap className="h-6 w-6 text-white" />
                 </div>
               </div>
-              <h3 className="text-lg font-semibold mb-2">{t('bmr')}</h3>
-              <p className="text-3xl font-bold text-primary">{results.bmr.toLocaleString()}</p>
-              <p className="text-muted-foreground">{t('calories')}</p>
+              <h3 className="text-lg font-semibold mb-2 text-gray-800">{t('bmr')}</h3>
+              <p className="text-3xl font-bold text-blue-600">{results.bmr.toLocaleString()}</p>
+              <p className="text-gray-600">{t('calories')}</p>
             </CardContent>
           </Card>
 
-          <Card className="gradient-card shadow-card border-0">
-            <CardContent className="p-6 text-center">
+          <Card className="shadow-lg border-0 bg-white">
+            <CardContent className="p-8 text-center">
               <div className="flex justify-center mb-4">
-                <div className="p-3 bg-success rounded-full">
+                <div className="p-3 bg-gradient-to-r from-green-500 to-green-600 rounded-full">
                   <Activity className="h-6 w-6 text-white" />
                 </div>
               </div>
-              <h3 className="text-lg font-semibold mb-2">{t('tdee')}</h3>
-              <p className="text-3xl font-bold text-primary">{results.tdee.toLocaleString()}</p>
-              <p className="text-muted-foreground">{t('calories')}</p>
+              <h3 className="text-lg font-semibold mb-2 text-gray-800">{t('tdee')}</h3>
+              <p className="text-3xl font-bold text-green-600">{results.tdee.toLocaleString()}</p>
+              <p className="text-gray-600">{t('calories')}</p>
             </CardContent>
           </Card>
         </div>

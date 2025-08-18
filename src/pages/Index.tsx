@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Header } from '@/components/Header';
-import { HeroSection } from '@/components/HeroSection';
+import { NewHeroSection } from '@/components/NewHeroSection';
 import { CalorieCalculator } from '@/components/CalorieCalculator';
 import { BodyMeasurements } from '@/components/BodyMeasurements';
 import { CardioConverter } from '@/components/CardioConverter';
@@ -11,10 +11,6 @@ type ViewType = 'home' | 'calories' | 'measurements' | 'cardio';
 const Index = () => {
   const [currentView, setCurrentView] = useState<ViewType>('home');
 
-  const handleStartTracking = () => {
-    setCurrentView('calories');
-  };
-
   const handleViewChange = (view: ViewType) => {
     setCurrentView(view);
   };
@@ -22,25 +18,46 @@ const Index = () => {
   const renderCurrentView = () => {
     switch (currentView) {
       case 'calories':
-        return <CalorieCalculator />;
+        return (
+          <div className="min-h-screen bg-gray-50 py-8">
+            <div className="container mx-auto px-4">
+              <CalorieCalculator />
+            </div>
+          </div>
+        );
       case 'measurements':
-        return <BodyMeasurements />;
+        return (
+          <div className="min-h-screen bg-gray-50 py-8">
+            <div className="container mx-auto px-4">
+              <BodyMeasurements />
+            </div>
+          </div>
+        );
       case 'cardio':
-        return <CardioConverter />;
+        return (
+          <div className="min-h-screen bg-gray-50 py-8">
+            <div className="container mx-auto px-4">
+              <CardioConverter />
+            </div>
+          </div>
+        );
       default:
-        return <HeroSection onStartTracking={handleStartTracking} />;
+        return <NewHeroSection onViewChange={handleViewChange} />;
     }
   };
 
   return (
-    <div className="min-h-screen bg-background pb-20">
-      <Header />
+    <div className="min-h-screen">
+      <Header currentView={currentView} onViewChange={handleViewChange} />
       
-      <main className="container mx-auto px-4 py-8">
+      <main>
         {renderCurrentView()}
       </main>
 
-      <Navigation currentView={currentView} onViewChange={handleViewChange} />
+      {/* Mobile Navigation - only show when not on home */}
+      {currentView !== 'home' && (
+        <Navigation currentView={currentView} onViewChange={handleViewChange} />
+      )}
     </div>
   );
 };
