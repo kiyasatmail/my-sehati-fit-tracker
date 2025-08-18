@@ -5,6 +5,7 @@ import { CalorieCalculator } from '@/components/CalorieCalculator';
 import { BodyMeasurements } from '@/components/BodyMeasurements';
 import { CardioConverter } from '@/components/CardioConverter';
 import { WeeklyProgram } from '@/components/WeeklyProgram';
+import PWAInstallPrompt from '@/components/PWAInstallPrompt';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, ArrowLeft, Home } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -120,6 +121,9 @@ const Index = () => {
       <main>
         {renderCurrentView()}
       </main>
+      
+      {/* PWA Install Prompt - shown on all pages */}
+      <PWAInstallPrompt />
     </div>
   );
 };
