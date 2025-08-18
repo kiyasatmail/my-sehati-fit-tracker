@@ -1,10 +1,10 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Calculator, Ruler, Heart, Activity, TrendingUp, Clock } from 'lucide-react';
+import { Calculator, Ruler, Heart, Activity, TrendingUp, Clock, Calendar } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 interface NewHeroSectionProps {
-  onViewChange: (view: 'calories' | 'measurements' | 'cardio') => void;
+  onViewChange: (view: 'calories' | 'measurements' | 'cardio' | 'program') => void;
 }
 export const NewHeroSection: React.FC<NewHeroSectionProps> = ({
   onViewChange
@@ -34,6 +34,13 @@ export const NewHeroSection: React.FC<NewHeroSectionProps> = ({
     description: isRTL ? 'حول قيم السعرات الحرارية إلى وقت التمارين الرياضية بناء على نوع النشاط ومستوى نشاطك' : 'Convert calorie values to exercise time based on activity type and your activity level',
     buttonText: t('explore'),
     color: 'from-purple-500 to-purple-600'
+  }, {
+    key: 'program',
+    icon: Calendar,
+    title: isRTL ? 'البرنامج التدريبي الأسبوعي' : 'Weekly Workout Program',
+    description: isRTL ? 'أنشئ برنامجك التدريبي الأسبوعي المخصص مع التمارين والمجموعات واحفظه محلياً على جهازك' : 'Create your custom weekly workout program with exercises and sets, saved locally on your device',
+    buttonText: t('explore'),
+    color: 'from-orange-500 to-orange-600'
   }];
   return <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
@@ -60,7 +67,7 @@ export const NewHeroSection: React.FC<NewHeroSectionProps> = ({
 
       {/* Features Section */}
       <div className="container mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-8">
           {features.map((feature, index) => {
           const Icon = feature.icon;
           return <Card key={feature.key} className="shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-0 bg-white">
@@ -78,7 +85,7 @@ export const NewHeroSection: React.FC<NewHeroSectionProps> = ({
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="pt-0">
-                  <Button variant="default" size="lg" onClick={() => onViewChange(feature.key as 'calories' | 'measurements' | 'cardio')} className="w-full bg-primary hover:bg-primary-light text-lg font-semibold">
+                  <Button variant="default" size="lg" onClick={() => onViewChange(feature.key as 'calories' | 'measurements' | 'cardio' | 'program')} className="w-full bg-primary hover:bg-primary-light text-lg font-semibold">
                     {feature.buttonText}
                   </Button>
                 </CardContent>

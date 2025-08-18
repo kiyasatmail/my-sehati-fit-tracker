@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from '@/components/ui/sheet';
-import { Globe, Menu, Home, Calculator, Ruler, Heart } from 'lucide-react';
+import { Globe, Menu, Home, Calculator, Ruler, Heart, Calendar } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 interface HeaderProps {
-  currentView: 'home' | 'calories' | 'measurements' | 'cardio';
-  onViewChange: (view: 'home' | 'calories' | 'measurements' | 'cardio') => void;
+  currentView: 'home' | 'calories' | 'measurements' | 'cardio' | 'program';
+  onViewChange: (view: 'home' | 'calories' | 'measurements' | 'cardio' | 'program') => void;
 }
 export const Header: React.FC<HeaderProps> = ({
   currentView,
@@ -37,6 +37,10 @@ export const Header: React.FC<HeaderProps> = ({
     key: 'cardio',
     icon: Heart,
     label: t('cardioConverter')
+  }, {
+    key: 'program',
+    icon: Calendar,
+    label: t('weeklyProgram')
   }] as const;
   return <header className="bg-primary text-primary-foreground shadow-lg">
       <div className="container mx-auto px-4 bg-green-500">
