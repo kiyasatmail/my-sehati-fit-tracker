@@ -47,7 +47,7 @@ export const Header: React.FC<HeaderProps> = ({
     label: t('myItems')
   }] as const;
   return <header className="bg-primary text-primary-foreground shadow-lg">
-      <div className="container mx-auto px-4 bg-green-500">
+      <div className="container mx-auto px-4 gradient-hero">
         {/* Top bar with logo and language switcher */}
         <div className="flex items-center justify-between py-4 border-b border-white/20">
           <div className="flex items-center gap-3">

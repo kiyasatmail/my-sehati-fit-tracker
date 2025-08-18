@@ -203,7 +203,7 @@ export const MyItems: React.FC = () => {
       {/* Add Item Dialog */}
       <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
         <DialogTrigger asChild>
-          <Button className="w-full bg-pink-500 hover:bg-pink-600 text-white">
+          <Button className="w-full gradient-primary hover:gradient-secondary text-white transition-smooth">
             <Plus className="h-4 w-4 mr-2" />
             {t('addNewItem')}
           </Button>
@@ -262,7 +262,7 @@ export const MyItems: React.FC = () => {
             <Button 
               onClick={addItem}
               disabled={!newItemName.trim()}
-              className="bg-pink-500 hover:bg-pink-600"
+              className="gradient-primary hover:gradient-secondary transition-smooth"
             >
               {t('add')}
             </Button>
