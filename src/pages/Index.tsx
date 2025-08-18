@@ -12,7 +12,7 @@ type ViewType = 'home' | 'calories' | 'measurements' | 'cardio';
 
 const Index = () => {
   const [currentView, setCurrentView] = useState<ViewType>('home');
-  const { isRTL } = useLanguage();
+  const { isRTL, t } = useLanguage();
 
   const handleViewChange = (view: ViewType) => {
     setCurrentView(view);
@@ -36,7 +36,7 @@ const Index = () => {
               >
                 {isRTL ? <ArrowRight className="h-4 w-4 ml-2" /> : <ArrowLeft className="h-4 w-4 mr-2" />}
                 <Home className="h-4 w-4 mx-2" />
-                العودة للرئيسية
+                {t('backToHome')}
               </Button>
             </div>
             <div className="container mx-auto px-4 pb-8">
@@ -56,7 +56,7 @@ const Index = () => {
               >
                 {isRTL ? <ArrowRight className="h-4 w-4 ml-2" /> : <ArrowLeft className="h-4 w-4 mr-2" />}
                 <Home className="h-4 w-4 mx-2" />
-                العودة للرئيسية
+                {t('backToHome')}
               </Button>
             </div>
             <div className="container mx-auto px-4 pb-8">
@@ -76,7 +76,7 @@ const Index = () => {
               >
                 {isRTL ? <ArrowRight className="h-4 w-4 ml-2" /> : <ArrowLeft className="h-4 w-4 mr-2" />}
                 <Home className="h-4 w-4 mx-2" />
-                العودة للرئيسية
+                {t('backToHome')}
               </Button>
             </div>
             <div className="container mx-auto px-4 pb-8">

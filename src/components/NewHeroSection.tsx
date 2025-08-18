@@ -15,34 +15,25 @@ export const NewHeroSection: React.FC<NewHeroSectionProps> = ({ onViewChange }) 
     {
       key: 'calories',
       icon: Activity,
-      title: 'حساب السعرات الحرارية',
-      titleEn: 'Calorie Calculator',
-      description: 'احسب احتياجاتك اليومية من السعرات الحرارية بناء على عمرك وجنسك ووزنك وطولك ومستوى نشاطك',
-      descriptionEn: 'Calculate your daily calorie needs based on age, gender, weight, height, and activity level',
-      buttonText: 'استكشف',
-      buttonTextEn: 'Explore',
+      title: isRTL ? 'حساب السعرات الحرارية' : 'Calorie Calculator',
+      description: isRTL ? 'احسب احتياجاتك اليومية من السعرات الحرارية بناء على عمرك وجنسك ووزنك وطولك ومستوى نشاطك' : 'Calculate your daily calorie needs based on age, gender, weight, height, and activity level',
+      buttonText: t('explore'),
       color: 'from-green-500 to-green-600'
     },
     {
       key: 'measurements',
       icon: TrendingUp,
-      title: 'تتبع قياسات الجسم',
-      titleEn: 'Body Measurements Tracking',
-      description: 'سجل وتتبع قياساتك في جميع المناطق الرئيسية واحصل على تقارير مفصلة عن التقدم على مر الوقت',
-      descriptionEn: 'Record and track measurements in all key areas and get detailed progress reports over time',
-      buttonText: 'استكشف',
-      buttonTextEn: 'Explore',
+      title: isRTL ? 'تتبع قياسات الجسم' : 'Body Measurements Tracking',
+      description: isRTL ? 'سجل وتتبع قياساتك في جميع المناطق الرئيسية واحصل على تقارير مفصلة عن التقدم على مر الوقت' : 'Record and track measurements in all key areas and get detailed progress reports over time',
+      buttonText: t('explore'),
       color: 'from-blue-500 to-blue-600'
     },
     {
       key: 'cardio',
       icon: Clock,
-      title: 'تحويل السعرات إلى دقائق كارديو',
-      titleEn: 'Convert Calories to Cardio Minutes',
-      description: 'حول قيم السعرات الحرارية إلى وقت التمارين الرياضية بناء على نوع النشاط ومستوى نشاطك',
-      descriptionEn: 'Convert calorie values to exercise time based on activity type and your activity level',
-      buttonText: 'استكشف',
-      buttonTextEn: 'Explore',
+      title: isRTL ? 'تحويل السعرات إلى دقائق كارديو' : 'Convert Calories to Cardio Minutes',
+      description: isRTL ? 'حول قيم السعرات الحرارية إلى وقت التمارين الرياضية بناء على نوع النشاط ومستوى نشاطك' : 'Convert calorie values to exercise time based on activity type and your activity level',
+      buttonText: t('explore'),
       color: 'from-purple-500 to-purple-600'
     }
   ];
@@ -54,10 +45,10 @@ export const NewHeroSection: React.FC<NewHeroSectionProps> = ({ onViewChange }) 
         <div className="container mx-auto px-4 py-16 md:py-24">
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              تتبع صحتي
+              {t('trackMyHealth')}
             </h1>
             <p className="text-xl md:text-2xl mb-8 opacity-90 leading-relaxed">
-              دليلك الشامل لحساب السعرات الحرارية وتتبع قياسات الجسم وتحويل السعرات لدقائق التمارين
+              {t('trackCalories')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button 
@@ -66,14 +57,14 @@ export const NewHeroSection: React.FC<NewHeroSectionProps> = ({ onViewChange }) 
                 onClick={() => onViewChange('calories')}
                 className="text-lg px-8 py-3 h-auto"
               >
-                تتبع قياساتك
+                {t('startTracking')}
               </Button>
               <Button 
                 variant="outline" 
                 size="lg"
                 className="text-lg px-8 py-3 h-auto bg-transparent border-white text-white hover:bg-white hover:text-primary"
               >
-                ابدأ الآن
+                {t('getStarted')}
               </Button>
             </div>
           </div>
@@ -98,10 +89,10 @@ export const NewHeroSection: React.FC<NewHeroSectionProps> = ({ onViewChange }) 
                     </div>
                   </div>
                   <CardTitle className="text-xl md:text-2xl font-bold text-gray-800 mb-2">
-                    {isRTL ? feature.title : feature.titleEn}
+                    {feature.title}
                   </CardTitle>
                   <CardDescription className="text-gray-600 text-base leading-relaxed">
-                    {isRTL ? feature.description : feature.descriptionEn}
+                    {feature.description}
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="pt-0">
@@ -111,7 +102,7 @@ export const NewHeroSection: React.FC<NewHeroSectionProps> = ({ onViewChange }) 
                     onClick={() => onViewChange(feature.key as 'calories' | 'measurements' | 'cardio')}
                     className="w-full bg-primary hover:bg-primary-light text-lg font-semibold"
                   >
-                    {isRTL ? feature.buttonText : feature.buttonTextEn}
+                    {feature.buttonText}
                   </Button>
                 </CardContent>
               </Card>

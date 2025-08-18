@@ -72,6 +72,10 @@ const translations = {
     minutes: 'دقيقة',
     selectExercise: 'اختر نوع التمرين',
     enterCalories: 'أدخل عدد السعرات',
+    backToHome: 'العودة للرئيسية',
+    explore: 'استكشف',
+    getStarted: 'ابدأ الآن',
+    trackMyHealth: 'تتبع صحتي',
   },
   en: {
     appName: 'Sehati',
@@ -135,6 +139,10 @@ const translations = {
     minutes: 'minutes',
     selectExercise: 'Select exercise type',
     enterCalories: 'Enter calories',
+    backToHome: 'Back to Home',
+    explore: 'Explore',
+    getStarted: 'Get Started',
+    trackMyHealth: 'Track My Health',
   }
 };
 
