@@ -4,117 +4,125 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Sehati Health App Design System - Green Medical Theme */
+/* Sehati Health App Design System - Professional Neutral Health Theme */
 
 @layer base {
   :root {
-    /* Medical Green Theme */
-    --background: 240 10% 96%;
-    --foreground: 158 15% 15%;
+    /* Professional Health Theme - Neutral & Inclusive */
+    --background: 210 20% 98%;
+    --foreground: 215 25% 18%;
 
     --card: 0 0% 100%;
-    --card-foreground: 158 15% 15%;
+    --card-foreground: 215 25% 18%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 158 15% 15%;
+    --popover-foreground: 215 25% 18%;
 
-    /* Medical Green Primary */
-    --primary: 158 68% 45%;
-    --primary-light: 158 68% 55%;
-    --primary-dark: 158 68% 35%;
+    /* Primary - Professional Teal (Health & Trust) */
+    --primary: 173 58% 39%;
+    --primary-light: 173 58% 49%;
+    --primary-dark: 173 58% 29%;
     --primary-foreground: 0 0% 100%;
 
-    /* Soft Green Secondary */
-    --secondary: 158 25% 94%;
-    --secondary-foreground: 158 15% 15%;
+    /* Secondary - Calm Blue (Trust & Stability) */
+    --secondary: 210 16% 93%;
+    --secondary-foreground: 215 25% 18%;
 
-    --muted: 158 15% 95%;
-    --muted-foreground: 158 8% 45%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 13% 50%;
 
-    --accent: 158 35% 88%;
-    --accent-foreground: 158 15% 15%;
+    --accent: 173 35% 91%;
+    --accent-foreground: 215 25% 18%;
 
-    --destructive: 0 75% 60%;
+    --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 158 15% 88%;
-    --input: 158 15% 88%;
-    --ring: 158 68% 45%;
+    --border: 210 40% 88%;
+    --input: 210 40% 88%;
+    --ring: 173 58% 39%;
 
-    --radius: 1rem;
+    --radius: 0.75rem;
 
-    /* Custom Health App Colors */
-    --success: 142 76% 45%;
-    --warning: 38 92% 50%;
-    --info: 217 91% 60%;
+    /* Custom Professional Health Colors */
+    --success: 142 69% 41%;
+    --warning: 43 89% 38%;
+    --info: 199 89% 48%;
+    --calm: 210 40% 94%;
+    --focus: 262 52% 47%;
     
-    /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(158 68% 45%), hsl(158 68% 55%));
-    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(158 25% 98%));
-    --gradient-hero: linear-gradient(135deg, hsl(158 68% 45%), hsl(158 68% 35%));
+    /* Professional Health Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(173 58% 39%), hsl(173 58% 49%));
+    --gradient-secondary: linear-gradient(135deg, hsl(199 89% 48%), hsl(173 58% 39%));
+    --gradient-success: linear-gradient(135deg, hsl(142 69% 41%), hsl(173 58% 39%));
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(210 40% 98%));
+    --gradient-hero: linear-gradient(135deg, hsl(173 58% 39%), hsl(199 89% 48%));
+    --gradient-focus: linear-gradient(135deg, hsl(262 52% 47%), hsl(173 58% 39%));
     
-    /* Shadows */
-    --shadow-card: 0 4px 20px hsl(158 68% 45% / 0.08);
-    --shadow-button: 0 4px 12px hsl(158 68% 45% / 0.2);
-    --shadow-hero: 0 8px 32px hsl(158 68% 45% / 0.15);
+    /* Professional Shadows */
+    --shadow-card: 0 4px 20px hsl(173 58% 39% / 0.06);
+    --shadow-button: 0 4px 12px hsl(173 58% 39% / 0.15);
+    --shadow-hero: 0 8px 32px hsl(173 58% 39% / 0.12);
+    --shadow-focus: 0 0 0 3px hsl(173 58% 39% / 0.1);
 
-    /* Transitions */
+    /* Health App Specific Colors */
+    --health-cardio: 0 79% 63%;
+    --health-strength: 262 52% 47%;
+    --health-nutrition: 142 69% 41%;
+    --health-wellness: 173 58% 39%;
+    --health-progress: 199 89% 48%;
+
+    /* Smooth Professional Transitions */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --transition-slow: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-ring: 173 58% 39%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
+    --background: 215 28% 7%;
     --foreground: 210 40% 98%;
 
-    --card: 222.2 84% 4.9%;
+    --card: 215 28% 9%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 222.2 84% 4.9%;
+    --popover: 215 28% 9%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 173 58% 49%;
+    --primary-foreground: 215 28% 7%;
 
-    --secondary: 217.2 32.6% 17.5%;
+    --secondary: 215 32% 17%;
     --secondary-foreground: 210 40% 98%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 215 32% 17%;
+    --muted-foreground: 215 20% 65%;
 
-    --accent: 217.2 32.6% 17.5%;
+    --accent: 215 32% 17%;
     --accent-foreground: 210 40% 98%;
 
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 0 72% 51%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --border: 215 32% 17%;
+    --input: 215 32% 17%;
+    --ring: 173 58% 49%;
+
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary: 173 58% 49%;
     --sidebar-primary-foreground: 0 0% 100%;
     --sidebar-accent: 240 3.7% 15.9%;
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-ring: 173 58% 49%;
   }
 }
 
@@ -132,9 +140,17 @@
     font-family: 'Cairo', 'Inter', sans-serif;
   }
 
-  /* Custom components and utilities */
+  /* Professional Health App Components */
   .gradient-primary {
     background: var(--gradient-primary);
+  }
+
+  .gradient-secondary {
+    background: var(--gradient-secondary);
+  }
+
+  .gradient-success {
+    background: var(--gradient-success);
   }
 
   .gradient-card {
@@ -143,6 +159,10 @@
 
   .gradient-hero {
     background: var(--gradient-hero);
+  }
+
+  .gradient-focus {
+    background: var(--gradient-focus);
   }
 
   .shadow-card {
@@ -157,11 +177,52 @@
     box-shadow: var(--shadow-hero);
   }
 
+  .shadow-focus {
+    box-shadow: var(--shadow-focus);
+  }
+
   .transition-smooth {
     transition: var(--transition-smooth);
   }
 
   .transition-bounce {
     transition: var(--transition-bounce);
+  }
+
+  .transition-slow {
+    transition: var(--transition-slow);
+  }
+
+  /* Health Category Colors */
+  .health-cardio {
+    color: hsl(var(--health-cardio));
+  }
+
+  .health-strength {
+    color: hsl(var(--health-strength));
+  }
+
+  .health-nutrition {
+    color: hsl(var(--health-nutrition));
+  }
+
+  .health-wellness {
+    color: hsl(var(--health-wellness));
+  }
+
+  .health-progress {
+    color: hsl(var(--health-progress));
+  }
+
+  /* Professional Button Styles */
+  .btn-health {
+    background: var(--gradient-primary);
+    color: hsl(var(--primary-foreground));
+    transition: var(--transition-smooth);
+  }
+
+  .btn-health:hover {
+    background: var(--gradient-secondary);
+    box-shadow: var(--shadow-button);
   }
 }

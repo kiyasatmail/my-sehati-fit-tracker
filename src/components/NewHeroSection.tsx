@@ -19,40 +19,40 @@ export const NewHeroSection: React.FC<NewHeroSectionProps> = ({
     title: isRTL ? 'حساب السعرات الحرارية' : 'Calorie Calculator',
     description: isRTL ? 'احسب احتياجاتك اليومية من السعرات الحرارية بناء على عمرك وجنسك ووزنك وطولك ومستوى نشاطك' : 'Calculate your daily calorie needs based on age, gender, weight, height, and activity level',
     buttonText: t('explore'),
-    color: 'from-green-500 to-green-600'
+    color: 'from-health-wellness to-health-progress'
   }, {
     key: 'measurements',
     icon: TrendingUp,
     title: isRTL ? 'تتبع قياسات الجسم' : 'Body Measurements Tracking',
     description: isRTL ? 'سجل وتتبع قياساتك في جميع المناطق الرئيسية واحصل على تقارير مفصلة عن التقدم على مر الوقت' : 'Record and track measurements in all key areas and get detailed progress reports over time',
     buttonText: t('explore'),
-    color: 'from-blue-500 to-blue-600'
+    color: 'from-health-progress to-info'
   }, {
     key: 'cardio',
     icon: Clock,
     title: isRTL ? 'تحويل السعرات إلى دقائق كارديو' : 'Convert Calories to Cardio Minutes',
     description: isRTL ? 'حول قيم السعرات الحرارية إلى وقت التمارين الرياضية بناء على نوع النشاط ومستوى نشاطك' : 'Convert calorie values to exercise time based on activity type and your activity level',
     buttonText: t('explore'),
-    color: 'from-purple-500 to-purple-600'
+    color: 'from-health-cardio to-destructive'
   }, {
     key: 'program',
     icon: Calendar,
     title: isRTL ? 'البرنامج التدريبي الأسبوعي' : 'Weekly Workout Program',
     description: isRTL ? 'أنشئ برنامجك التدريبي الأسبوعي المخصص مع التمارين والمجموعات واحفظه محلياً على جهازك' : 'Create your custom weekly workout program with exercises and sets, saved locally on your device',
     buttonText: t('explore'),
-    color: 'from-orange-500 to-orange-600'
+    color: 'from-health-strength to-focus'
   }, {
     key: 'items',
     icon: Package,
     title: t('myItems'),
     description: t('myItemsDesc'),
     buttonText: t('exploreItems'),
-    color: 'from-pink-500 to-pink-600'
+    color: 'from-primary to-health-nutrition'
   }];
   return <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
       <div className="bg-primary text-primary-foreground">
-        <div className="container mx-auto px-4 py-8 md:py-12 bg-green-500">
+        <div className="container mx-auto px-4 py-8 md:py-12 gradient-hero">
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
               {t('trackMyHealth')}
