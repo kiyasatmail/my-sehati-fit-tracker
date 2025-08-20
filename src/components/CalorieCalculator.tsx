@@ -203,7 +203,7 @@ export const CalorieCalculator: React.FC = () => {
         <TabsContent value="calculator" className="space-y-6">
 
       <Card className="shadow-xl border-0 bg-white max-w-4xl mx-auto">
-        <CardHeader className="gradient-hero text-white rounded-t-lg">
+        <CardHeader className="bg-gradient-to-r from-green-500 to-green-600 text-white rounded-t-lg">
           <div className="flex justify-center mb-4">
             <div className="p-3 bg-white/20 rounded-full">
               <Calculator className="h-8 w-8 text-white" />
@@ -287,7 +287,7 @@ export const CalorieCalculator: React.FC = () => {
               onClick={calculateCalories} 
               variant="default" 
               size="lg" 
-              className="flex-1 gradient-primary text-white font-semibold hover:gradient-secondary transition-smooth"
+              className="flex-1 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-semibold"
             >
               <Calculator className="h-5 w-5" />
               {t('calculate')}
@@ -328,7 +328,7 @@ export const CalorieCalculator: React.FC = () => {
                     <Button 
                       onClick={saveCalculation}
                       disabled={!calculationName.trim()}
-                      className="gradient-primary hover:gradient-secondary"
+                      className="bg-green-500 hover:bg-green-600"
                     >
                       <Save className="h-4 w-4 mr-2" />
                       {t('save')}
@@ -553,7 +553,7 @@ export const CalorieCalculator: React.FC = () => {
         {/* Saved Calculations Tab */}
         <TabsContent value="saved" className="space-y-6">
           <Card className="shadow-xl border-0 bg-white">
-            <CardHeader className="gradient-secondary text-white rounded-t-lg">
+            <CardHeader className="bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-t-lg">
               <div className="flex justify-center mb-4">
                 <div className="p-3 bg-white/20 rounded-full">
                   <History className="h-8 w-8 text-white" />

@@ -57,15 +57,6 @@ export default {
 				success: 'hsl(var(--success))',
 				warning: 'hsl(var(--warning))',
 				info: 'hsl(var(--info))',
-				calm: 'hsl(var(--calm))',
-				focus: 'hsl(var(--focus))',
-				health: {
-					cardio: 'hsl(var(--health-cardio))',
-					strength: 'hsl(var(--health-strength))',
-					nutrition: 'hsl(var(--health-nutrition))',
-					wellness: 'hsl(var(--health-wellness))',
-					progress: 'hsl(var(--health-progress))'
-				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
