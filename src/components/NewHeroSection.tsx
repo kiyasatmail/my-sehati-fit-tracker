@@ -65,7 +65,7 @@ export const NewHeroSection: React.FC<NewHeroSectionProps> = ({
                 <Calculator className="h-5 w-5 mr-2" />
                 {t('startTracking')}
               </Button>
-              <Button variant="outline" size="lg" className="text-lg px-8 py-3 h-auto bg-transparent border-white text-white hover:bg-white hover:text-primary">
+              <Button variant="outline" size="lg" onClick={() => onViewChange('calories')} className="text-lg px-8 py-3 h-auto bg-transparent border-white text-white hover:bg-white hover:text-primary">
                 <Zap className="h-5 w-5 mr-2" />
                 {t('getStarted')}
               </Button>
