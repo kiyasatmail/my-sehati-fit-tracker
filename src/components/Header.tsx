@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from '@/components/ui/sheet';
-import { Globe, Menu, Home, Calculator, Ruler, Heart, Calendar, Package, AlarmClock, Droplets, Dumbbell } from 'lucide-react';
+import { Globe, Menu, Home, Calculator, Ruler, Heart, Calendar, Package, AlarmClock, Droplets, Dumbbell, Sun, Moon, FileText } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useTheme } from '@/contexts/ThemeContext';
 interface HeaderProps {
-  currentView: 'home' | 'calories' | 'measurements' | 'cardio' | 'program' | 'workout-plans' | 'items' | 'wakeup' | 'water';
-  onViewChange: (view: 'home' | 'calories' | 'measurements' | 'cardio' | 'program' | 'workout-plans' | 'items' | 'wakeup' | 'water') => void;
+  currentView: 'home' | 'calories' | 'measurements' | 'cardio' | 'program' | 'workout-plans' | 'items' | 'wakeup' | 'water' | 'terms';
+  onViewChange: (view: 'home' | 'calories' | 'measurements' | 'cardio' | 'program' | 'workout-plans' | 'items' | 'wakeup' | 'water' | 'terms') => void;
 }
 export const Header: React.FC<HeaderProps> = ({
   currentView,
@@ -17,6 +18,7 @@ export const Header: React.FC<HeaderProps> = ({
     t,
     isRTL
   } = useLanguage();
+  const { theme, toggleTheme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleLanguage = () => {
     setLanguage(language === 'ar' ? 'en' : 'ar');
@@ -57,6 +59,10 @@ export const Header: React.FC<HeaderProps> = ({
     key: 'water',
     icon: Droplets,
     label: isRTL ? 'حاسبة الماء' : 'Water Calculator'
+  }, {
+    key: 'terms',
+    icon: FileText,
+    label: t('termsAndPrivacy')
   }] as const;
   return <header className="bg-primary text-primary-foreground shadow-lg">
       <div className="container mx-auto px-4 gradient-hero">
@@ -93,10 +99,15 @@ export const Header: React.FC<HeaderProps> = ({
             <h1 className="text-2xl font-bold">{t('appName')}</h1>
           </div>
           
-          <Button variant="ghost" size="sm" onClick={toggleLanguage} className="text-primary-foreground hover:bg-white/10 gap-2">
-            <Globe className="h-4 w-4" />
-            {language === 'ar' ? 'English' : 'العربية'}
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button variant="ghost" size="sm" onClick={toggleTheme} className="text-primary-foreground hover:bg-white/10">
+              {theme === 'light' ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
+            </Button>
+            <Button variant="ghost" size="sm" onClick={toggleLanguage} className="text-primary-foreground hover:bg-white/10 gap-2">
+              <Globe className="h-4 w-4" />
+              {language === 'ar' ? 'English' : 'العربية'}
+            </Button>
+          </div>
         </div>
 
         {/* Navigation bar */}

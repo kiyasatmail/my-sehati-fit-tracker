@@ -8,6 +8,7 @@ import { WeeklyProgram } from '@/components/WeeklyProgram';
 import { MyItems } from '@/components/MyItems';
 import { WakeUpChallenge } from '@/components/WakeUpChallenge';
 import { WaterCalculator } from '@/components/WaterCalculator';
+import { TermsAndPrivacy } from '@/components/TermsAndPrivacy';
 import WorkoutPlans from '@/components/WorkoutPlans';
 import PWAInstallPrompt from '@/components/PWAInstallPrompt';
 
@@ -15,7 +16,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, ArrowLeft, Home } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
-type ViewType = 'home' | 'calories' | 'measurements' | 'cardio' | 'program' | 'workout-plans' | 'items' | 'wakeup' | 'water';
+type ViewType = 'home' | 'calories' | 'measurements' | 'cardio' | 'program' | 'workout-plans' | 'items' | 'wakeup' | 'water' | 'terms';
 
 const Index = () => {
   const [currentView, setCurrentView] = useState<ViewType>('home');
@@ -177,6 +178,8 @@ const Index = () => {
             </div>
           </div>
         );
+      case 'terms':
+        return <TermsAndPrivacy onBack={handleBackToHome} />;
       default:
         return <NewHeroSection onViewChange={handleViewChange} />;
     }
