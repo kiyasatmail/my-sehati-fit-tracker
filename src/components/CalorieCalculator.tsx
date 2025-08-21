@@ -178,8 +178,8 @@ export const CalorieCalculator: React.FC = () => {
     <div className="space-y-8">
       {/* Header */}
       <div className="text-center">
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">حاسبة السعرات الحرارية</h1>
-        <p className="text-gray-600 text-lg">احسب احتياجاتك اليومية من السعرات الحرارية</p>
+        <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">{t('calorieCalculator')}</h1>
+        <p className="text-gray-600 text-lg">{t('trackCalories')}</p>
       </div>
 
       {/* Tabs for Calculator and Saved */}
