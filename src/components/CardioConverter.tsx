@@ -46,9 +46,13 @@ export const CardioConverter: React.FC = () => {
     } else {
       const hours = Math.floor(minutes / 60);
       const remainingMinutes = minutes % 60;
+      const hourText = isRTL ? 'ساعة' : 'hour';
+      const hoursText = isRTL ? 'ساعة' : 'hours';
+      const andText = isRTL ? 'و' : 'and';
+      
       return remainingMinutes > 0 
-        ? `${hours} ساعة و ${remainingMinutes} ${t('minutes')}`
-        : `${hours} ساعة`;
+        ? `${hours} ${hours === 1 ? hourText : hoursText} ${andText} ${remainingMinutes} ${t('minutes')}`
+        : `${hours} ${hours === 1 ? hourText : hoursText}`;
     }
   };
 
@@ -56,8 +60,8 @@ export const CardioConverter: React.FC = () => {
     <div className="space-y-8">
       {/* Page Header */}
       <div className="text-center">
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">محول الكارديو</h1>
-        <p className="text-gray-600 text-lg">تحويل السعرات الحرارية إلى دقائق التمارين الرياضية</p>
+        <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">{t('cardioConverter')}</h1>
+        <p className="text-gray-600 text-lg">{isRTL ? 'تحويل السعرات الحرارية إلى دقائق التمارين الرياضية' : 'Convert calories to exercise minutes'}</p>
       </div>
 
       <Card className="shadow-xl border-0 bg-white max-w-4xl mx-auto">
@@ -69,7 +73,7 @@ export const CardioConverter: React.FC = () => {
           </div>
           <CardTitle className="text-2xl text-center">{t('cardioConverter')}</CardTitle>
           <CardDescription className="text-center text-white/90 text-lg">
-            تحويل السعرات الحرارية إلى دقائق التمارين الرياضية
+            {isRTL ? 'تحويل السعرات الحرارية إلى دقائق التمارين الرياضية' : 'Convert calories to exercise minutes'}
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -87,14 +91,14 @@ export const CardioConverter: React.FC = () => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="weight">الوزن (كيلو)</Label>
+              <Label htmlFor="weight">{t('weight')}</Label>
               <Input
                 id="weight"
                 type="number"
                 value={weight || ''}
                 onChange={(e) => setWeight(parseInt(e.target.value) || 0)}
                 className="h-12 text-lg"
-                placeholder="أدخل وزنك"
+                placeholder={isRTL ? 'أدخل وزنك' : 'Enter your weight'}
               />
             </div>
             
@@ -110,7 +114,7 @@ export const CardioConverter: React.FC = () => {
                       <div className="flex items-center gap-3">
                         <span>{t(exercise.key)}</span>
                         <span className="text-sm text-muted-foreground">
-                          ({exercise.caloriesPerMinute} {t('calories')}/دقيقة)
+                          ({exercise.caloriesPerMinute} {t('calories')}/{t('minutes')})
                         </span>
                       </div>
                     </SelectItem>
@@ -147,16 +151,22 @@ export const CardioConverter: React.FC = () => {
                 {formatTime(result)}
               </p>
               <p className="text-lg text-gray-600">
-                من {t(selectedExercise)} لحرق {calories.toLocaleString()} {t('calories')}
+                {isRTL 
+                  ? `من ${t(selectedExercise)} لحرق ${calories.toLocaleString()} ${t('calories')}`
+                  : `${t(selectedExercise)} to burn ${calories.toLocaleString()} ${t('calories')}`
+                }
               </p>
               <p className="text-md text-gray-500">
-                لشخص بوزن {weight} كيلو
+                {isRTL ? `لشخص بوزن ${weight} كيلو` : `For a person weighing ${weight} kg`}
               </p>
             </div>
             
             <div className="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
               <p className="text-sm text-gray-600">
-                * الحسابات تقريبية ومحسوبة حسب الوزن المدخل
+                {isRTL 
+                  ? '* الحسابات تقريبية ومحسوبة حسب الوزن المدخل' 
+                  : '* Calculations are approximate and based on entered weight'
+                }
               </p>
             </div>
           </CardContent>
@@ -168,7 +178,7 @@ export const CardioConverter: React.FC = () => {
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-gray-800">
             <Heart className="h-5 w-5" />
-            نصائح التمارين الرياضية
+            {isRTL ? 'نصائح التمارين الرياضية' : 'Exercise Tips'}
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -181,7 +191,7 @@ export const CardioConverter: React.FC = () => {
                 <div className="flex justify-between items-center">
                   <span className="font-medium text-gray-800">{t(exercise.key)}</span>
                   <span className="text-sm text-purple-600 font-semibold">
-                    {exercise.caloriesPerMinute} سعرة/دقيقة
+                    {exercise.caloriesPerMinute} {isRTL ? 'سعرة/دقيقة' : 'cal/min'}
                   </span>
                 </div>
               </div>
