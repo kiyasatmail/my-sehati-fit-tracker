@@ -16,14 +16,23 @@ export const WaterCalculator = () => {
     const weightNum = parseFloat(weight);
     const exerciseNum = parseFloat(exerciseHours);
     
-    if (weightNum > 0) {
-      // Base water: 35ml per kg of body weight
-      const baseWater = weightNum * 35;
-      // Additional water for exercise: 500ml per hour of exercise
-      const exerciseWater = exerciseNum > 0 ? exerciseNum * 500 : 0;
-      const totalWater = baseWater + exerciseWater;
-      setWaterNeeded(Math.round(totalWater));
+    // Input validation for security and reliability
+    if (!weightNum || weightNum <= 0 || weightNum > 500) {
+      alert(isRTL ? 'يرجى إدخال وزن صحيح (1-500 كغ)' : 'Please enter a valid weight (1-500 kg)');
+      return;
     }
+    
+    if (exerciseNum < 0 || exerciseNum > 24) {
+      alert(isRTL ? 'يرجى إدخال ساعات تمرين صحيحة (0-24 ساعة)' : 'Please enter valid exercise hours (0-24 hours)');
+      return;
+    }
+    
+    // Base water: 35ml per kg of body weight
+    const baseWater = weightNum * 35;
+    // Additional water for exercise: 500ml per hour of exercise
+    const exerciseWater = exerciseNum > 0 ? exerciseNum * 500 : 0;
+    const totalWater = baseWater + exerciseWater;
+    setWaterNeeded(Math.round(totalWater));
   };
 
   const resetCalculator = () => {
@@ -106,6 +115,8 @@ export const WaterCalculator = () => {
                 <Input
                   id="weight"
                   type="number"
+                  min="1"
+                  max="500"
                   placeholder={isRTL ? 'أدخل وزنك' : 'Enter your weight'}
                   value={weight}
                   onChange={(e) => setWeight(e.target.value)}
@@ -120,6 +131,8 @@ export const WaterCalculator = () => {
                 <Input
                   id="exercise"
                   type="number"
+                  min="0"
+                  max="24"
                   step="0.5"
                   placeholder={isRTL ? 'أدخل ساعات التمرين' : 'Enter exercise hours'}
                   value={exerciseHours}
