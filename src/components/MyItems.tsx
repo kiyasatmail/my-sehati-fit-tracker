@@ -9,6 +9,7 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Badge } from '@/components/ui/badge';
 import { toast } from '@/hooks/use-toast';
 import { Plus, Package, Trash2, CheckCircle, XCircle } from 'lucide-react';
+
 interface WorkoutItem {
   id: string;
   name: string;
@@ -16,60 +17,28 @@ interface WorkoutItem {
   checked: boolean;
   category: 'before' | 'after';
 }
-const availableIcons = [{
-  icon: '🧴',
-  label: 'Bottle'
-}, {
-  icon: '👟',
-  label: 'Shoes'
-}, {
-  icon: '🎧',
-  label: 'Headphones'
-}, {
-  icon: '🏃',
-  label: 'Running'
-}, {
-  icon: '💧',
-  label: 'Water'
-}, {
-  icon: '🧽',
-  label: 'Towel'
-}, {
-  icon: '🎒',
-  label: 'Bag'
-}, {
-  icon: '💳',
-  label: 'Card'
-}, {
-  icon: '🔑',
-  label: 'Keys'
-}, {
-  icon: '📱',
-  label: 'Phone'
-}, {
-  icon: '⌚',
-  label: 'Watch'
-}, {
-  icon: '🧤',
-  label: 'Gloves'
-}, {
-  icon: '🩳',
-  label: 'Shorts'
-}, {
-  icon: '👕',
-  label: 'Shirt'
-}, {
-  icon: '🥤',
-  label: 'Drink'
-}, {
-  icon: '💊',
-  label: 'Supplements'
-}];
+
+const availableIcons = [
+  { icon: '🧴', label: 'Bottle' },
+  { icon: '👟', label: 'Shoes' },
+  { icon: '🎧', label: 'Headphones' },
+  { icon: '🏃', label: 'Running' },
+  { icon: '💧', label: 'Water' },
+  { icon: '🧽', label: 'Towel' },
+  { icon: '🎒', label: 'Bag' },
+  { icon: '💳', label: 'Card' },
+  { icon: '🔑', label: 'Keys' },
+  { icon: '📱', label: 'Phone' },
+  { icon: '⌚', label: 'Watch' },
+  { icon: '🧤', label: 'Gloves' },
+  { icon: '🩳', label: 'Shorts' },
+  { icon: '👕', label: 'Shirt' },
+  { icon: '🥤', label: 'Drink' },
+  { icon: '💊', label: 'Supplements' }
+];
+
 export const MyItems: React.FC = () => {
-  const {
-    t,
-    isRTL
-  } = useLanguage();
+  const { t, isRTL } = useLanguage();
   const [items, setItems] = useState<WorkoutItem[]>([]);
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
   const [newItemName, setNewItemName] = useState('');
@@ -92,8 +61,10 @@ export const MyItems: React.FC = () => {
   useEffect(() => {
     localStorage.setItem('sehati-workout-items', JSON.stringify(items));
   }, [items]);
+
   const addItem = () => {
     if (!newItemName.trim()) return;
+
     const newItem: WorkoutItem = {
       id: Date.now().toString(),
       name: newItemName.trim(),
@@ -101,88 +72,129 @@ export const MyItems: React.FC = () => {
       checked: false,
       category: selectedCategory
     };
+
     setItems(prev => [...prev, newItem]);
     setNewItemName('');
     setSelectedIcon('🎒');
     setIsAddDialogOpen(false);
+    
     toast({
       title: t('add'),
-      description: `${newItem.icon} ${newItem.name} ${t('add')}`
+      description: `${newItem.icon} ${newItem.name} ${t('add')}`,
     });
   };
+
   const deleteItem = (id: string) => {
     setItems(prev => prev.filter(item => item.id !== id));
     toast({
       title: t('delete'),
-      description: t('delete')
+      description: t('delete'),
     });
   };
+
   const toggleItem = (id: string) => {
-    setItems(prev => prev.map(item => item.id === id ? {
-      ...item,
-      checked: !item.checked
-    } : item));
+    setItems(prev => prev.map(item => 
+      item.id === id ? { ...item, checked: !item.checked } : item
+    ));
   };
+
   const checkAllItems = (category: 'before' | 'after') => {
-    setItems(prev => prev.map(item => item.category === category ? {
-      ...item,
-      checked: true
-    } : item));
+    setItems(prev => prev.map(item => 
+      item.category === category ? { ...item, checked: true } : item
+    ));
   };
+
   const uncheckAllItems = (category: 'before' | 'after') => {
-    setItems(prev => prev.map(item => item.category === category ? {
-      ...item,
-      checked: false
-    } : item));
+    setItems(prev => prev.map(item => 
+      item.category === category ? { ...item, checked: false } : item
+    ));
   };
+
   const getItemsByCategory = (category: 'before' | 'after') => {
     return items.filter(item => item.category === category);
   };
+
   const renderItemsList = (category: 'before' | 'after') => {
     const categoryItems = getItemsByCategory(category);
+    
     if (categoryItems.length === 0) {
-      return <div className="text-center py-8 text-muted-foreground">
+      return (
+        <div className="text-center py-8 text-muted-foreground">
           <Package className="h-12 w-12 mx-auto mb-4 opacity-50" />
           <p className="text-lg font-medium">{t('noItemsYet')}</p>
           <p className="text-sm">{t('addFirstItem')}</p>
-        </div>;
+        </div>
+      );
     }
-    return <div className="space-y-3">
+
+    return (
+      <div className="space-y-3">
         <div className="flex gap-2 mb-4">
-          <Button variant="outline" size="sm" onClick={() => checkAllItems(category)} className="flex items-center gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => checkAllItems(category)}
+            className="flex items-center gap-2"
+          >
             <CheckCircle className="h-4 w-4" />
             {t('checkAll')}
           </Button>
-          <Button variant="outline" size="sm" onClick={() => uncheckAllItems(category)} className="flex items-center gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => uncheckAllItems(category)}
+            className="flex items-center gap-2"
+          >
             <XCircle className="h-4 w-4" />
             {t('uncheckAll')}
           </Button>
         </div>
         
-        {categoryItems.map(item => <div key={item.id} className={`flex items-center justify-between p-4 border rounded-lg transition-colors ${item.checked ? 'bg-green-50 border-green-200' : 'bg-white border-gray-200'}`}>
+        {categoryItems.map((item) => (
+          <div
+            key={item.id}
+            className={`flex items-center justify-between p-4 border rounded-lg transition-colors ${
+              item.checked ? 'bg-green-50 border-green-200' : 'bg-white border-gray-200'
+            }`}
+          >
             <div className="flex items-center gap-3">
-              <Checkbox checked={item.checked} onCheckedChange={() => toggleItem(item.id)} className="h-5 w-5" />
+              <Checkbox
+                checked={item.checked}
+                onCheckedChange={() => toggleItem(item.id)}
+                className="h-5 w-5"
+              />
               <span className="text-2xl">{item.icon}</span>
               <span className={`font-medium ${item.checked ? 'text-green-700 line-through' : 'text-gray-900'}`}>
                 {item.name}
               </span>
             </div>
             <div className="flex items-center gap-2">
-              {item.checked && <Badge variant="secondary" className="bg-green-100 text-green-800">
+              {item.checked && (
+                <Badge variant="secondary" className="bg-green-100 text-green-800">
                   ✓
-                </Badge>}
-              <Button variant="ghost" size="sm" onClick={() => deleteItem(item.id)} className="text-red-500 hover:text-red-700 hover:bg-red-50">
+                </Badge>
+              )}
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => deleteItem(item.id)}
+                className="text-red-500 hover:text-red-700 hover:bg-red-50"
+              >
                 <Trash2 className="h-4 w-4" />
               </Button>
             </div>
-          </div>)}
-      </div>;
+          </div>
+        ))}
+      </div>
+    );
   };
-  return <div className="max-w-4xl mx-auto space-y-6">
+
+  return (
+    <div className="max-w-4xl mx-auto space-y-6">
       {/* Header */}
       <div className="text-center">
         <h1 className="text-3xl font-bold text-gray-900 mb-2 flex items-center justify-center gap-3">
-          <Package className="h-8 w-8 text-pink-500 bg-[#e1cd1d]" />
+          <Package className="h-8 w-8 text-pink-500" />
           {t('myItems')}
         </h1>
         <p className="text-gray-600">{t('myItemsDesc')}</p>
@@ -207,15 +219,28 @@ export const MyItems: React.FC = () => {
           <div className="space-y-4">
             <div>
               <label className="block text-sm font-medium mb-2">{t('itemName')}</label>
-              <Input value={newItemName} onChange={e => setNewItemName(e.target.value)} placeholder={t('itemName')} className="w-full" />
+              <Input
+                value={newItemName}
+                onChange={(e) => setNewItemName(e.target.value)}
+                placeholder={t('itemName')}
+                className="w-full"
+              />
             </div>
             
             <div>
               <label className="block text-sm font-medium mb-2">{t('selectIcon')}</label>
               <div className="grid grid-cols-8 gap-2 max-h-40 overflow-y-auto p-2 border rounded-lg">
-                {availableIcons.map(iconItem => <button key={iconItem.icon} onClick={() => setSelectedIcon(iconItem.icon)} className={`p-2 text-2xl rounded hover:bg-gray-100 transition-colors ${selectedIcon === iconItem.icon ? 'bg-pink-100 ring-2 ring-pink-500' : ''}`}>
+                {availableIcons.map((iconItem) => (
+                  <button
+                    key={iconItem.icon}
+                    onClick={() => setSelectedIcon(iconItem.icon)}
+                    className={`p-2 text-2xl rounded hover:bg-gray-100 transition-colors ${
+                      selectedIcon === iconItem.icon ? 'bg-pink-100 ring-2 ring-pink-500' : ''
+                    }`}
+                  >
                     {iconItem.icon}
-                  </button>)}
+                  </button>
+                ))}
               </div>
             </div>
 
@@ -234,7 +259,11 @@ export const MyItems: React.FC = () => {
             <Button variant="outline" onClick={() => setIsAddDialogOpen(false)}>
               {t('cancel')}
             </Button>
-            <Button onClick={addItem} disabled={!newItemName.trim()} className="bg-primary hover:bg-primary-light transition-smooth">
+            <Button 
+              onClick={addItem}
+              disabled={!newItemName.trim()}
+              className="bg-primary hover:bg-primary-light transition-smooth"
+            >
               {t('add')}
             </Button>
           </DialogFooter>
@@ -317,5 +346,6 @@ export const MyItems: React.FC = () => {
           </CardContent>
         </Card>
       </div>
-    </div>;
+    </div>
+  );
 };
