@@ -9,14 +9,14 @@ import { MyItems } from '@/components/MyItems';
 import { WakeUpChallenge } from '@/components/WakeUpChallenge';
 import { WaterCalculator } from '@/components/WaterCalculator';
 import { TermsAndPrivacy } from '@/components/TermsAndPrivacy';
-import WorkoutPlans from '@/components/WorkoutPlans';
+
 import PWAInstallPrompt from '@/components/PWAInstallPrompt';
 
 import { Button } from '@/components/ui/button';
 import { ArrowRight, ArrowLeft, Home } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
-type ViewType = 'home' | 'calories' | 'measurements' | 'cardio' | 'program' | 'workout-plans' | 'items' | 'wakeup' | 'water' | 'terms';
+type ViewType = 'home' | 'calories' | 'measurements' | 'cardio' | 'program' | 'items' | 'wakeup' | 'water' | 'terms';
 
 const Index = () => {
   const [currentView, setCurrentView] = useState<ViewType>('home');
@@ -110,12 +110,6 @@ const Index = () => {
             <div className="container mx-auto px-4 pb-8">
               <WeeklyProgram />
             </div>
-          </div>
-        );
-      case 'workout-plans':
-        return (
-          <div>
-            <WorkoutPlans onBack={() => setCurrentView('home')} />
           </div>
         );
       case 'items':
