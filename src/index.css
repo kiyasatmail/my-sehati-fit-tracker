@@ -19,9 +19,9 @@
     --popover-foreground: 215 25% 18%;
 
     /* Primary - Professional Teal (Health & Trust) */
-    --primary: 142 69% 30%;
-    --primary-light: 142 69% 40%;
-    --primary-dark: 142 69% 20%;
+    --primary: 142 85% 32%;
+    --primary-light: 142 85% 42%;
+    --primary-dark: 142 85% 22%;
     --primary-foreground: 0 0% 100%;
 
     /* Secondary - Calm Blue (Trust & Stability) */
@@ -39,36 +39,36 @@
 
     --border: 210 40% 88%;
     --input: 210 40% 88%;
-    --ring: 142 69% 30%;
+    --ring: 142 85% 32%;
 
     --radius: 0.75rem;
 
     /* Custom Professional Health Colors */
-    --success: 142 69% 30%;
+    --success: 142 85% 32%;
     --warning: 43 89% 38%;
     --info: 199 89% 48%;
     --calm: 210 40% 94%;
     --focus: 262 52% 47%;
     
     /* Professional Health Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(142 69% 30%), hsl(142 69% 40%));
-    --gradient-secondary: linear-gradient(135deg, hsl(199 89% 48%), hsl(142 69% 30%));
-    --gradient-success: linear-gradient(135deg, hsl(142 69% 30%), hsl(142 69% 40%));
+    --gradient-primary: linear-gradient(135deg, hsl(142 85% 32%), hsl(142 85% 42%));
+    --gradient-secondary: linear-gradient(135deg, hsl(199 89% 48%), hsl(142 85% 32%));
+    --gradient-success: linear-gradient(135deg, hsl(142 85% 32%), hsl(142 85% 42%));
     --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(210 40% 98%));
-    --gradient-hero: linear-gradient(135deg, hsl(142 69% 30%), hsl(199 89% 48%));
-    --gradient-focus: linear-gradient(135deg, hsl(262 52% 47%), hsl(142 69% 30%));
+    --gradient-hero: linear-gradient(135deg, hsl(142 85% 32%), hsl(199 89% 48%));
+    --gradient-focus: linear-gradient(135deg, hsl(262 52% 47%), hsl(142 85% 32%));
     
     /* Professional Shadows */
-    --shadow-card: 0 4px 20px hsl(142 69% 30% / 0.06);
-    --shadow-button: 0 4px 12px hsl(142 69% 30% / 0.15);
-    --shadow-hero: 0 8px 32px hsl(142 69% 30% / 0.12);
-    --shadow-focus: 0 0 0 3px hsl(142 69% 30% / 0.1);
+    --shadow-card: 0 4px 20px hsl(142 85% 32% / 0.06);
+    --shadow-button: 0 4px 12px hsl(142 85% 32% / 0.15);
+    --shadow-hero: 0 8px 32px hsl(142 85% 32% / 0.12);
+    --shadow-focus: 0 0 0 3px hsl(142 85% 32% / 0.1);
 
     /* Health App Specific Colors */
     --health-cardio: 0 79% 63%;
     --health-strength: 262 52% 47%;
-    --health-nutrition: 142 69% 30%;
-    --health-wellness: 142 69% 30%;
+    --health-nutrition: 142 85% 32%;
+    --health-wellness: 142 85% 32%;
     --health-progress: 199 89% 48%;
 
     /* Smooth Professional Transitions */
@@ -83,7 +83,7 @@
     --sidebar-accent: 240 4.8% 95.9%;
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 142 69% 30%;
+    --sidebar-ring: 142 85% 32%;
   }
 
   .dark {
@@ -115,14 +115,14 @@
     --input: 215 32% 17%;
     --ring: 173 58% 49%;
 
-    --sidebar-background: 142 69% 5%;
+    --sidebar-background: 142 85% 5%;
     --sidebar-foreground: 142 20% 95%;
-    --sidebar-primary: 142 69% 40%;
+    --sidebar-primary: 142 85% 40%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 142 30% 15%;
+    --sidebar-accent: 142 85% 15%;
     --sidebar-accent-foreground: 142 20% 95%;
-    --sidebar-border: 142 30% 15%;
-    --sidebar-ring: 142 69% 40%;
+    --sidebar-border: 142 85% 15%;
+    --sidebar-ring: 142 85% 40%;
   }
 }
 

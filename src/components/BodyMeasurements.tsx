@@ -225,7 +225,7 @@ export const BodyMeasurements: React.FC = () => {
                   onClick={handleSaveMeasurement} 
                   variant="default" 
                   size="lg" 
-                  className="w-full mt-8 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold"
+                  className="w-full mt-8 bg-primary hover:bg-primary-light text-white font-semibold"
                 >
                   <Plus className="h-5 w-5" />
                   {t('saveMeasurement')}

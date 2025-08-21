@@ -109,7 +109,7 @@ export const CardioConverter: React.FC = () => {
             onClick={handleConvert} 
             variant="default" 
             size="lg" 
-            className="w-full bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white font-semibold"
+            className="w-full bg-primary hover:bg-primary-light text-white font-semibold"
             disabled={!calories || !selectedExercise}
           >
             <Flame className="h-5 w-5" />

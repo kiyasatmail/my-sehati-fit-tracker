@@ -287,7 +287,7 @@ export const CalorieCalculator: React.FC = () => {
               onClick={calculateCalories} 
               variant="default" 
               size="lg" 
-              className="flex-1 gradient-primary text-white font-semibold hover:gradient-secondary transition-smooth"
+              className="flex-1 bg-primary hover:bg-primary-light text-white font-semibold transition-smooth"
             >
               <Calculator className="h-5 w-5" />
               {t('calculate')}
@@ -328,7 +328,7 @@ export const CalorieCalculator: React.FC = () => {
                     <Button 
                       onClick={saveCalculation}
                       disabled={!calculationName.trim()}
-                      className="gradient-primary hover:gradient-secondary"
+                      className="bg-primary hover:bg-primary-light"
                     >
                       <Save className="h-4 w-4 mr-2" />
                       {t('save')}
