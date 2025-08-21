@@ -262,7 +262,7 @@ export const MyItems: React.FC = () => {
             <Button 
               onClick={addItem}
               disabled={!newItemName.trim()}
-              className="gradient-primary hover:gradient-secondary transition-smooth"
+              className="bg-primary hover:bg-primary-light transition-smooth"
             >
               {t('add')}
             </Button>
