@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from '@/components/ui/sheet';
-import { Globe, Menu, Home, Calculator, Ruler, Heart, Calendar, Package, AlarmClock, Droplets } from 'lucide-react';
+import { Globe, Menu, Home, Calculator, Ruler, Heart, Calendar, Package, AlarmClock, Droplets, Dumbbell } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 interface HeaderProps {
-  currentView: 'home' | 'calories' | 'measurements' | 'cardio' | 'program' | 'items' | 'wakeup' | 'water';
-  onViewChange: (view: 'home' | 'calories' | 'measurements' | 'cardio' | 'program' | 'items' | 'wakeup' | 'water') => void;
+  currentView: 'home' | 'calories' | 'measurements' | 'cardio' | 'program' | 'workout-plans' | 'items' | 'wakeup' | 'water';
+  onViewChange: (view: 'home' | 'calories' | 'measurements' | 'cardio' | 'program' | 'workout-plans' | 'items' | 'wakeup' | 'water') => void;
 }
 export const Header: React.FC<HeaderProps> = ({
   currentView,
@@ -41,6 +41,10 @@ export const Header: React.FC<HeaderProps> = ({
     key: 'program',
     icon: Calendar,
     label: t('weeklyProgram')
+  }, {
+    key: 'workout-plans',
+    icon: Dumbbell,
+    label: isRTL ? 'خطط التمرين' : 'Workout Plans'
   }, {
     key: 'items',
     icon: Package,
