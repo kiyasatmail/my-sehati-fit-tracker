@@ -36,18 +36,18 @@ const Index = () => {
         return (
           <div className="min-h-screen bg-gray-50">
             {/* Back Button */}
-            <div className="container mx-auto px-4 pt-8">
+            <div className="responsive-container pt-8">
               <Button
                 variant="ghost"
                 onClick={handleBackToHome}
-                className="mb-4 text-gray-600 hover:text-gray-800"
+                className={`mb-4 text-gray-600 hover:text-gray-800 btn-with-icon ${isRTL ? 'flex-row-reverse' : 'flex-row'}`}
               >
-                {isRTL ? <ArrowRight className="h-4 w-4 ml-2" /> : <ArrowLeft className="h-4 w-4 mr-2" />}
+                {isRTL ? <ArrowRight className="h-4 w-4" /> : <ArrowLeft className="h-4 w-4" />}
                 <Home className="h-4 w-4 mx-2" />
-                {t('backToHome')}
+                <span>{t('backToHome')}</span>
               </Button>
             </div>
-            <div className="container mx-auto px-4 pb-8">
+            <div className="responsive-container pb-8">
               <CalorieCalculator />
             </div>
           </div>
@@ -56,18 +56,18 @@ const Index = () => {
         return (
           <div className="min-h-screen bg-gray-50">
             {/* Back Button */}
-            <div className="container mx-auto px-4 pt-8">
+            <div className="responsive-container pt-8">
               <Button
                 variant="ghost"
                 onClick={handleBackToHome}
-                className="mb-4 text-gray-600 hover:text-gray-800"
+                className={`mb-4 text-gray-600 hover:text-gray-800 btn-with-icon ${isRTL ? 'flex-row-reverse' : 'flex-row'}`}
               >
-                {isRTL ? <ArrowRight className="h-4 w-4 ml-2" /> : <ArrowLeft className="h-4 w-4 mr-2" />}
+                {isRTL ? <ArrowRight className="h-4 w-4" /> : <ArrowLeft className="h-4 w-4" />}
                 <Home className="h-4 w-4 mx-2" />
-                {t('backToHome')}
+                <span>{t('backToHome')}</span>
               </Button>
             </div>
-            <div className="container mx-auto px-4 pb-8">
+            <div className="responsive-container pb-8">
               <BodyMeasurements />
             </div>
           </div>
@@ -76,18 +76,18 @@ const Index = () => {
         return (
           <div className="min-h-screen bg-gray-50">
             {/* Back Button */}
-            <div className="container mx-auto px-4 pt-8">
+            <div className="responsive-container pt-8">
               <Button
                 variant="ghost"
                 onClick={handleBackToHome}
-                className="mb-4 text-gray-600 hover:text-gray-800"
+                className={`mb-4 text-gray-600 hover:text-gray-800 btn-with-icon ${isRTL ? 'flex-row-reverse' : 'flex-row'}`}
               >
-                {isRTL ? <ArrowRight className="h-4 w-4 ml-2" /> : <ArrowLeft className="h-4 w-4 mr-2" />}
+                {isRTL ? <ArrowRight className="h-4 w-4" /> : <ArrowLeft className="h-4 w-4" />}
                 <Home className="h-4 w-4 mx-2" />
-                {t('backToHome')}
+                <span>{t('backToHome')}</span>
               </Button>
             </div>
-            <div className="container mx-auto px-4 pb-8">
+            <div className="responsive-container pb-8">
               <CardioConverter />
             </div>
           </div>
@@ -96,18 +96,18 @@ const Index = () => {
         return (
           <div className="min-h-screen bg-gray-50">
             {/* Back Button */}
-            <div className="container mx-auto px-4 pt-8">
+            <div className="responsive-container pt-8">
               <Button
                 variant="ghost"
                 onClick={handleBackToHome}
-                className="mb-4 text-gray-600 hover:text-gray-800"
+                className={`mb-4 text-gray-600 hover:text-gray-800 btn-with-icon ${isRTL ? 'flex-row-reverse' : 'flex-row'}`}
               >
-                {isRTL ? <ArrowRight className="h-4 w-4 ml-2" /> : <ArrowLeft className="h-4 w-4 mr-2" />}
+                {isRTL ? <ArrowRight className="h-4 w-4" /> : <ArrowLeft className="h-4 w-4" />}
                 <Home className="h-4 w-4 mx-2" />
-                {t('backToHome')}
+                <span>{t('backToHome')}</span>
               </Button>
             </div>
-            <div className="container mx-auto px-4 pb-8">
+            <div className="responsive-container pb-8">
               <WeeklyProgram />
             </div>
           </div>
@@ -116,18 +116,18 @@ const Index = () => {
         return (
           <div className="min-h-screen bg-gray-50">
             {/* Back Button */}
-            <div className="container mx-auto px-4 pt-8">
+            <div className="responsive-container pt-8">
               <Button
                 variant="ghost"
                 onClick={handleBackToHome}
-                className="mb-4 text-gray-600 hover:text-gray-800"
+                className={`mb-4 text-gray-600 hover:text-gray-800 btn-with-icon ${isRTL ? 'flex-row-reverse' : 'flex-row'}`}
               >
-                {isRTL ? <ArrowRight className="h-4 w-4 ml-2" /> : <ArrowLeft className="h-4 w-4 mr-2" />}
+                {isRTL ? <ArrowRight className="h-4 w-4" /> : <ArrowLeft className="h-4 w-4" />}
                 <Home className="h-4 w-4 mx-2" />
-                {t('backToHome')}
+                <span>{t('backToHome')}</span>
               </Button>
             </div>
-            <div className="container mx-auto px-4 pb-8">
+            <div className="responsive-container pb-8">
               <MyItems />
             </div>
           </div>
@@ -136,18 +136,18 @@ const Index = () => {
         return (
           <div className="min-h-screen bg-gray-50">
             {/* Back Button */}
-            <div className="container mx-auto px-4 pt-8">
+            <div className="responsive-container pt-8">
               <Button
                 variant="ghost"
                 onClick={handleBackToHome}
-                className="mb-4 text-gray-600 hover:text-gray-800"
+                className={`mb-4 text-gray-600 hover:text-gray-800 btn-with-icon ${isRTL ? 'flex-row-reverse' : 'flex-row'}`}
               >
-                {isRTL ? <ArrowRight className="h-4 w-4 ml-2" /> : <ArrowLeft className="h-4 w-4 mr-2" />}
+                {isRTL ? <ArrowRight className="h-4 w-4" /> : <ArrowLeft className="h-4 w-4" />}
                 <Home className="h-4 w-4 mx-2" />
-                {t('backToHome')}
+                <span>{t('backToHome')}</span>
               </Button>
             </div>
-            <div className="container mx-auto px-4 pb-8">
+            <div className="responsive-container pb-8">
               <WakeUpChallenge />
             </div>
           </div>
@@ -156,18 +156,18 @@ const Index = () => {
         return (
           <div className="min-h-screen bg-gray-50">
             {/* Back Button */}
-            <div className="container mx-auto px-4 pt-8">
+            <div className="responsive-container pt-8">
               <Button
                 variant="ghost"
                 onClick={handleBackToHome}
-                className="mb-4 text-gray-600 hover:text-gray-800"
+                className={`mb-4 text-gray-600 hover:text-gray-800 btn-with-icon ${isRTL ? 'flex-row-reverse' : 'flex-row'}`}
               >
-                {isRTL ? <ArrowRight className="h-4 w-4 ml-2" /> : <ArrowLeft className="h-4 w-4 mr-2" />}
+                {isRTL ? <ArrowRight className="h-4 w-4" /> : <ArrowLeft className="h-4 w-4" />}
                 <Home className="h-4 w-4 mx-2" />
-                {t('backToHome')}
+                <span>{t('backToHome')}</span>
               </Button>
             </div>
-            <div className="container mx-auto px-4 pb-8">
+            <div className="responsive-container pb-8">
               <WaterCalculator />
             </div>
           </div>
@@ -180,11 +180,11 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className={`min-h-screen transition-all duration-300 ${isRTL ? 'rtl' : 'ltr'}`} dir={isRTL ? 'rtl' : 'ltr'}>
       {/* Header on all pages */}
       <Header currentView={currentView} onViewChange={handleViewChange} />
       
-      <main>
+      <main className="responsive-container">
         {renderCurrentView()}
       </main>
       
