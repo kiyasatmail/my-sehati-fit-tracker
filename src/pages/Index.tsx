@@ -8,6 +8,7 @@ import { WeeklyProgram } from '@/components/WeeklyProgram';
 import { MyItems } from '@/components/MyItems';
 import { WakeUpChallenge } from '@/components/WakeUpChallenge';
 import PWAInstallPrompt from '@/components/PWAInstallPrompt';
+import { Navigation } from '@/components/Navigation';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, ArrowLeft, Home } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -154,7 +155,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen pb-20">
       {/* Header only on home page */}
       {currentView === 'home' && (
         <Header currentView={currentView} onViewChange={handleViewChange} />
@@ -163,6 +164,9 @@ const Index = () => {
       <main>
         {renderCurrentView()}
       </main>
+      
+      {/* Navigation Bar - shown on all pages */}
+      <Navigation currentView={currentView} onViewChange={handleViewChange} />
       
       {/* PWA Install Prompt - shown on all pages */}
       <PWAInstallPrompt />

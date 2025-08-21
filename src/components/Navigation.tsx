@@ -1,11 +1,11 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { Calculator, Ruler, Heart, Home, AlarmClock } from 'lucide-react';
+import { Calculator, Ruler, Heart, Home, AlarmClock, Calendar, Package } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 interface NavigationProps {
-  currentView: 'home' | 'calories' | 'measurements' | 'cardio' | 'wakeup';
-  onViewChange: (view: 'home' | 'calories' | 'measurements' | 'cardio' | 'wakeup') => void;
+  currentView: 'home' | 'calories' | 'measurements' | 'cardio' | 'program' | 'items' | 'wakeup';
+  onViewChange: (view: 'home' | 'calories' | 'measurements' | 'cardio' | 'program' | 'items' | 'wakeup') => void;
 }
 
 export const Navigation: React.FC<NavigationProps> = ({ currentView, onViewChange }) => {
@@ -16,13 +16,15 @@ export const Navigation: React.FC<NavigationProps> = ({ currentView, onViewChang
     { key: 'calories', icon: Calculator, label: t('calorieCalculator') },
     { key: 'measurements', icon: Ruler, label: t('bodyMeasurements') },
     { key: 'cardio', icon: Heart, label: t('cardioConverter') },
+    { key: 'program', icon: Calendar, label: t('weeklyProgram') },
+    { key: 'items', icon: Package, label: t('myItems') },
     { key: 'wakeup', icon: AlarmClock, label: t('wakeUpChallenge') },
   ] as const;
 
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-card border-t shadow-lg z-50">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-5 gap-1 py-2">
+        <div className="grid grid-cols-7 gap-1 py-2">
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = currentView === item.key;
