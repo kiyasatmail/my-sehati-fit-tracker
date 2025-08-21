@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
-import { Ruler, Plus, TrendingUp, Calendar } from 'lucide-react';
+import { Ruler, Plus, TrendingUp, Calendar, User } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useToast } from '@/hooks/use-toast';
 import { Line } from 'react-chartjs-2';
@@ -33,22 +33,33 @@ ChartJS.register(
 interface BodyMeasurement {
   id: string;
   date: string;
-  neck: number;
-  shoulders: number;
-  chest: number;
-  rightArm: number;
-  leftArm: number;
-  abdomen: number;
-  waist: number;
-  rightThigh: number;
-  leftThigh: number;
-  rightLeg: number;
-  leftLeg: number;
+  type: 'general' | 'bodybuilding';
+  // General measurements
+  neck?: number;
+  shoulders?: number;
+  chest?: number;
+  rightArm?: number;
+  leftArm?: number;
+  abdomen?: number;
+  waist?: number;
+  rightThigh?: number;
+  leftThigh?: number;
+  rightLeg?: number;
+  leftLeg?: number;
+  // Bodybuilding specific measurements
+  arms?: number;
+  back?: number;
+  calves?: number;
+  thighs?: number;
 }
 
-const MEASUREMENT_FIELDS = [
+const GENERAL_FIELDS = [
   'neck', 'shoulders', 'chest', 'rightArm', 'leftArm', 
   'abdomen', 'waist', 'rightThigh', 'leftThigh', 'rightLeg', 'leftLeg'
+] as const;
+
+const BODYBUILDING_FIELDS = [
+  'chest', 'arms', 'shoulders', 'waist', 'thighs', 'calves', 'back'
 ] as const;
 
 export const BodyMeasurements: React.FC = () => {
@@ -57,6 +68,7 @@ export const BodyMeasurements: React.FC = () => {
   const [measurements, setMeasurements] = useState<BodyMeasurement[]>([]);
   const [currentMeasurement, setCurrentMeasurement] = useState<Partial<BodyMeasurement>>({});
   const [selectedField, setSelectedField] = useState<string>('waist');
+  const [measurementType, setMeasurementType] = useState<'general' | 'bodybuilding'>('general');
 
   useEffect(() => {
     const savedMeasurements = localStorage.getItem('sehati-measurements');
@@ -74,17 +86,8 @@ export const BodyMeasurements: React.FC = () => {
     const newMeasurement: BodyMeasurement = {
       id: Date.now().toString(),
       date: new Date().toLocaleDateString('en-CA'),
-      neck: currentMeasurement.neck || 0,
-      shoulders: currentMeasurement.shoulders || 0,
-      chest: currentMeasurement.chest || 0,
-      rightArm: currentMeasurement.rightArm || 0,
-      leftArm: currentMeasurement.leftArm || 0,
-      abdomen: currentMeasurement.abdomen || 0,
-      waist: currentMeasurement.waist || 0,
-      rightThigh: currentMeasurement.rightThigh || 0,
-      leftThigh: currentMeasurement.leftThigh || 0,
-      rightLeg: currentMeasurement.rightLeg || 0,
-      leftLeg: currentMeasurement.leftLeg || 0,
+      type: measurementType,
+      ...currentMeasurement,
     };
 
     const updatedMeasurements = [...measurements, newMeasurement];
@@ -164,6 +167,10 @@ export const BodyMeasurements: React.FC = () => {
     },
   };
 
+  const getCurrentFields = () => {
+    return measurementType === 'bodybuilding' ? BODYBUILDING_FIELDS : GENERAL_FIELDS;
+  };
+
   return (
     <div className="space-y-8">
       {/* Page Header */}
@@ -198,11 +205,68 @@ export const BodyMeasurements: React.FC = () => {
             </TabsList>
 
             <TabsContent value="add">
+              {/* Measurement Type Selection */}
+              <div className="mb-6">
+                <h3 className="text-lg font-semibold mb-4 text-center">اختر نوع القياسات</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <Card 
+                    className={`cursor-pointer transition-all duration-200 ${
+                      measurementType === 'general' 
+                        ? 'ring-2 ring-blue-500 bg-blue-50' 
+                        : 'hover:bg-gray-50'
+                    }`}
+                    onClick={() => setMeasurementType('general')}
+                  >
+                    <CardContent className="p-4 flex items-center gap-4">
+                      <div className="p-3 bg-blue-100 rounded-full">
+                        <User className="h-6 w-6 text-blue-600" />
+                      </div>
+                      <div>
+                        <h4 className="font-semibold">قياسات عامة</h4>
+                        <p className="text-sm text-gray-600">لإنقاص الوزن والمتابعة العامة</p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                  
+                  <Card 
+                    className={`cursor-pointer transition-all duration-200 ${
+                      measurementType === 'bodybuilding' 
+                        ? 'ring-2 ring-orange-500 bg-orange-50' 
+                        : 'hover:bg-gray-50'
+                    }`}
+                    onClick={() => setMeasurementType('bodybuilding')}
+                  >
+                    <CardContent className="p-4 flex items-center gap-4">
+                      <div className="p-3 bg-orange-100 rounded-full">
+                        <Ruler className="h-6 w-6 text-orange-600" />
+                      </div>
+                      <div>
+                        <h4 className="font-semibold">قياسات كمال الأجسام</h4>
+                        <p className="text-sm text-gray-600">للاعبي كمال الأجسام والبناء العضلي</p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              </div>
+
               <div className="bg-gray-50 p-6 rounded-lg">
+                <h4 className="text-lg font-semibold mb-4 text-center">
+                  {measurementType === 'bodybuilding' ? 'قياسات كمال الأجسام' : 'القياسات العامة'}
+                </h4>
+                
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {MEASUREMENT_FIELDS.map((field) => (
+                  {getCurrentFields().map((field) => (
                     <div key={field} className="space-y-2">
-                      <Label htmlFor={field}>{t(field)}</Label>
+                      <Label htmlFor={field} className="text-sm font-medium">
+                        {measurementType === 'bodybuilding' && field === 'chest' ? 'الصدر (Chest)' :
+                         measurementType === 'bodybuilding' && field === 'arms' ? 'الذراعين (Arms)' :
+                         measurementType === 'bodybuilding' && field === 'shoulders' ? 'الأكتاف (Shoulders)' :
+                         measurementType === 'bodybuilding' && field === 'waist' ? 'الخصر (Waist)' :
+                         measurementType === 'bodybuilding' && field === 'thighs' ? 'الفخذين (Thighs)' :
+                         measurementType === 'bodybuilding' && field === 'calves' ? 'السمانة (Calves)' :
+                         measurementType === 'bodybuilding' && field === 'back' ? 'الظهر (Back)' :
+                         t(field)}
+                      </Label>
                       <Input
                         id={field}
                         type="number"
@@ -215,7 +279,7 @@ export const BodyMeasurements: React.FC = () => {
                           })
                         }
                         className="h-12 text-lg"
-                        placeholder="0.0"
+                        placeholder="0.0 سم"
                       />
                     </div>
                   ))}
@@ -250,14 +314,18 @@ export const BodyMeasurements: React.FC = () => {
                           {t('progress')}
                         </CardTitle>
                         <div className="flex flex-wrap gap-2 mt-4">
-                          {MEASUREMENT_FIELDS.map((field) => (
+                          {[...GENERAL_FIELDS, ...BODYBUILDING_FIELDS].filter((field, index, arr) => arr.indexOf(field) === index).map((field) => (
                             <Badge
                               key={field}
                               variant={selectedField === field ? "default" : "secondary"}
                               className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-smooth"
                               onClick={() => setSelectedField(field)}
                             >
-                              {t(field)}
+                              {field === 'arms' ? 'الذراعين' :
+                               field === 'calves' ? 'السمانة' :
+                               field === 'thighs' ? 'الفخذين' :
+                               field === 'back' ? 'الظهر' :
+                               t(field)}
                             </Badge>
                           ))}
                         </div>
@@ -292,19 +360,29 @@ export const BodyMeasurements: React.FC = () => {
                                   </span>
                                   <Badge variant="outline">
                                     {Object.keys(measurement).filter(key => {
-                                      if (key === 'id' || key === 'date') return false;
+                                      if (key === 'id' || key === 'date' || key === 'type') return false;
                                       const value = measurement[key as keyof BodyMeasurement];
                                       return typeof value === 'number' && value > 0;
                                     }).length} قياسات
                                   </Badge>
+                                  <Badge variant={measurement.type === 'bodybuilding' ? 'default' : 'secondary'}>
+                                    {measurement.type === 'bodybuilding' ? 'كمال أجسام' : 'عامة'}
+                                  </Badge>
                                 </div>
                                 <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm">
-                                  {MEASUREMENT_FIELDS.map((field) => {
-                                    const value = measurement[field];
+                                  {Object.keys(measurement).map((field) => {
+                                    if (field === 'id' || field === 'date' || field === 'type') return null;
+                                    const value = measurement[field as keyof BodyMeasurement];
                                     return (
                                       value && typeof value === 'number' && value > 0 && (
                                         <div key={field} className="flex justify-between">
-                                          <span className="text-gray-600">{t(field)}:</span>
+                                          <span className="text-gray-600">
+                                            {field === 'arms' ? 'الذراعين' :
+                                             field === 'calves' ? 'السمانة' :
+                                             field === 'thighs' ? 'الفخذين' :
+                                             field === 'back' ? 'الظهر' :
+                                             t(field)}:
+                                          </span>
                                           <span className="font-medium text-gray-800">{value} {t('cm')}</span>
                                         </div>
                                       )

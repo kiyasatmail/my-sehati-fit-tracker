@@ -8,7 +8,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
 import { toast } from '@/hooks/use-toast';
-import { Plus, Package, Trash2, CheckCircle, XCircle } from 'lucide-react';
+import { Plus, Luggage, Trash2, CheckCircle, XCircle } from 'lucide-react';
 
 interface WorkoutItem {
   id: string;
@@ -120,7 +120,7 @@ export const MyItems: React.FC = () => {
     if (categoryItems.length === 0) {
       return (
         <div className="text-center py-8 text-muted-foreground">
-          <Package className="h-12 w-12 mx-auto mb-4 opacity-50" />
+          <Luggage className="h-12 w-12 mx-auto mb-4 opacity-50" />
           <p className="text-lg font-medium">{t('noItemsYet')}</p>
           <p className="text-sm">{t('addFirstItem')}</p>
         </div>
@@ -194,7 +194,7 @@ export const MyItems: React.FC = () => {
       {/* Header */}
       <div className="text-center">
         <h1 className="text-3xl font-bold text-gray-900 mb-2 flex items-center justify-center gap-3">
-          <Package className="h-8 w-8 text-pink-500" />
+          <Luggage className="h-8 w-8 text-pink-500" />
           {t('myItems')}
         </h1>
         <p className="text-gray-600">{t('myItemsDesc')}</p>
@@ -274,11 +274,11 @@ export const MyItems: React.FC = () => {
       <Tabs defaultValue="before" className="w-full">
         <TabsList className="grid w-full grid-cols-2 mb-6">
           <TabsTrigger value="before" className="flex items-center gap-2">
-            <Package className="h-4 w-4" />
+            <Luggage className="h-4 w-4" />
             {t('beforeWorkout')}
           </TabsTrigger>
           <TabsTrigger value="after" className="flex items-center gap-2">
-            <Package className="h-4 w-4" />
+            <Luggage className="h-4 w-4" />
             {t('afterWorkout')}
           </TabsTrigger>
         </TabsList>
