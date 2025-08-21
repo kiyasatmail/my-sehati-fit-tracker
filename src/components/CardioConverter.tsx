@@ -24,14 +24,17 @@ const exercises: Exercise[] = [
 export const CardioConverter: React.FC = () => {
   const { t, isRTL } = useLanguage();
   const [calories, setCalories] = useState<number>(0);
+  const [weight, setWeight] = useState<number>(70);
   const [selectedExercise, setSelectedExercise] = useState<string>('');
   const [result, setResult] = useState<number | null>(null);
 
   const handleConvert = () => {
-    if (calories > 0 && selectedExercise) {
+    if (calories > 0 && selectedExercise && weight > 0) {
       const exercise = exercises.find(ex => ex.key === selectedExercise);
       if (exercise) {
-        const timeInMinutes = Math.round(calories / exercise.caloriesPerMinute);
+        // حساب السعرات الحرارية الفعلية حسب الوزن
+        const actualCaloriesPerMinute = (exercise.caloriesPerMinute * weight) / 70;
+        const timeInMinutes = Math.round(calories / actualCaloriesPerMinute);
         setResult(timeInMinutes);
       }
     }
@@ -70,7 +73,7 @@ export const CardioConverter: React.FC = () => {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="space-y-2">
               <Label htmlFor="calories">{t('caloriesInput')}</Label>
               <Input
@@ -80,6 +83,18 @@ export const CardioConverter: React.FC = () => {
                 onChange={(e) => setCalories(parseInt(e.target.value) || 0)}
                 className="h-12 text-lg"
                 placeholder={t('enterCalories')}
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="weight">الوزن (كيلو)</Label>
+              <Input
+                id="weight"
+                type="number"
+                value={weight || ''}
+                onChange={(e) => setWeight(parseInt(e.target.value) || 0)}
+                className="h-12 text-lg"
+                placeholder="أدخل وزنك"
               />
             </div>
             
@@ -110,7 +125,7 @@ export const CardioConverter: React.FC = () => {
             variant="default" 
             size="lg" 
             className="w-full bg-primary hover:bg-primary-light text-white font-semibold"
-            disabled={!calories || !selectedExercise}
+            disabled={!calories || !selectedExercise || !weight}
           >
             <Flame className="h-5 w-5" />
             {t('convert')}
@@ -134,11 +149,14 @@ export const CardioConverter: React.FC = () => {
               <p className="text-lg text-gray-600">
                 من {t(selectedExercise)} لحرق {calories.toLocaleString()} {t('calories')}
               </p>
+              <p className="text-md text-gray-500">
+                لشخص بوزن {weight} كيلو
+              </p>
             </div>
             
             <div className="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
               <p className="text-sm text-gray-600">
-                * الحسابات تقريبية وتعتمد على شخص بوزن 70 كيلو
+                * الحسابات تقريبية ومحسوبة حسب الوزن المدخل
               </p>
             </div>
           </CardContent>
