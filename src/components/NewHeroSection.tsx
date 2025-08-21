@@ -52,7 +52,7 @@ export const NewHeroSection: React.FC<NewHeroSectionProps> = ({
   return <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
       <div className="bg-primary text-primary-foreground">
-        <div className="container mx-auto px-4 py-8 md:py-12 gradient-hero">
+        <div className="container mx-auto px-4 py-8 md:py-12 gradient-hero bg-[039956] bg-[#039956]">
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
               {t('trackMyHealth')}
