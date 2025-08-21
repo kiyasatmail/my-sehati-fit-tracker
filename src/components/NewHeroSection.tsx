@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Calculator, Ruler, Heart, Activity, TrendingUp, Clock, Calendar, Package } from 'lucide-react';
+import { Calculator, Ruler, Heart, Activity, TrendingUp, Clock, Calendar, Package, Zap } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 interface NewHeroSectionProps {
   onViewChange: (view: 'calories' | 'measurements' | 'cardio' | 'program' | 'items') => void;
@@ -62,9 +62,11 @@ export const NewHeroSection: React.FC<NewHeroSectionProps> = ({
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button variant="secondary" size="lg" onClick={() => onViewChange('calories')} className="text-lg px-8 py-3 h-auto">
+                <Calculator className="h-5 w-5 mr-2" />
                 {t('startTracking')}
               </Button>
               <Button variant="outline" size="lg" className="text-lg px-8 py-3 h-auto bg-transparent border-white text-white hover:bg-white hover:text-primary">
+                <Zap className="h-5 w-5 mr-2" />
                 {t('getStarted')}
               </Button>
             </div>
