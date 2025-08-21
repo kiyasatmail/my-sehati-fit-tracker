@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from '@/components/ui/sheet';
-import { Globe, Menu, Home, Calculator, Ruler, Heart, Calendar, Package } from 'lucide-react';
+import { Globe, Menu, Home, Calculator, Ruler, Heart, Calendar, Package, AlarmClock } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 interface HeaderProps {
-  currentView: 'home' | 'calories' | 'measurements' | 'cardio' | 'program' | 'items';
-  onViewChange: (view: 'home' | 'calories' | 'measurements' | 'cardio' | 'program' | 'items') => void;
+  currentView: 'home' | 'calories' | 'measurements' | 'cardio' | 'program' | 'items' | 'wakeup';
+  onViewChange: (view: 'home' | 'calories' | 'measurements' | 'cardio' | 'program' | 'items' | 'wakeup') => void;
 }
 export const Header: React.FC<HeaderProps> = ({
   currentView,
@@ -45,6 +45,10 @@ export const Header: React.FC<HeaderProps> = ({
     key: 'items',
     icon: Package,
     label: t('myItems')
+  }, {
+    key: 'wakeup',
+    icon: AlarmClock,
+    label: t('wakeUpChallenge')
   }] as const;
   return <header className="bg-primary text-primary-foreground shadow-lg">
       <div className="container mx-auto px-4 gradient-hero">
