@@ -83,6 +83,12 @@ const translations = {
     progress: 'التقدم',
     cm: 'سم',
     
+    // Bodybuilding specific measurements
+    arms: 'الذراعين (سم)',
+    calves: 'السمانة (سم)', 
+    thighs: 'الفخذين (سم)',
+    back: 'الظهر (سم)',
+    
     // Cardio Converter
     caloriesInput: 'عدد السعرات المراد حرقها',
     exerciseType: 'نوع التمرين',
@@ -291,6 +297,12 @@ const translations = {
     measurement: 'Measurement',
     progress: 'Progress',
     cm: 'cm',
+    
+    // Bodybuilding specific measurements
+    arms: 'Arms (cm)',
+    calves: 'Calves (cm)',
+    thighs: 'Thighs (cm)', 
+    back: 'Back (cm)',
     
     // Cardio Converter
     caloriesInput: 'Calories to burn',
