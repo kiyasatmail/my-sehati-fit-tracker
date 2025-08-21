@@ -175,8 +175,8 @@ export const BodyMeasurements: React.FC = () => {
     <div className="space-y-8">
       {/* Page Header */}
       <div className="text-center">
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">تتبع قياسات الجسم</h1>
-        <p className="text-gray-600 text-lg">سجل وتتبع قياساتك في جميع المناطق الرئيسية</p>
+        <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">{t('trackBodyMeasurements')}</h1>
+        <p className="text-gray-600 text-lg">{t('trackBodyMeasurementsDesc')}</p>
       </div>
 
       <Card className="shadow-xl border-0 bg-white max-w-6xl mx-auto">
@@ -207,7 +207,7 @@ export const BodyMeasurements: React.FC = () => {
             <TabsContent value="add">
               {/* Measurement Type Selection */}
               <div className="mb-6">
-                <h3 className="text-lg font-semibold mb-4 text-center">اختر نوع القياسات</h3>
+                <h3 className="text-lg font-semibold mb-4 text-center">{t('selectMeasurementType')}</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <Card 
                     className={`cursor-pointer transition-all duration-200 ${
@@ -222,8 +222,8 @@ export const BodyMeasurements: React.FC = () => {
                         <User className="h-6 w-6 text-blue-600" />
                       </div>
                       <div>
-                        <h4 className="font-semibold">قياسات عامة</h4>
-                        <p className="text-sm text-gray-600">لإنقاص الوزن والمتابعة العامة</p>
+                        <h4 className="font-semibold">{t('generalMeasurements')}</h4>
+                        <p className="text-sm text-gray-600">{t('generalMeasurementsDesc')}</p>
                       </div>
                     </CardContent>
                   </Card>
@@ -241,8 +241,8 @@ export const BodyMeasurements: React.FC = () => {
                         <Ruler className="h-6 w-6 text-orange-600" />
                       </div>
                       <div>
-                        <h4 className="font-semibold">قياسات كمال الأجسام</h4>
-                        <p className="text-sm text-gray-600">للاعبي كمال الأجسام والبناء العضلي</p>
+                        <h4 className="font-semibold">{t('bodybuildingMeasurements')}</h4>
+                        <p className="text-sm text-gray-600">{t('bodybuildingMeasurementsDesc')}</p>
                       </div>
                     </CardContent>
                   </Card>
@@ -251,20 +251,20 @@ export const BodyMeasurements: React.FC = () => {
 
               <div className="bg-gray-50 p-6 rounded-lg">
                 <h4 className="text-lg font-semibold mb-4 text-center">
-                  {measurementType === 'bodybuilding' ? 'قياسات كمال الأجسام' : 'القياسات العامة'}
+                  {measurementType === 'bodybuilding' ? t('bodybuildingMeasurementsTitle') : t('generalMeasurementsTitle')}
                 </h4>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {getCurrentFields().map((field) => (
                     <div key={field} className="space-y-2">
                       <Label htmlFor={field} className="text-sm font-medium">
-                        {measurementType === 'bodybuilding' && field === 'chest' ? 'الصدر (Chest)' :
-                         measurementType === 'bodybuilding' && field === 'arms' ? 'الذراعين (Arms)' :
-                         measurementType === 'bodybuilding' && field === 'shoulders' ? 'الأكتاف (Shoulders)' :
-                         measurementType === 'bodybuilding' && field === 'waist' ? 'الخصر (Waist)' :
-                         measurementType === 'bodybuilding' && field === 'thighs' ? 'الفخذين (Thighs)' :
-                         measurementType === 'bodybuilding' && field === 'calves' ? 'السمانة (Calves)' :
-                         measurementType === 'bodybuilding' && field === 'back' ? 'الظهر (Back)' :
+                        {measurementType === 'bodybuilding' && field === 'chest' ? (isRTL ? 'الصدر (Chest)' : 'Chest') :
+                         measurementType === 'bodybuilding' && field === 'arms' ? t('arms') :
+                         measurementType === 'bodybuilding' && field === 'shoulders' ? (isRTL ? 'الأكتاف (Shoulders)' : 'Shoulders') :
+                         measurementType === 'bodybuilding' && field === 'waist' ? (isRTL ? 'الخصر (Waist)' : 'Waist') :
+                         measurementType === 'bodybuilding' && field === 'thighs' ? t('thighs') :
+                         measurementType === 'bodybuilding' && field === 'calves' ? t('calves') :
+                         measurementType === 'bodybuilding' && field === 'back' ? t('back') :
                          t(field)}
                       </Label>
                       <Input
@@ -279,7 +279,7 @@ export const BodyMeasurements: React.FC = () => {
                           })
                         }
                         className="h-12 text-lg"
-                        placeholder="0.0 سم"
+                        placeholder={`0.0 ${t('measurementPlaceholder')}`}
                       />
                     </div>
                   ))}
@@ -321,10 +321,10 @@ export const BodyMeasurements: React.FC = () => {
                               className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-smooth"
                               onClick={() => setSelectedField(field)}
                             >
-                              {field === 'arms' ? 'الذراعين' :
-                               field === 'calves' ? 'السمانة' :
-                               field === 'thighs' ? 'الفخذين' :
-                               field === 'back' ? 'الظهر' :
+                              {field === 'arms' ? t('arms') :
+                               field === 'calves' ? t('calves') :
+                               field === 'thighs' ? t('thighs') :
+                               field === 'back' ? t('back') :
                                t(field)}
                             </Badge>
                           ))}
@@ -363,10 +363,10 @@ export const BodyMeasurements: React.FC = () => {
                                       if (key === 'id' || key === 'date' || key === 'type') return false;
                                       const value = measurement[key as keyof BodyMeasurement];
                                       return typeof value === 'number' && value > 0;
-                                    }).length} قياسات
+                                     }).length} {t('measurementCount')}
                                   </Badge>
                                   <Badge variant={measurement.type === 'bodybuilding' ? 'default' : 'secondary'}>
-                                    {measurement.type === 'bodybuilding' ? 'كمال أجسام' : 'عامة'}
+                                    {measurement.type === 'bodybuilding' ? t('bodybuildingType') : t('generalType')}
                                   </Badge>
                                 </div>
                                 <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm">
@@ -377,10 +377,10 @@ export const BodyMeasurements: React.FC = () => {
                                       value && typeof value === 'number' && value > 0 && (
                                         <div key={field} className="flex justify-between">
                                           <span className="text-gray-600">
-                                            {field === 'arms' ? 'الذراعين' :
-                                             field === 'calves' ? 'السمانة' :
-                                             field === 'thighs' ? 'الفخذين' :
-                                             field === 'back' ? 'الظهر' :
+                                            {field === 'arms' ? t('arms') :
+                                             field === 'calves' ? t('calves') :
+                                             field === 'thighs' ? t('thighs') :
+                                             field === 'back' ? t('back') :
                                              t(field)}:
                                           </span>
                                           <span className="font-medium text-gray-800">{value} {t('cm')}</span>

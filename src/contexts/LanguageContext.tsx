@@ -89,6 +89,21 @@ const translations = {
     thighs: 'الفخذين (سم)',
     back: 'الظهر (سم)',
     
+    // New measurement type labels
+    selectMeasurementType: 'اختر نوع القياسات',
+    generalMeasurements: 'قياسات عامة',
+    generalMeasurementsDesc: 'لإنقاص الوزن والمتابعة العامة',
+    bodybuildingMeasurements: 'قياسات كمال الأجسام', 
+    bodybuildingMeasurementsDesc: 'للاعبي كمال الأجسام والبناء العضلي',
+    generalMeasurementsTitle: 'القياسات العامة',
+    bodybuildingMeasurementsTitle: 'قياسات كمال الأجسام',
+    measurementPlaceholder: 'سم',
+    bodybuildingType: 'كمال أجسام',
+    generalType: 'عامة',
+    measurementCount: 'قياسات',
+    trackBodyMeasurements: 'تتبع قياسات الجسم',
+    trackBodyMeasurementsDesc: 'سجل وتتبع قياساتك في جميع المناطق الرئيسية',
+    
     // Cardio Converter
     caloriesInput: 'عدد السعرات المراد حرقها',
     exerciseType: 'نوع التمرين',
@@ -303,6 +318,21 @@ const translations = {
     calves: 'Calves (cm)',
     thighs: 'Thighs (cm)', 
     back: 'Back (cm)',
+    
+    // New measurement type labels
+    selectMeasurementType: 'Select Measurement Type',
+    generalMeasurements: 'General Measurements',
+    generalMeasurementsDesc: 'For weight loss and general tracking',
+    bodybuildingMeasurements: 'Bodybuilding Measurements',
+    bodybuildingMeasurementsDesc: 'For bodybuilders and muscle building',
+    generalMeasurementsTitle: 'General Measurements',
+    bodybuildingMeasurementsTitle: 'Bodybuilding Measurements',
+    measurementPlaceholder: 'cm',
+    bodybuildingType: 'Bodybuilding',
+    generalType: 'General',
+    measurementCount: 'measurements',
+    trackBodyMeasurements: 'Track Body Measurements',
+    trackBodyMeasurementsDesc: 'Record and track your measurements in all key areas',
     
     // Cardio Converter
     caloriesInput: 'Calories to burn',
