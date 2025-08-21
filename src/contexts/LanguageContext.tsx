@@ -59,6 +59,8 @@ const translations = {
     reminderBefore: 'تذكير قبل التمرين (دقيقة)',
     reminderAfter: 'تذكير بعد التمرين (دقيقة)',
     save: 'حفظ',
+    beforeWorkoutDesc: 'تأكد من جميع أغراضك قبل الذهاب للتمرين',
+    afterWorkoutDesc: 'تأكد من استرداد جميع أغراضك بعد التمرين',
     
     // Body Measurements
     neck: 'الرقبة (سم)',
@@ -289,6 +291,8 @@ const translations = {
     reminderBefore: 'Reminder before workout (minutes)',
     reminderAfter: 'Reminder after workout (minutes)',
     save: 'Save',
+    beforeWorkoutDesc: 'Make sure you have all your items before going to workout',
+    afterWorkoutDesc: 'Make sure to retrieve all your items after workout',
     
     // Body Measurements
     neck: 'Neck (cm)',

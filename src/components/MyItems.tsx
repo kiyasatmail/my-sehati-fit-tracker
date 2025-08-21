@@ -290,7 +290,7 @@ export const MyItems: React.FC = () => {
                 {t('beforeWorkout')}
               </CardTitle>
               <CardDescription>
-                تأكد من جميع أغراضك قبل الذهاب للتمرين
+                {t('beforeWorkoutDesc')}
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -306,7 +306,7 @@ export const MyItems: React.FC = () => {
                 {t('afterWorkout')}
               </CardTitle>
               <CardDescription>
-                تأكد من استرداد جميع أغراضك بعد التمرين
+                {t('afterWorkoutDesc')}
               </CardDescription>
             </CardHeader>
             <CardContent>
