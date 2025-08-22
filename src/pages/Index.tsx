@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { MobileHeader } from '@/components/MobileHeader';
 import { MobileDashboard } from '@/components/MobileDashboard';
-import { BottomNavigation } from '@/components/BottomNavigation';
-import { QuickAddDialog } from '@/components/QuickAddDialog';
+import { QuickServicesDialog } from '@/components/QuickAddDialog';
 import { CalorieCalculator } from '@/components/CalorieCalculator';
 import { BodyMeasurements } from '@/components/BodyMeasurements';
 import { CardioConverter } from '@/components/CardioConverter';
@@ -13,14 +12,14 @@ import { WaterCalculator } from '@/components/WaterCalculator';
 import { TermsAndPrivacy } from '@/components/TermsAndPrivacy';
 import PWAInstallPrompt from '@/components/PWAInstallPrompt';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, ArrowLeft, Home } from 'lucide-react';
+import { ArrowRight, ArrowLeft, Home, Activity } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
-type ViewType = 'home' | 'calories' | 'measurements' | 'cardio' | 'program' | 'items' | 'wakeup' | 'water' | 'terms' | 'tracking' | 'workouts' | 'settings';
+type ViewType = 'home' | 'calories' | 'measurements' | 'cardio' | 'program' | 'items' | 'wakeup' | 'water' | 'terms';
 
 const Index = () => {
   const [currentView, setCurrentView] = useState<ViewType>('home');
-  const [quickAddOpen, setQuickAddOpen] = useState(false);
+  const [quickServicesOpen, setQuickServicesOpen] = useState(false);
   const { isRTL, t } = useLanguage();
 
   const handleViewChange = (view: ViewType) => {
@@ -168,33 +167,6 @@ const Index = () => {
         );
       case 'terms':
         return <TermsAndPrivacy onBack={handleBackToHome} />;
-      case 'tracking':
-        return (
-          <div className="min-h-screen bg-gray-50 pb-20">
-            <div className="px-4 pt-6">
-              <h1 className="text-2xl font-bold mb-4">{isRTL ? 'التتبع' : 'Tracking'}</h1>
-              <p className="text-gray-600">{isRTL ? 'قريباً...' : 'Coming soon...'}</p>
-            </div>
-          </div>
-        );
-      case 'workouts':
-        return (
-          <div className="min-h-screen bg-gray-50 pb-20">
-            <div className="px-4 pt-6">
-              <h1 className="text-2xl font-bold mb-4">{isRTL ? 'التمارين' : 'Workouts'}</h1>
-              <p className="text-gray-600">{isRTL ? 'قريباً...' : 'Coming soon...'}</p>
-            </div>
-          </div>
-        );
-      case 'settings':
-        return (
-          <div className="min-h-screen bg-gray-50 pb-20">
-            <div className="px-4 pt-6">
-              <h1 className="text-2xl font-bold mb-4">{isRTL ? 'الإعدادات' : 'Settings'}</h1>
-              <p className="text-gray-600">{isRTL ? 'قريباً...' : 'Coming soon...'}</p>
-            </div>
-          </div>
-        );
       default:
         return <MobileDashboard onViewChange={handleViewChange} />;
     }
@@ -209,19 +181,23 @@ const Index = () => {
         {renderCurrentView()}
       </main>
       
-      {/* Bottom Navigation - only show on main views */}
+      {/* Floating Services Button - show on all pages except terms */}
       {!['terms'].includes(currentView) && (
-        <BottomNavigation
-          currentView={currentView}
-          onViewChange={handleViewChange}
-          onQuickAdd={() => setQuickAddOpen(true)}
-        />
+        <Button
+          onClick={() => setQuickServicesOpen(true)}
+          className="fixed bottom-6 right-6 w-16 h-16 rounded-full bg-primary hover:bg-primary-dark shadow-2xl hover:shadow-3xl transition-all duration-300 z-50 hover:scale-110"
+          size="icon"
+        >
+          <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
+            <span className="text-primary font-bold text-lg">ص</span>
+          </div>
+        </Button>
       )}
       
-      {/* Quick Add Dialog */}
-      <QuickAddDialog
-        open={quickAddOpen}
-        onOpenChange={setQuickAddOpen}
+      {/* Quick Services Dialog */}
+      <QuickServicesDialog
+        open={quickServicesOpen}
+        onOpenChange={setQuickServicesOpen}
         onViewChange={handleViewChange}
       />
       
