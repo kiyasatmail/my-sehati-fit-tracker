@@ -232,8 +232,8 @@
   .responsive-container {
     width: 100%;
     max-width: 100%;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding-left: 0;
+    padding-right: 0;
     margin-left: auto;
     margin-right: auto;
   }
@@ -272,8 +272,8 @@
   /* Mobile responsive adjustments */
   @media (max-width: 640px) {
     .responsive-container {
-      padding-left: 0.75rem;
-      padding-right: 0.75rem;
+      padding-left: 0;
+      padding-right: 0;
     }
 
     /* Better text sizing for mobile */
@@ -300,8 +300,8 @@
   /* Tablet responsive adjustments */
   @media (min-width: 641px) and (max-width: 1024px) {
     .responsive-container {
-      padding-left: 1rem;
-      padding-right: 1rem;
+      padding-left: 0;
+      padding-right: 0;
       max-width: 100%;
     }
 
@@ -320,7 +320,7 @@
   /* Desktop responsive adjustments */
   @media (min-width: 1025px) {
     .responsive-container {
-      max-width: 1200px;
+      max-width: 100%;
     }
   }
 
