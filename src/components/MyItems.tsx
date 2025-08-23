@@ -8,8 +8,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
 import { toast } from '@/hooks/use-toast';
-import { Plus, Luggage, Trash2, CheckCircle, XCircle, ArrowRight } from 'lucide-react';
-import { QuickServicesDialog } from '@/components/QuickAddDialog';
+import { Plus, Luggage, Trash2, CheckCircle, XCircle } from 'lucide-react';
 
 interface WorkoutItem {
   id: string;
@@ -45,7 +44,6 @@ export const MyItems: React.FC = () => {
   const [newItemName, setNewItemName] = useState('');
   const [selectedIcon, setSelectedIcon] = useState('🎒');
   const [selectedCategory, setSelectedCategory] = useState<'before' | 'after'>('before');
-  const [showQuickServices, setShowQuickServices] = useState(false);
 
   // Load items from localStorage on component mount
   useEffect(() => {
@@ -194,15 +192,7 @@ export const MyItems: React.FC = () => {
   return (
     <div className="max-w-4xl mx-auto space-y-6">
       {/* Header */}
-      <div className="text-center pt-4">
-        <Button
-          variant="ghost"
-          onClick={() => setShowQuickServices(true)}
-          className={`mb-4 text-gray-600 hover:text-gray-800 ${isRTL ? 'flex-row-reverse' : 'flex-row'}`}
-        >
-          <ArrowRight className={`h-4 w-4 ${isRTL ? '' : 'rotate-180'}`} />
-          <span className="mr-2">{t('backToHome')}</span>
-        </Button>
+      <div className="text-center">
         <h1 className="text-3xl font-bold text-gray-900 mb-2 flex items-center justify-center gap-3">
           <Luggage className="h-8 w-8 text-pink-500" />
           {t('myItems')}
@@ -356,17 +346,6 @@ export const MyItems: React.FC = () => {
           </CardContent>
         </Card>
       </div>
-      
-      {/* Quick Services Dialog */}
-      <QuickServicesDialog
-        open={showQuickServices}
-        onOpenChange={setShowQuickServices}
-        onViewChange={(view) => {
-          if (view === 'home') {
-            window.location.reload();
-          }
-        }}
-      />
     </div>
   );
 };

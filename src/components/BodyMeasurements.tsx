@@ -5,10 +5,9 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
-import { Ruler, Plus, TrendingUp, Calendar, User, ArrowRight } from 'lucide-react';
+import { Ruler, Plus, TrendingUp, Calendar, User } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useToast } from '@/hooks/use-toast';
-import { QuickServicesDialog } from '@/components/QuickAddDialog';
 import { Line } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -70,7 +69,6 @@ export const BodyMeasurements: React.FC = () => {
   const [currentMeasurement, setCurrentMeasurement] = useState<Partial<BodyMeasurement>>({});
   const [selectedField, setSelectedField] = useState<string>('waist');
   const [measurementType, setMeasurementType] = useState<'general' | 'bodybuilding'>('general');
-  const [showQuickServices, setShowQuickServices] = useState(false);
 
   useEffect(() => {
     const savedMeasurements = localStorage.getItem('sehati-measurements');
@@ -87,7 +85,7 @@ export const BodyMeasurements: React.FC = () => {
   const handleSaveMeasurement = () => {
     const newMeasurement: BodyMeasurement = {
       id: Date.now().toString(),
-      date: new Date().toLocaleDateString('en-US'),
+      date: new Date().toLocaleDateString('en-CA'),
       type: measurementType,
       ...currentMeasurement,
     };
@@ -176,15 +174,7 @@ export const BodyMeasurements: React.FC = () => {
   return (
     <div className="space-y-8">
       {/* Page Header */}
-      <div className="text-center pt-4">
-        <Button
-          variant="ghost"
-          onClick={() => setShowQuickServices(true)}
-          className={`mb-4 text-gray-600 hover:text-gray-800 ${isRTL ? 'flex-row-reverse' : 'flex-row'}`}
-        >
-          <ArrowRight className={`h-4 w-4 ${isRTL ? '' : 'rotate-180'}`} />
-          <span className="mr-2">{t('backToHome')}</span>
-        </Button>
+      <div className="text-center">
         <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">{t('trackBodyMeasurements')}</h1>
         <p className="text-gray-600 text-lg">{t('trackBodyMeasurementsDesc')}</p>
       </div>
@@ -341,7 +331,7 @@ export const BodyMeasurements: React.FC = () => {
                         </div>
                       </CardHeader>
                       <CardContent>
-                        <div className="h-[300px] md:h-[400px]">
+                        <div className="h-[400px]">
                           <Line data={getChartData(selectedField)} options={chartOptions} />
                         </div>
                       </CardContent>
@@ -358,51 +348,42 @@ export const BodyMeasurements: React.FC = () => {
                         <div className="space-y-4">
                           {measurements
                             .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-                            .slice(0, 10)
+                            .slice(0, 5)
                             .map((measurement) => (
                               <div 
                                 key={measurement.id}
-                                className="p-4 bg-gradient-to-r from-white to-gray-50 rounded-lg border-0 shadow-lg hover:shadow-xl transition-all duration-300"
+                                className="p-4 bg-gray-50 rounded-lg border border-gray-200"
                               >
-                                <div className="flex justify-between items-start mb-4">
-                                  <div className="flex items-center gap-3">
-                                    <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
-                                      <Ruler className="h-5 w-5 text-white" />
-                                    </div>
-                                    <div>
-                                      <p className="font-bold text-lg text-gray-800">
-                                        {measurement.date}
-                                      </p>
-                                      <div className="flex gap-2 mt-1">
-                                        <Badge variant="outline" className="text-xs">
-                                          {Object.keys(measurement).filter(key => {
-                                            if (key === 'id' || key === 'date' || key === 'type') return false;
-                                            const value = measurement[key as keyof BodyMeasurement];
-                                            return typeof value === 'number' && value > 0;
-                                           }).length} {t('measurementCount')}
-                                        </Badge>
-                                        <Badge variant={measurement.type === 'bodybuilding' ? 'default' : 'secondary'} className="text-xs">
-                                          {measurement.type === 'bodybuilding' ? t('bodybuildingType') : t('generalType')}
-                                        </Badge>
-                                      </div>
-                                    </div>
-                                  </div>
+                                <div className="flex justify-between items-center mb-2">
+                                  <span className="font-semibold text-gray-800">
+                                    {new Date(measurement.date).toLocaleDateString()}
+                                  </span>
+                                  <Badge variant="outline">
+                                    {Object.keys(measurement).filter(key => {
+                                      if (key === 'id' || key === 'date' || key === 'type') return false;
+                                      const value = measurement[key as keyof BodyMeasurement];
+                                      return typeof value === 'number' && value > 0;
+                                     }).length} {t('measurementCount')}
+                                  </Badge>
+                                  <Badge variant={measurement.type === 'bodybuilding' ? 'default' : 'secondary'}>
+                                    {measurement.type === 'bodybuilding' ? t('bodybuildingType') : t('generalType')}
+                                  </Badge>
                                 </div>
-                                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                                <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm">
                                   {Object.keys(measurement).map((field) => {
                                     if (field === 'id' || field === 'date' || field === 'type') return null;
                                     const value = measurement[field as keyof BodyMeasurement];
                                     return (
                                       value && typeof value === 'number' && value > 0 && (
-                                        <div key={field} className="bg-gray-50 p-2 rounded-lg text-center">
-                                          <p className="text-xs text-gray-600 font-medium">
+                                        <div key={field} className="flex justify-between">
+                                          <span className="text-gray-600">
                                             {field === 'arms' ? t('arms') :
                                              field === 'calves' ? t('calves') :
                                              field === 'thighs' ? t('thighs') :
                                              field === 'back' ? t('back') :
-                                             t(field)}
-                                          </p>
-                                          <p className="font-bold text-gray-800">{value} {t('cm')}</p>
+                                             t(field)}:
+                                          </span>
+                                          <span className="font-medium text-gray-800">{value} {t('cm')}</span>
                                         </div>
                                       )
                                     );
@@ -420,17 +401,6 @@ export const BodyMeasurements: React.FC = () => {
           </Tabs>
         </CardContent>
       </Card>
-      
-      {/* Quick Services Dialog */}
-      <QuickServicesDialog
-        open={showQuickServices}
-        onOpenChange={setShowQuickServices}
-        onViewChange={(view) => {
-          if (view === 'home') {
-            window.location.reload();
-          }
-        }}
-      />
     </div>
   );
 };

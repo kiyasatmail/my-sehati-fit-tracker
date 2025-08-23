@@ -7,10 +7,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Textarea } from '@/components/ui/textarea';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
-import { Plus, Trash2, Edit2, Calendar, Eye, ChevronDown, ChevronUp, ArrowRight } from 'lucide-react';
+import { Plus, Trash2, Edit2, Calendar, Eye, ChevronDown, ChevronUp } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { toast } from '@/hooks/use-toast';
-import { QuickServicesDialog } from '@/components/QuickAddDialog';
 
 interface Exercise {
   id: string;
@@ -43,7 +42,6 @@ export const WeeklyProgram: React.FC = () => {
   const [isCreating, setIsCreating] = useState(false);
   const [viewingProgram, setViewingProgram] = useState<WeeklyProgramData | null>(null);
   const [expandedDays, setExpandedDays] = useState<{ [key: string]: boolean }>({});
-  const [showQuickServices, setShowQuickServices] = useState(false);
 
   const daysOfWeek = [
     { key: 'sunday', label: t('sunday') },
@@ -87,7 +85,7 @@ export const WeeklyProgram: React.FC = () => {
         exercises: [],
         isRestDay: false,
       })),
-      createdAt: new Date().toLocaleDateString('en-US'),
+      createdAt: new Date().toISOString(),
     };
 
     setCurrentProgram(newProgram);
@@ -349,16 +347,6 @@ export const WeeklyProgram: React.FC = () => {
   if (viewingProgram) {
     return (
       <div className="space-y-6">
-        <div className="pt-4">
-          <Button
-            variant="ghost"
-            onClick={() => setShowQuickServices(true)}
-            className={`mb-4 text-gray-600 hover:text-gray-800 ${isRTL ? 'flex-row-reverse' : 'flex-row'}`}
-          >
-            <ArrowRight className={`h-4 w-4 ${isRTL ? '' : 'rotate-180'}`} />
-            <span className="mr-2">{t('backToHome')}</span>
-          </Button>
-        </div>
         <div className="flex justify-between items-center">
           <h2 className="text-2xl font-bold">{viewingProgram.name}</h2>
           <Button variant="outline" onClick={() => setViewingProgram(null)}>
@@ -441,31 +429,12 @@ export const WeeklyProgram: React.FC = () => {
           })}
         </div>
       </div>
-      
-      {/* Quick Services Dialog */}
-      <QuickServicesDialog
-        open={showQuickServices}
-        onOpenChange={setShowQuickServices}
-        onViewChange={(view) => {
-          if (view === 'home') {
-            window.location.reload();
-          }
-        }}
-      />
     );
   }
 
   return (
     <div className="space-y-6">
-      <div className="text-center pt-4">
-        <Button
-          variant="ghost"
-          onClick={() => setShowQuickServices(true)}
-          className={`mb-4 text-gray-600 hover:text-gray-800 ${isRTL ? 'flex-row-reverse' : 'flex-row'}`}
-        >
-          <ArrowRight className={`h-4 w-4 ${isRTL ? '' : 'rotate-180'}`} />
-          <span className="mr-2">{t('backToHome')}</span>
-        </Button>
+      <div className="text-center">
         <h1 className="text-3xl font-bold mb-4">{t('weeklyProgram')}</h1>
         <p className="text-muted-foreground mb-8">
           {isRTL 
