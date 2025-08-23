@@ -4,8 +4,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Heart, Clock, Flame } from 'lucide-react';
+import { Heart, Clock, Flame, ArrowRight } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { QuickServicesDialog } from '@/components/QuickAddDialog';
 
 interface Exercise {
   key: string;
@@ -27,6 +28,7 @@ export const CardioConverter: React.FC = () => {
   const [weight, setWeight] = useState<number>(70);
   const [selectedExercise, setSelectedExercise] = useState<string>('');
   const [result, setResult] = useState<number | null>(null);
+  const [showQuickServices, setShowQuickServices] = useState(false);
 
   const handleConvert = () => {
     if (calories > 0 && selectedExercise && weight > 0) {
@@ -59,7 +61,15 @@ export const CardioConverter: React.FC = () => {
   return (
     <div className="space-y-8">
       {/* Page Header */}
-      <div className="text-center">
+      <div className="text-center pt-4">
+        <Button
+          variant="ghost"
+          onClick={() => setShowQuickServices(true)}
+          className={`mb-4 text-gray-600 hover:text-gray-800 ${isRTL ? 'flex-row-reverse' : 'flex-row'}`}
+        >
+          <ArrowRight className={`h-4 w-4 ${isRTL ? '' : 'rotate-180'}`} />
+          <span className="mr-2">{t('backToHome')}</span>
+        </Button>
         <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">{t('cardioConverter')}</h1>
         <p className="text-gray-600 text-lg">{isRTL ? 'تحويل السعرات الحرارية إلى دقائق التمارين الرياضية' : 'Convert calories to exercise minutes'}</p>
       </div>
@@ -172,6 +182,17 @@ export const CardioConverter: React.FC = () => {
           </CardContent>
         </Card>
       )}
+      
+      {/* Quick Services Dialog */}
+      <QuickServicesDialog
+        open={showQuickServices}
+        onOpenChange={setShowQuickServices}
+        onViewChange={(view) => {
+          if (view === 'home') {
+            window.location.reload();
+          }
+        }}
+      />
 
       {/* معلومات إضافية عن التمارين */}
       <Card className="shadow-lg border-0 bg-white max-w-4xl mx-auto">

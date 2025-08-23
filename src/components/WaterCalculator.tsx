@@ -3,14 +3,16 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
-import { Droplets, Calculator, Info, AlertCircle } from 'lucide-react';
+import { Droplets, Calculator, Info, AlertCircle, ArrowRight } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { QuickServicesDialog } from '@/components/QuickAddDialog';
 
 export const WaterCalculator = () => {
   const { t, isRTL } = useLanguage();
   const [weight, setWeight] = useState<string>('');
   const [exerciseHours, setExerciseHours] = useState<string>('');
   const [waterNeeded, setWaterNeeded] = useState<number | null>(null);
+  const [showQuickServices, setShowQuickServices] = useState(false);
 
   const calculateWater = () => {
     const weightNum = parseFloat(weight);
@@ -77,7 +79,15 @@ export const WaterCalculator = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50 py-8">
       <div className="container mx-auto px-4 max-w-4xl">
-        <div className="text-center mb-8">
+        <div className="text-center mb-8 pt-4">
+          <Button
+            variant="ghost"
+            onClick={() => setShowQuickServices(true)}
+            className={`mb-4 text-gray-600 hover:text-gray-800 ${isRTL ? 'flex-row-reverse' : 'flex-row'}`}
+          >
+            <ArrowRight className={`h-4 w-4 ${isRTL ? '' : 'rotate-180'}`} />
+            <span className="mr-2">{t('backToHome')}</span>
+          </Button>
           <div className="flex items-center justify-center gap-3 mb-4">
             <Droplets className="h-8 w-8 text-blue-500" />
             <h1 className="text-3xl font-bold text-gray-900">
@@ -247,6 +257,17 @@ export const WaterCalculator = () => {
           </Card>
         </div>
       </div>
+      
+      {/* Quick Services Dialog */}
+      <QuickServicesDialog
+        open={showQuickServices}
+        onOpenChange={setShowQuickServices}
+        onViewChange={(view) => {
+          if (view === 'home') {
+            window.location.reload();
+          }
+        }}
+      />
     </div>
   );
 };

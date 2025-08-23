@@ -7,8 +7,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Calculator, Activity, Zap, Target, TrendingDown, TrendingUp, Minus, Save, History, Trash2, Calendar } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { toast } from '@/hooks/use-toast';
+import { QuickServicesDialog } from '@/components/QuickAddDialog';
 
 interface CalorieData {
   age: number;
@@ -58,6 +60,7 @@ export const CalorieCalculator: React.FC = () => {
   const [savedCalculations, setSavedCalculations] = useState<SavedCalculation[]>([]);
   const [saveDialogOpen, setSaveDialogOpen] = useState(false);
   const [calculationName, setCalculationName] = useState('');
+  const [showQuickServices, setShowQuickServices] = useState(false);
 
   // Load saved calculations from localStorage
   useEffect(() => {
@@ -132,7 +135,7 @@ export const CalorieCalculator: React.FC = () => {
     const newCalculation: SavedCalculation = {
       id: Date.now().toString(),
       name: calculationName.trim(),
-      date: new Date().toLocaleDateString('ar-SA'),
+      date: new Date().toLocaleDateString('en-US'),
       formData: { ...formData },
       results: { ...results }
     };
@@ -177,7 +180,15 @@ export const CalorieCalculator: React.FC = () => {
   return (
     <div className="space-y-8">
       {/* Header */}
-      <div className="text-center">
+      <div className="text-center pt-4">
+        <Button
+          variant="ghost"
+          onClick={() => setShowQuickServices(true)}
+          className={`mb-4 text-gray-600 hover:text-gray-800 ${isRTL ? 'flex-row-reverse' : 'flex-row'}`}
+        >
+          <ArrowRight className={`h-4 w-4 ${isRTL ? '' : 'rotate-180'}`} />
+          <span className="mr-2">{t('backToHome')}</span>
+        </Button>
         <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">{t('calorieCalculator')}</h1>
         <p className="text-gray-600 text-lg">{t('trackCalories')}</p>
       </div>
@@ -580,61 +591,61 @@ export const CalorieCalculator: React.FC = () => {
               ) : (
                 <div className="grid gap-4">
                   {savedCalculations.map((saved) => (
-                    <Card key={saved.id} className="border border-gray-200 hover:shadow-md transition-shadow">
-                      <CardContent className="p-4">
-                        <div className="flex items-center justify-between">
-                          <div className="flex-1">
-                            <div className="flex items-center gap-3 mb-2">
-                              <h4 className="font-semibold text-lg text-gray-800">{saved.name}</h4>
-                              <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">
-                                {saved.date}
-                              </span>
+                    <Card key={saved.id} className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-r from-white to-gray-50">
+                      <CardContent className="p-6">
+                        <div className="space-y-4">
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-3">
+                              <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center">
+                                <Calculator className="h-6 w-6 text-white" />
+                              </div>
+                              <div>
+                                <h4 className="font-bold text-xl text-gray-800">{saved.name}</h4>
+                                <p className="text-sm text-gray-500 flex items-center gap-1">
+                                  <Calendar className="h-3 w-3" />
+                                  {saved.date}
+                                </p>
+                              </div>
                             </div>
                             
-                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-                              <div>
-                                <span className="text-gray-600">
-                                  {isRTL ? 'العمر:' : 'Age:'}
-                                </span>
-                                <span className="font-medium ml-1">{saved.formData.age}</span>
-                              </div>
-                              <div>
-                                <span className="text-gray-600">
-                                  {isRTL ? 'الوزن:' : 'Weight:'}
-                                </span>
-                                <span className="font-medium ml-1">{saved.formData.weight}kg</span>
-                              </div>
-                              <div>
-                                <span className="text-blue-600 font-medium">
-                                  BMR: {saved.results.bmr.toLocaleString()}
-                                </span>
-                              </div>
-                              <div>
-                                <span className="text-green-600 font-medium">
-                                  TDEE: {saved.results.tdee.toLocaleString()}
-                                </span>
-                              </div>
+                            <div className="flex items-center gap-2">
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                onClick={() => loadCalculation(saved)}
+                                className="bg-primary text-white hover:bg-primary-light border-0"
+                              >
+                                <Calculator className="h-4 w-4 mr-1" />
+                                {isRTL ? 'تحميل' : 'Load'}
+                              </Button>
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={() => deleteCalculation(saved.id)}
+                                className="text-red-500 hover:text-red-700 hover:bg-red-50"
+                              >
+                                <Trash2 className="h-4 w-4" />
+                              </Button>
                             </div>
                           </div>
                           
-                          <div className="flex items-center gap-2 ml-4">
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              onClick={() => loadCalculation(saved)}
-                              className="text-blue-600 hover:text-blue-700"
-                            >
-                              <Calculator className="h-4 w-4 mr-1" />
-                              {isRTL ? 'تحميل' : 'Load'}
-                            </Button>
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              onClick={() => deleteCalculation(saved.id)}
-                              className="text-red-500 hover:text-red-700 hover:bg-red-50"
-                            >
-                              <Trash2 className="h-4 w-4" />
-                            </Button>
+                          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <div className="bg-blue-50 p-3 rounded-lg text-center">
+                              <p className="text-xs text-blue-600 font-medium">{isRTL ? 'العمر' : 'Age'}</p>
+                              <p className="text-lg font-bold text-blue-800">{saved.formData.age}</p>
+                            </div>
+                            <div className="bg-green-50 p-3 rounded-lg text-center">
+                              <p className="text-xs text-green-600 font-medium">{isRTL ? 'الوزن' : 'Weight'}</p>
+                              <p className="text-lg font-bold text-green-800">{saved.formData.weight}kg</p>
+                            </div>
+                            <div className="bg-purple-50 p-3 rounded-lg text-center">
+                              <p className="text-xs text-purple-600 font-medium">BMR</p>
+                              <p className="text-lg font-bold text-purple-800">{saved.results.bmr.toLocaleString()}</p>
+                            </div>
+                            <div className="bg-orange-50 p-3 rounded-lg text-center">
+                              <p className="text-xs text-orange-600 font-medium">TDEE</p>
+                              <p className="text-lg font-bold text-orange-800">{saved.results.tdee.toLocaleString()}</p>
+                            </div>
                           </div>
                         </div>
                       </CardContent>
@@ -646,6 +657,17 @@ export const CalorieCalculator: React.FC = () => {
           </Card>
         </TabsContent>
       </Tabs>
+      
+      {/* Quick Services Dialog */}
+      <QuickServicesDialog
+        open={showQuickServices}
+        onOpenChange={setShowQuickServices}
+        onViewChange={(view) => {
+          if (view === 'home') {
+            window.location.reload();
+          }
+        }}
+      />
     </div>
   );
 };

@@ -8,7 +8,8 @@ import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Clock, Calendar, CheckCircle, TrendingUp, Award, Target } from 'lucide-react';
+import { Clock, Calendar, CheckCircle, TrendingUp, Award, Target, ArrowRight } from 'lucide-react';
+import { QuickServicesDialog } from '@/components/QuickAddDialog';
 
 interface WakeUpRecord {
   date: string;
@@ -34,6 +35,7 @@ export const WakeUpChallenge: React.FC = () => {
   const [wakeUpTime, setWakeUpTime] = useState('06:00');
   const [duration, setDuration] = useState(7);
   const [activeTab, setActiveTab] = useState('setup');
+  const [showQuickServices, setShowQuickServices] = useState(false);
 
   useEffect(() => {
     loadChallenge();
@@ -166,7 +168,15 @@ export const WakeUpChallenge: React.FC = () => {
 
   return (
     <div className="container mx-auto p-4 space-y-6">
-      <div className="text-center mb-8">
+      <div className="text-center mb-8 pt-4">
+        <Button
+          variant="ghost"
+          onClick={() => setShowQuickServices(true)}
+          className={`mb-4 text-gray-600 hover:text-gray-800 ${isRTL ? 'flex-row-reverse' : 'flex-row'}`}
+        >
+          <ArrowRight className={`h-4 w-4 ${isRTL ? '' : 'rotate-180'}`} />
+          <span className="mr-2">{t('backToHome')}</span>
+        </Button>
         <h1 className="text-3xl font-bold text-primary mb-2">
           {isRTL ? 'تحدي الاستيقاظ' : 'Wake-up Challenge'}
         </h1>
@@ -470,6 +480,17 @@ export const WakeUpChallenge: React.FC = () => {
           )}
         </TabsContent>
       </Tabs>
+      
+      {/* Quick Services Dialog */}
+      <QuickServicesDialog
+        open={showQuickServices}
+        onOpenChange={setShowQuickServices}
+        onViewChange={(view) => {
+          if (view === 'home') {
+            window.location.reload();
+          }
+        }}
+      />
     </div>
   );
 };
