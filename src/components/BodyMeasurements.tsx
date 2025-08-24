@@ -68,7 +68,6 @@ export const BodyMeasurements: React.FC = () => {
   const [measurements, setMeasurements] = useState<BodyMeasurement[]>([]);
   const [currentMeasurement, setCurrentMeasurement] = useState<Partial<BodyMeasurement>>({});
   const [selectedField, setSelectedField] = useState<string>('waist');
-  const [measurementType, setMeasurementType] = useState<'general' | 'bodybuilding'>('general');
 
   useEffect(() => {
     const savedMeasurements = localStorage.getItem('sehati-measurements');
@@ -86,7 +85,7 @@ export const BodyMeasurements: React.FC = () => {
     const newMeasurement: BodyMeasurement = {
       id: Date.now().toString(),
       date: new Date().toLocaleDateString('en-CA'),
-      type: measurementType,
+      type: 'general',
       ...currentMeasurement,
     };
 
@@ -167,8 +166,10 @@ export const BodyMeasurements: React.FC = () => {
     },
   };
 
-  const getCurrentFields = () => {
-    return measurementType === 'bodybuilding' ? BODYBUILDING_FIELDS : GENERAL_FIELDS;
+  const getAllFields = () => {
+    // Combine all unique fields
+    const allFields = [...GENERAL_FIELDS, ...BODYBUILDING_FIELDS];
+    return allFields.filter((field, index, arr) => arr.indexOf(field) === index);
   };
 
   return (
@@ -205,66 +206,19 @@ export const BodyMeasurements: React.FC = () => {
             </TabsList>
 
             <TabsContent value="add">
-              {/* Measurement Type Selection */}
-              <div className="mb-6">
-                <h3 className="text-lg font-semibold mb-4 text-center">{t('selectMeasurementType')}</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <Card 
-                    className={`cursor-pointer transition-all duration-200 ${
-                      measurementType === 'general' 
-                        ? 'ring-2 ring-blue-500 bg-blue-50' 
-                        : 'hover:bg-gray-50'
-                    }`}
-                    onClick={() => setMeasurementType('general')}
-                  >
-                    <CardContent className="p-4 flex items-center gap-4">
-                      <div className="p-3 bg-blue-100 rounded-full">
-                        <User className="h-6 w-6 text-blue-600" />
-                      </div>
-                      <div>
-                        <h4 className="font-semibold">{t('generalMeasurements')}</h4>
-                        <p className="text-sm text-gray-600">{t('generalMeasurementsDesc')}</p>
-                      </div>
-                    </CardContent>
-                  </Card>
-                  
-                  <Card 
-                    className={`cursor-pointer transition-all duration-200 ${
-                      measurementType === 'bodybuilding' 
-                        ? 'ring-2 ring-orange-500 bg-orange-50' 
-                        : 'hover:bg-gray-50'
-                    }`}
-                    onClick={() => setMeasurementType('bodybuilding')}
-                  >
-                    <CardContent className="p-4 flex items-center gap-4">
-                      <div className="p-3 bg-orange-100 rounded-full">
-                        <Ruler className="h-6 w-6 text-orange-600" />
-                      </div>
-                      <div>
-                        <h4 className="font-semibold">{t('bodybuildingMeasurements')}</h4>
-                        <p className="text-sm text-gray-600">{t('bodybuildingMeasurementsDesc')}</p>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
-              </div>
-
               <div className="bg-gray-50 p-6 rounded-lg">
                 <h4 className="text-lg font-semibold mb-4 text-center">
-                  {measurementType === 'bodybuilding' ? t('bodybuildingMeasurementsTitle') : t('generalMeasurementsTitle')}
+                  {t('bodyMeasurements')}
                 </h4>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {getCurrentFields().map((field) => (
+                  {getAllFields().map((field) => (
                     <div key={field} className="space-y-2">
                       <Label htmlFor={field} className="text-sm font-medium">
-                        {measurementType === 'bodybuilding' && field === 'chest' ? (isRTL ? 'الصدر (Chest)' : 'Chest') :
-                         measurementType === 'bodybuilding' && field === 'arms' ? t('arms') :
-                         measurementType === 'bodybuilding' && field === 'shoulders' ? (isRTL ? 'الأكتاف (Shoulders)' : 'Shoulders') :
-                         measurementType === 'bodybuilding' && field === 'waist' ? (isRTL ? 'الخصر (Waist)' : 'Waist') :
-                         measurementType === 'bodybuilding' && field === 'thighs' ? t('thighs') :
-                         measurementType === 'bodybuilding' && field === 'calves' ? t('calves') :
-                         measurementType === 'bodybuilding' && field === 'back' ? t('back') :
+                        {field === 'arms' ? t('arms') :
+                         field === 'calves' ? t('calves') :
+                         field === 'thighs' ? t('thighs') :
+                         field === 'back' ? t('back') :
                          t(field)}
                       </Label>
                       <Input
@@ -364,9 +318,6 @@ export const BodyMeasurements: React.FC = () => {
                                       const value = measurement[key as keyof BodyMeasurement];
                                       return typeof value === 'number' && value > 0;
                                      }).length} {t('measurementCount')}
-                                  </Badge>
-                                  <Badge variant={measurement.type === 'bodybuilding' ? 'default' : 'secondary'}>
-                                    {measurement.type === 'bodybuilding' ? t('bodybuildingType') : t('generalType')}
                                   </Badge>
                                 </div>
                                 <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm">

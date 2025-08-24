@@ -15,7 +15,6 @@ interface WorkoutItem {
   name: string;
   icon: string;
   checked: boolean;
-  category: 'before' | 'after';
 }
 
 const availableIcons = [
@@ -43,7 +42,6 @@ export const MyItems: React.FC = () => {
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
   const [newItemName, setNewItemName] = useState('');
   const [selectedIcon, setSelectedIcon] = useState('🎒');
-  const [selectedCategory, setSelectedCategory] = useState<'before' | 'after'>('before');
 
   // Load items from localStorage on component mount
   useEffect(() => {
@@ -70,7 +68,6 @@ export const MyItems: React.FC = () => {
       name: newItemName.trim(),
       icon: selectedIcon,
       checked: false,
-      category: selectedCategory
     };
 
     setItems(prev => [...prev, newItem]);
@@ -98,26 +95,22 @@ export const MyItems: React.FC = () => {
     ));
   };
 
-  const checkAllItems = (category: 'before' | 'after') => {
+  const checkAllItems = () => {
     setItems(prev => prev.map(item => 
-      item.category === category ? { ...item, checked: true } : item
+      { ...item, checked: true }
     ));
   };
 
-  const uncheckAllItems = (category: 'before' | 'after') => {
+  const uncheckAllItems = () => {
     setItems(prev => prev.map(item => 
-      item.category === category ? { ...item, checked: false } : item
+      { ...item, checked: false }
     ));
   };
 
-  const getItemsByCategory = (category: 'before' | 'after') => {
-    return items.filter(item => item.category === category);
-  };
-
-  const renderItemsList = (category: 'before' | 'after') => {
-    const categoryItems = getItemsByCategory(category);
+  const renderItemsList = () => {
+    const allItems = items;
     
-    if (categoryItems.length === 0) {
+    if (allItems.length === 0) {
       return (
         <div className="text-center py-8 text-muted-foreground">
           <Luggage className="h-12 w-12 mx-auto mb-4 opacity-50" />
@@ -133,7 +126,7 @@ export const MyItems: React.FC = () => {
           <Button
             variant="outline"
             size="sm"
-            onClick={() => checkAllItems(category)}
+            onClick={checkAllItems}
             className="flex items-center gap-2"
           >
             <CheckCircle className="h-4 w-4" />
@@ -142,7 +135,7 @@ export const MyItems: React.FC = () => {
           <Button
             variant="outline"
             size="sm"
-            onClick={() => uncheckAllItems(category)}
+            onClick={uncheckAllItems}
             className="flex items-center gap-2"
           >
             <XCircle className="h-4 w-4" />
@@ -150,7 +143,7 @@ export const MyItems: React.FC = () => {
           </Button>
         </div>
         
-        {categoryItems.map((item) => (
+        {allItems.map((item) => (
           <div
             key={item.id}
             className={`flex items-center justify-between p-4 border rounded-lg transition-colors ${
@@ -244,15 +237,6 @@ export const MyItems: React.FC = () => {
               </div>
             </div>
 
-            <div>
-              <label className="block text-sm font-medium mb-2">Category</label>
-              <Tabs value={selectedCategory} onValueChange={(value: any) => setSelectedCategory(value)}>
-                <TabsList className="grid w-full grid-cols-2">
-                  <TabsTrigger value="before">{t('beforeWorkout')}</TabsTrigger>
-                  <TabsTrigger value="after">{t('afterWorkout')}</TabsTrigger>
-                </TabsList>
-              </Tabs>
-            </div>
           </div>
 
           <DialogFooter>
@@ -270,82 +254,35 @@ export const MyItems: React.FC = () => {
         </DialogContent>
       </Dialog>
 
-      {/* Items Tabs */}
-      <Tabs defaultValue="before" className="w-full">
-        <TabsList className="grid w-full grid-cols-2 mb-6">
-          <TabsTrigger value="before" className="flex items-center gap-2">
-            <Luggage className="h-4 w-4" />
-            {t('beforeWorkout')}
-          </TabsTrigger>
-          <TabsTrigger value="after" className="flex items-center gap-2">
-            <Luggage className="h-4 w-4" />
-            {t('afterWorkout')}
-          </TabsTrigger>
-        </TabsList>
-
-        <TabsContent value="before">
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-xl font-bold text-green-700">
-                {t('beforeWorkout')}
-              </CardTitle>
-              <CardDescription>
-                {t('beforeWorkoutDesc')}
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              {renderItemsList('before')}
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="after">
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-xl font-bold text-blue-700">
-                {t('afterWorkout')}
-              </CardTitle>
-              <CardDescription>
-                {t('afterWorkoutDesc')}
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              {renderItemsList('after')}
-            </CardContent>
-          </Card>
-        </TabsContent>
-      </Tabs>
+      {/* Items List */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-xl font-bold text-green-700">
+            {t('myItems')}
+          </CardTitle>
+          <CardDescription>
+            {t('myItemsDesc')}
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          {renderItemsList()}
+        </CardContent>
+      </Card>
 
       {/* Statistics */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Card>
-          <CardContent className="pt-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-gray-600">{t('beforeWorkout')}</p>
-                <p className="text-2xl font-bold text-green-600">
-                  {getItemsByCategory('before').filter(item => item.checked).length}/{getItemsByCategory('before').length}
-                </p>
-              </div>
-              <CheckCircle className="h-8 w-8 text-green-500" />
+      <Card>
+        <CardContent className="pt-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-gray-600">{t('myItems')}</p>
+              <p className="text-2xl font-bold text-green-600">
+                {items.filter(item => item.checked).length}/{items.length}
+              </p>
             </div>
-          </CardContent>
-        </Card>
-        
-        <Card>
-          <CardContent className="pt-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-gray-600">{t('afterWorkout')}</p>
-                <p className="text-2xl font-bold text-blue-600">
-                  {getItemsByCategory('after').filter(item => item.checked).length}/{getItemsByCategory('after').length}
-                </p>
-              </div>
-              <CheckCircle className="h-8 w-8 text-blue-500" />
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+            <CheckCircle className="h-8 w-8 text-green-500" />
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 };
