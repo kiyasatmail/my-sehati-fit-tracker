@@ -97,13 +97,13 @@ export const MyItems: React.FC = () => {
 
   const checkAllItems = () => {
     setItems(prev => prev.map(item => 
-      { ...item, checked: true }
+      ({ ...item, checked: true })
     ));
   };
 
   const uncheckAllItems = () => {
     setItems(prev => prev.map(item => 
-      { ...item, checked: false }
+      ({ ...item, checked: false })
     ));
   };
 
