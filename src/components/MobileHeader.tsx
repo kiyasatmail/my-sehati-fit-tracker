@@ -23,8 +23,19 @@ export const MobileHeader: React.FC<MobileHeaderProps> = ({ onViewChange }) => {
       <div className="flex items-center justify-between px-4 py-3">
         {/* Logo */}
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-            <span className="text-white font-bold text-lg">ص</span>
+          <div className="relative w-10 h-10 bg-gradient-to-br from-primary via-primary-light to-primary-dark rounded-xl flex items-center justify-center shadow-lg border-2 border-white/10">
+            {/* Background glow */}
+            <div className="absolute inset-0 bg-white/5 rounded-xl blur-sm"></div>
+            
+            {/* Main icon */}
+            <div className="relative w-6 h-6 bg-white/95 backdrop-blur-sm rounded-lg flex items-center justify-center shadow-sm border border-white/20">
+              <span className="text-primary font-black text-sm bg-gradient-to-br from-primary to-primary-dark bg-clip-text text-transparent">
+                ص
+              </span>
+            </div>
+            
+            {/* Small decorative dot */}
+            <div className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-gradient-to-br from-green-400 to-green-600 rounded-full opacity-70"></div>
           </div>
           <h1 className="text-xl font-bold text-gray-900 dark:text-white">{t('appName')}</h1>
         </div>

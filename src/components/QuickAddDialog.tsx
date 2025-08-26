@@ -86,8 +86,20 @@ export const QuickServicesDialog: React.FC<QuickServicesDialogProps> = ({
       <DialogContent className="sm:max-w-2xl max-h-[80vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="text-center text-2xl font-bold flex items-center justify-center gap-3">
-            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-lg">ص</span>
+            <div className="relative w-12 h-12 bg-gradient-to-br from-primary via-primary-light to-primary-dark rounded-xl flex items-center justify-center shadow-lg border-2 border-white/20">
+              {/* Background glow */}
+              <div className="absolute inset-0 bg-white/10 rounded-xl blur-sm"></div>
+              
+              {/* Main icon */}
+              <div className="relative w-8 h-8 bg-white/95 backdrop-blur-sm rounded-lg flex items-center justify-center shadow-md border border-white/30">
+                <span className="text-primary font-black text-lg bg-gradient-to-br from-primary to-primary-dark bg-clip-text text-transparent">
+                  ص
+                </span>
+              </div>
+              
+              {/* Decorative dots */}
+              <div className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-gradient-to-br from-green-400 to-green-600 rounded-full opacity-80"></div>
+              <div className="absolute -bottom-1 -left-1 w-2 h-2 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full opacity-60"></div>
             </div>
             {isRTL ? 'خدمات صحتي' : 'Sehati Services'}
           </DialogTitle>
