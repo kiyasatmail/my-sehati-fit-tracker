@@ -38,7 +38,7 @@ const measurementFields = [
   { key: 'back', labelAr: 'الظهر (سم)', labelEn: 'Back (cm)' }
 ];
 
-export default function BodyMeasurements() {
+export function BodyMeasurements() {
   const { language } = useLanguage();
   const [measurements, setMeasurements] = useState<Measurement[]>([]);
   const [currentMeasurement, setCurrentMeasurement] = useState<Partial<Measurement>>({});
