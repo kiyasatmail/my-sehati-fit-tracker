@@ -185,27 +185,11 @@ const Index = () => {
       {!['terms'].includes(currentView) && (
         <Button
           onClick={() => setQuickServicesOpen(true)}
-          className="fixed bottom-6 right-6 w-20 h-20 rounded-full bg-gradient-to-br from-primary via-primary-light to-primary-dark hover:from-primary-dark hover:via-primary hover:to-primary-light shadow-2xl hover:shadow-3xl transition-all duration-500 z-50 hover:scale-110 group border-4 border-white/20 backdrop-blur-sm"
+          className="fixed bottom-6 right-6 w-16 h-16 rounded-full bg-primary hover:bg-primary-dark shadow-2xl hover:shadow-3xl transition-all duration-300 z-50 hover:scale-110"
           size="icon"
         >
-          <div className="relative w-full h-full flex items-center justify-center">
-            {/* Background glow effect */}
-            <div className="absolute inset-0 bg-white/10 rounded-full blur-sm group-hover:bg-white/20 transition-all duration-300"></div>
-            
-            {/* Main icon container */}
-            <div className="relative w-12 h-12 bg-white/95 backdrop-blur-sm rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-105 border border-white/30">
-              {/* Arabic letter with enhanced styling */}
-              <span className="text-primary font-black text-2xl bg-gradient-to-br from-primary to-primary-dark bg-clip-text text-transparent drop-shadow-sm">
-                ص
-              </span>
-              
-              {/* Decorative elements */}
-              <div className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-br from-green-400 to-green-600 rounded-full opacity-80 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div className="absolute -bottom-1 -left-1 w-2 h-2 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full opacity-60 group-hover:opacity-80 transition-opacity duration-300"></div>
-            </div>
-            
-            {/* Pulse animation ring */}
-            <div className="absolute inset-0 rounded-full border-2 border-white/30 animate-pulse group-hover:border-white/50 transition-colors duration-300"></div>
+          <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
+            <span className="text-primary font-bold text-lg">ص</span>
           </div>
         </Button>
       )}
