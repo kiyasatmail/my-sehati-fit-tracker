@@ -407,4 +407,23 @@
     text-align: left;
     display: block;
   }
+
+  /* PWA Icon fixes */
+  .lucide-heart {
+    fill: currentColor !important;
+    stroke: currentColor !important;
+  }
+
+  /* Ensure icons display properly in PWA mode */
+  @media (display-mode: standalone) {
+    .lucide {
+      display: inline-block !important;
+      vertical-align: middle !important;
+    }
+    
+    .lucide-heart {
+      fill: currentColor !important;
+      stroke: currentColor !important;
+    }
+  }
 }

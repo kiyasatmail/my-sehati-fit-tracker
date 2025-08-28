@@ -43,7 +43,7 @@ export const QuickServicesDialog: React.FC<QuickServicesDialogProps> = ({
       key: 'cardio',
       icon: Heart,
       title: isRTL ? 'محول الكارديو' : 'Cardio Converter',
-      color: 'bg-red-500 hover:bg-red-600',
+      color: 'bg-gradient-to-br from-red-500 to-red-600 hover:from-red-600 hover:to-red-700',
       description: isRTL ? 'حول السعرات لدقائق' : 'Convert calories to minutes'
     },
     {

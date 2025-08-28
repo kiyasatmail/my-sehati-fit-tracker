@@ -34,7 +34,7 @@ export const MobileDashboard: React.FC<MobileDashboardProps> = ({ onViewChange }
       icon: Heart,
       title: isRTL ? 'محول الكارديو' : 'Cardio Converter',
       subtitle: isRTL ? 'حول السعرات لدقائق' : 'Convert calories to minutes',
-      color: 'bg-gradient-to-br from-red-500 to-red-600',
+      color: 'bg-gradient-to-br from-red-500 to-red-600 shadow-lg',
       iconBg: 'bg-red-100',
       iconColor: 'text-red-600'
     },

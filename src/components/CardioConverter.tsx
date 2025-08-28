@@ -68,7 +68,7 @@ export const CardioConverter: React.FC = () => {
         <CardHeader className="bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-t-lg">
           <div className="flex justify-center mb-4">
             <div className="p-3 bg-white/20 rounded-full">
-              <Heart className="h-8 w-8 text-white" />
+              <Heart className="h-8 w-8 text-white fill-white" />
             </div>
           </div>
           <CardTitle className="text-2xl text-center">{t('cardioConverter')}</CardTitle>
@@ -142,7 +142,7 @@ export const CardioConverter: React.FC = () => {
           <CardContent className="p-8 text-center">
             <div className="flex justify-center mb-6">
               <div className="p-4 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full">
-                <Clock className="h-8 w-8 text-white" />
+                <Clock className="h-8 w-8 text-white stroke-white" />
               </div>
             </div>
             <h3 className="text-2xl font-bold mb-4 text-gray-800">{t('timeNeeded')}</h3>
