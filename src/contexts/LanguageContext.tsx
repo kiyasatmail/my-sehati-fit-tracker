@@ -13,7 +13,7 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 
 const translations = {
   ar: {
-    appName: 'قياساتي',
+    appName: 'صحتي',
     calorieCalculator: 'حاسبة السعرات الحرارية',
     bodyMeasurements: 'قياسات الجسم',
     cardioConverter: 'محول الكارديو',
@@ -245,7 +245,7 @@ const translations = {
     contactInfo: 'للاستفسارات: تواصل معنا عبر التطبيق'
   },
   en: {
-    appName: 'QiyasaT',
+    appName: 'Sehati',
     calorieCalculator: 'Calorie Calculator',
     bodyMeasurements: 'Body Measurements',
     cardioConverter: 'Cardio Converter',

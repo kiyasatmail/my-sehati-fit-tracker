@@ -1,7 +1,7 @@
 {
-  "name": "QiyasaT",
-  "short_name": "QiyasaT",
-  "description": "تطبيق قياساتي الشامل لحساب السعرات الحرارية وتتبع قياسات الجسم",
+  "name": "صحتي - Sehati",
+  "short_name": "صحتي",
+  "description": "تطبيق صحتي الشامل لحساب السعرات الحرارية وتتبع قياسات الجسم",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#f0f9f4",

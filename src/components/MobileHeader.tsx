@@ -24,7 +24,7 @@ export const MobileHeader: React.FC<MobileHeaderProps> = ({ onViewChange }) => {
         {/* Logo */}
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-            <span className="text-white font-bold text-lg">ق</span>
+            <span className="text-white font-bold text-lg">ص</span>
           </div>
           <h1 className="text-xl font-bold text-gray-900 dark:text-white">{t('appName')}</h1>
         </div>
@@ -40,7 +40,7 @@ export const MobileHeader: React.FC<MobileHeaderProps> = ({ onViewChange }) => {
             <SheetHeader>
               <SheetTitle className="text-xl font-bold mb-6 flex items-center gap-3">
                 <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-xl">ق</span>
+                  <span className="text-white font-bold text-xl">ص</span>
                 </div>
                 {t('appName')}
               </SheetTitle>
