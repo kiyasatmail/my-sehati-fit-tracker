@@ -1,7 +1,7 @@
 {
-  "name": "صحتي - Sehati",
-  "short_name": "صحتي",
-  "description": "تطبيق صحتي الشامل لحساب السعرات الحرارية وتتبع قياسات الجسم",
+  "name": "QiyasaT - Fitness Tracker",
+  "short_name": "QiyasaT",
+  "description": "QiyasaT comprehensive app for calorie calculation and body measurements tracking",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#f0f9f4",
