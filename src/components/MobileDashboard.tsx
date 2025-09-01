@@ -102,8 +102,8 @@ export const MobileDashboard: React.FC<MobileDashboardProps> = ({ onViewChange }
                 <CardContent className="p-0">
                   <div className={`${service.color} p-4 text-white`}>
                     <div className="flex justify-between items-start mb-3">
-                      <div className={`p-3 rounded-lg ${service.iconBg} flex items-center justify-center`}>
-                        <Icon className={`h-7 w-7 ${service.iconColor}`} />
+                      <div className={`p-2 rounded-lg ${service.iconBg}`}>
+                        <Icon className={`h-6 w-6 ${service.iconColor}`} />
                       </div>
                     </div>
                     <h3 className="font-bold text-lg mb-1 leading-tight">
