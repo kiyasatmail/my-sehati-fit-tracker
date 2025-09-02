@@ -25,7 +25,7 @@ export const MobileDashboard: React.FC<MobileDashboardProps> = ({ onViewChange }
       icon: Ruler,
       title: isRTL ? 'قياسات الجسم' : 'Body Measurements',
       subtitle: isRTL ? 'تتبع تقدمك' : 'Track your progress',
-      color: 'bg-gradient-to-br from-green-600 to-green-700',
+      color: 'bg-gradient-to-br from-blue-500 to-blue-600',
       iconBg: 'bg-white/20',
       iconColor: 'text-white'
     },
@@ -34,7 +34,7 @@ export const MobileDashboard: React.FC<MobileDashboardProps> = ({ onViewChange }
       icon: Heart,
       title: isRTL ? 'محول الكارديو' : 'Cardio Converter',
       subtitle: isRTL ? 'حول السعرات لدقائق' : 'Convert calories to minutes',
-      color: 'bg-gradient-to-br from-green-500 to-green-600',
+      color: 'bg-gradient-to-br from-red-500 to-red-600',
       iconBg: 'bg-white/20',
       iconColor: 'text-white'
     },
@@ -43,7 +43,7 @@ export const MobileDashboard: React.FC<MobileDashboardProps> = ({ onViewChange }
       icon: Calendar,
       title: isRTL ? 'البرنامج الأسبوعي' : 'Weekly Program',
       subtitle: isRTL ? 'خطط تمارينك' : 'Plan your workouts',
-      color: 'bg-gradient-to-br from-green-600 to-green-700',
+      color: 'bg-gradient-to-br from-purple-500 to-purple-600',
       iconBg: 'bg-white/20',
       iconColor: 'text-white'
     },
@@ -52,7 +52,7 @@ export const MobileDashboard: React.FC<MobileDashboardProps> = ({ onViewChange }
       icon: Package,
       title: isRTL ? 'أغراضي' : 'My Items',
       subtitle: isRTL ? 'تحقق من أغراضك' : 'Check your items',
-      color: 'bg-gradient-to-br from-green-500 to-green-600',
+      color: 'bg-gradient-to-br from-orange-500 to-orange-600',
       iconBg: 'bg-white/20',
       iconColor: 'text-white'
     },
@@ -61,7 +61,7 @@ export const MobileDashboard: React.FC<MobileDashboardProps> = ({ onViewChange }
       icon: AlarmClock,
       title: isRTL ? 'تحدي الاستيقاظ' : 'Wake-up Challenge',
       subtitle: isRTL ? 'تحدى نفسك' : 'Challenge yourself',
-      color: 'bg-gradient-to-br from-green-600 to-green-700',
+      color: 'bg-gradient-to-br from-indigo-500 to-indigo-600',
       iconBg: 'bg-white/20',
       iconColor: 'text-white'
     },
@@ -70,7 +70,7 @@ export const MobileDashboard: React.FC<MobileDashboardProps> = ({ onViewChange }
       icon: Droplets,
       title: isRTL ? 'حاسبة الماء' : 'Water Calculator',
       subtitle: isRTL ? 'احسب احتياجك من الماء' : 'Calculate water needs',
-      color: 'bg-gradient-to-br from-green-500 to-green-600',
+      color: 'bg-gradient-to-br from-cyan-500 to-cyan-600',
       iconBg: 'bg-white/20',
       iconColor: 'text-white'
     }
