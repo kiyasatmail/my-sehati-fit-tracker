@@ -16,49 +16,63 @@ export const MobileDashboard: React.FC<MobileDashboardProps> = ({ onViewChange }
       icon: Calculator,
       title: isRTL ? 'حاسبة السعرات' : 'Calorie Calculator',
       subtitle: isRTL ? 'احسب احتياجك اليومي' : 'Calculate daily needs',
-      colorClass: 'service-card-calories'
+      color: 'bg-gradient-to-br from-green-500 to-green-600',
+      iconBg: 'bg-green-100',
+      iconColor: 'text-green-600'
     },
     {
       key: 'measurements',
       icon: Ruler,
       title: isRTL ? 'قياسات الجسم' : 'Body Measurements',
       subtitle: isRTL ? 'تتبع تقدمك' : 'Track your progress',
-      colorClass: 'service-card-measurements'
+      color: 'bg-gradient-to-br from-blue-500 to-blue-600',
+      iconBg: 'bg-blue-100',
+      iconColor: 'text-blue-600'
     },
     {
       key: 'cardio',
       icon: Heart,
       title: isRTL ? 'محول الكارديو' : 'Cardio Converter',
       subtitle: isRTL ? 'حول السعرات لدقائق' : 'Convert calories to minutes',
-      colorClass: 'service-card-cardio'
+      color: 'bg-gradient-to-br from-red-500 to-red-600 shadow-lg',
+      iconBg: 'bg-red-100',
+      iconColor: 'text-red-600'
     },
     {
       key: 'program',
       icon: Calendar,
       title: isRTL ? 'البرنامج الأسبوعي' : 'Weekly Program',
       subtitle: isRTL ? 'خطط تمارينك' : 'Plan your workouts',
-      colorClass: 'service-card-program'
+      color: 'bg-gradient-to-br from-purple-500 to-purple-600',
+      iconBg: 'bg-purple-100',
+      iconColor: 'text-purple-600'
     },
     {
       key: 'items',
       icon: Package,
       title: isRTL ? 'أغراضي' : 'My Items',
       subtitle: isRTL ? 'تحقق من أغراضك' : 'Check your items',
-      colorClass: 'service-card-items'
+      color: 'bg-gradient-to-br from-orange-500 to-orange-600',
+      iconBg: 'bg-orange-100',
+      iconColor: 'text-orange-600'
     },
     {
       key: 'wakeup',
       icon: AlarmClock,
       title: isRTL ? 'تحدي الاستيقاظ' : 'Wake-up Challenge',
       subtitle: isRTL ? 'تحدى نفسك' : 'Challenge yourself',
-      colorClass: 'service-card-wakeup'
+      color: 'bg-gradient-to-br from-indigo-500 to-indigo-600',
+      iconBg: 'bg-indigo-100',
+      iconColor: 'text-indigo-600'
     },
     {
       key: 'water',
       icon: Droplets,
       title: isRTL ? 'حاسبة الماء' : 'Water Calculator',
       subtitle: isRTL ? 'احسب احتياجك من الماء' : 'Calculate water needs',
-      colorClass: 'service-card-water'
+      color: 'bg-gradient-to-br from-cyan-500 to-cyan-600',
+      iconBg: 'bg-cyan-100',
+      iconColor: 'text-cyan-600'
     }
   ];
 
@@ -86,16 +100,16 @@ export const MobileDashboard: React.FC<MobileDashboardProps> = ({ onViewChange }
                 onClick={() => onViewChange(service.key as any)}
               >
                 <CardContent className="p-0">
-                  <div className={`${service.colorClass} p-4 text-white shadow-hero`}>
+                  <div className={`${service.color} p-4 text-white`}>
                     <div className="flex justify-between items-start mb-3">
-                      <div className="p-2 rounded-lg bg-white/20 backdrop-blur-sm">
-                        <Icon className="h-6 w-6 text-white" />
+                      <div className={`p-2 rounded-lg ${service.iconBg}`}>
+                        <Icon className={`h-6 w-6 ${service.iconColor}`} />
                       </div>
                     </div>
-                    <h3 className="font-bold text-lg mb-1 leading-tight text-white">
+                    <h3 className="font-bold text-lg mb-1 leading-tight">
                       {service.title}
                     </h3>
-                    <p className="text-white/90 text-sm">
+                    <p className="text-white/80 text-sm">
                       {service.subtitle}
                     </p>
                   </div>
