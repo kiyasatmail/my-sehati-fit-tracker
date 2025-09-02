@@ -64,12 +64,21 @@
     --shadow-hero: 0 8px 32px hsl(153 96% 31% / 0.12);
     --shadow-focus: 0 0 0 3px hsl(153 96% 31% / 0.1);
 
-    /* Health App Green Colors */
+    /* Health App Service Colors */
     --health-cardio: 153 96% 31%;
     --health-strength: 153 76% 35%;
     --health-nutrition: 153 96% 31%;
     --health-wellness: 153 86% 35%;
     --health-progress: 153 76% 45%;
+    
+    /* Service Card Colors */
+    --service-calories: 142 71% 45%;
+    --service-measurements: 210 100% 60%;
+    --service-cardio: 0 84% 60%;
+    --service-program: 262 83% 58%;
+    --service-items: 25 95% 53%;
+    --service-wakeup: 238 83% 58%;
+    --service-water: 188 91% 60%;
 
     /* Smooth Professional Transitions */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -217,6 +226,35 @@
 
   .health-progress {
     color: hsl(var(--health-progress));
+  }
+
+  /* Service Card Styles */
+  .service-card-calories {
+    background: linear-gradient(135deg, hsl(var(--service-calories)), hsl(var(--service-calories) / 0.8));
+  }
+
+  .service-card-measurements {
+    background: linear-gradient(135deg, hsl(var(--service-measurements)), hsl(var(--service-measurements) / 0.8));
+  }
+
+  .service-card-cardio {
+    background: linear-gradient(135deg, hsl(var(--service-cardio)), hsl(var(--service-cardio) / 0.8));
+  }
+
+  .service-card-program {
+    background: linear-gradient(135deg, hsl(var(--service-program)), hsl(var(--service-program) / 0.8));
+  }
+
+  .service-card-items {
+    background: linear-gradient(135deg, hsl(var(--service-items)), hsl(var(--service-items) / 0.8));
+  }
+
+  .service-card-wakeup {
+    background: linear-gradient(135deg, hsl(var(--service-wakeup)), hsl(var(--service-wakeup) / 0.8));
+  }
+
+  .service-card-water {
+    background: linear-gradient(135deg, hsl(var(--service-water)), hsl(var(--service-water) / 0.8));
   }
 
   /* Professional Button Styles */
