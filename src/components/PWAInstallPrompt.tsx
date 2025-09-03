@@ -19,10 +19,12 @@ const PWAInstallPrompt = () => {
   useEffect(() => {
     // Check if it's iOS
     const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    const isAndroid = /Android/.test(navigator.userAgent);
     setIsIOS(iOS);
 
     // Check if app is already installed (standalone mode)
-    const standalone = window.matchMedia('(display-mode: standalone)').matches;
+    const standalone = window.matchMedia('(display-mode: standalone)').matches || 
+                      (window.navigator as any).standalone === true;
     setIsInStandaloneMode(standalone);
 
     // Listen for the beforeinstallprompt event
@@ -34,11 +36,17 @@ const PWAInstallPrompt = () => {
 
     window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
 
-    // For iOS, show install prompt after a delay if not in standalone mode
-    if (iOS && !standalone) {
+    // Show install prompt for mobile devices after a delay if not in standalone mode
+    if ((iOS || isAndroid) && !standalone && !sessionStorage.getItem('pwa-install-dismissed')) {
       const timer = setTimeout(() => {
         setShowInstallPrompt(true);
-      }, 3000);
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+
+    // For desktop Chrome/Edge, show prompt when available
+    if (!iOS && !isAndroid && deferredPrompt && !sessionStorage.getItem('pwa-install-dismissed')) {
+      setShowInstallPrompt(true);
       return () => clearTimeout(timer);
     }
 
@@ -69,30 +77,28 @@ const PWAInstallPrompt = () => {
   const handleDismiss = () => {
     setShowInstallPrompt(false);
     // Remember user's choice for this session
-    sessionStorage.setItem('pwa-install-dismissed', 'true');
+    localStorage.setItem('pwa-install-dismissed', 'true');
   };
 
   // Don't show if already in standalone mode or user dismissed
   if (isInStandaloneMode || 
-      sessionStorage.getItem('pwa-install-dismissed') === 'true') {
+      localStorage.getItem('pwa-install-dismissed') === 'true') {
     return null;
   }
 
-  // Don't show on desktop unless there's a deferred prompt
-  if (!isIOS && !deferredPrompt && !showInstallPrompt) {
+  // Don't show unless conditions are met
+  if (!showInstallPrompt) {
     return null;
   }
-
-  if (!showInstallPrompt) return null;
 
   return (
-    <Card className="fixed bottom-4 left-4 right-4 z-50 mx-auto max-w-sm shadow-lg border-primary/20">
+    <Card className="fixed bottom-20 left-4 right-4 z-40 mx-auto max-w-sm shadow-lg border-primary/20 bg-white">
       <CardContent className="p-4">
         <div className="flex items-start justify-between mb-3">
           <div className="flex items-center gap-2">
             <Smartphone className="w-5 h-5 text-primary" />
             <h3 className="font-semibold text-sm">
-              {isIOS ? 'تثبيت التطبيق' : t('installApp') || 'تثبيت التطبيق'}
+              تثبيت التطبيق
             </h3>
           </div>
           <Button
@@ -107,8 +113,8 @@ const PWAInstallPrompt = () => {
         
         <p className="text-xs text-muted-foreground mb-3" dir={language === 'ar' ? 'rtl' : 'ltr'}>
           {isIOS 
-            ? 'أضف صحتي إلى الشاشة الرئيسية للوصول السريع'
-            : 'أضف صحتي إلى شاشتك الرئيسية للوصول السريع وتجربة أفضل'
+            ? 'أضف QiyasaT إلى الشاشة الرئيسية للوصول السريع'
+            : 'أضف QiyasaT إلى شاشتك الرئيسية للوصول السريع وتجربة أفضل'
           }
         </p>
 
@@ -124,7 +130,7 @@ const PWAInstallPrompt = () => {
             size="sm"
           >
             <Download className="w-4 h-4 mr-2" />
-            تثبيت التطبيق
+            تثبيت QiyasaT
           </Button>
         )}
       </CardContent>
