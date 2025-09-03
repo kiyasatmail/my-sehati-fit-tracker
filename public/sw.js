@@ -1,5 +1,5 @@
-const CACHE_NAME = 'qiyasat-v5';
-const STATIC_CACHE = 'qiyasat-static-v5';
+const CACHE_NAME = 'sehati-v4';
+const STATIC_CACHE = 'sehati-static-v4';
 const urlsToCache = [
   '/',
   '/manifest.json',
@@ -19,28 +19,6 @@ self.addEventListener('install', event => {
         // Force the waiting service worker to become the active service worker
         return self.skipWaiting();
       })
-  );
-});
-
-// Activate event - clean up old caches and take control
-self.addEventListener('activate', event => {
-  console.log('Service Worker activating...');
-  event.waitUntil(
-    Promise.all([
-      // Clean up old caches
-      caches.keys().then(cacheNames => {
-        return Promise.all(
-          cacheNames.map(cacheName => {
-            if (cacheName !== CACHE_NAME && cacheName !== STATIC_CACHE) {
-              console.log('Deleting old cache:', cacheName);
-              return caches.delete(cacheName);
-            }
-          })
-        );
-      }),
-      // Take control of all pages immediately
-      self.clients.claim()
-    ])
   );
 });
 
@@ -86,7 +64,7 @@ self.addEventListener('fetch', event => {
                 <head>
                   <meta charset="UTF-8">
                   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                  <title>QiyasaT - غير متصل</title>
+                  <title>صحتي - غير متصل</title>
                   <style>
                     body { font-family: 'Cairo', sans-serif; text-align: center; padding: 50px; background: #f0f9f4; }
                     .offline { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); max-width: 400px; margin: 0 auto; }
@@ -98,7 +76,7 @@ self.addEventListener('fetch', event => {
                 <body>
                   <div class="offline">
                     <div class="icon">📱</div>
-                    <h1>تطبيق QiyasaT</h1>
+                    <h1>تطبيق صحتي</h1>
                     <p>أنت غير متصل بالإنترنت حالياً</p>
                     <p>بعض الميزات قد تكون محدودة</p>
                     <button onclick="window.location.reload()" style="background: #22c55e; color: white; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer; margin-top: 20px;">حاول مرة أخرى</button>
@@ -168,6 +146,35 @@ self.addEventListener('fetch', event => {
         })
     );
   }
+});
+
+// Activate event - clean up old caches and take control
+self.addEventListener('activate', event => {
+  console.log('Service Worker activating...');
+  event.waitUntil(
+    Promise.all([
+      // Clean up old caches
+      caches.keys().then(cacheNames => {
+        return Promise.all(
+          cacheNames.map(cacheName => {
+            if (cacheName !== CACHE_NAME && cacheName !== STATIC_CACHE) {
+              console.log('Deleting old cache:', cacheName);
+              return caches.delete(cacheName);
+            }
+          })
+        );
+      }),
+      // Take control of all pages immediately
+      self.clients.claim()
+    ])
+  );
+  
+  // Notify all clients about the update
+  self.clients.matchAll().then(clients => {
+    clients.forEach(client => {
+      client.postMessage({ type: 'SW_UPDATED' });
+    });
+  });
 });
 
 // Handle messages from the main thread
