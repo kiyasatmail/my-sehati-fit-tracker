@@ -72,14 +72,13 @@ const PWAInstallPrompt = () => {
     sessionStorage.setItem('pwa-install-dismissed', 'true');
   };
 
-  // Don't show if already in standalone mode or user dismissed
-  if (isInStandaloneMode || 
-      sessionStorage.getItem('pwa-install-dismissed') === 'true') {
+  // Don't show if already in standalone mode
+  if (isInStandaloneMode) {
     return null;
   }
 
-  // Don't show on desktop unless there's a deferred prompt
-  if (!isIOS && !deferredPrompt && !showInstallPrompt) {
+  // Don't show if user dismissed in this session
+  if (sessionStorage.getItem('pwa-install-dismissed') === 'true') {
     return null;
   }
 
