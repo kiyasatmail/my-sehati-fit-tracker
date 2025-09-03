@@ -17,47 +17,61 @@ const PWAInstallPrompt = () => {
   const [isStandalone, setIsStandalone] = useState(false);
 
   useEffect(() => {
+    console.log('PWA Install Prompt: Component mounted');
+    
+    // Clear any previous dismissal for testing
+    localStorage.removeItem('pwa-install-dismissed');
+    
     // Check if running in standalone mode (already installed)
     const standalone = window.matchMedia('(display-mode: standalone)').matches;
+    console.log('PWA Install Prompt: Is standalone?', standalone);
     setIsStandalone(standalone);
     
     // Check if it's iOS
     const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    console.log('PWA Install Prompt: Is iOS?', iOS);
     setIsIOS(iOS);
 
     // Don't show prompt if already installed
     if (standalone) {
+      console.log('PWA Install Prompt: Not showing - already in standalone mode');
       return;
     }
 
     // Listen for the beforeinstallprompt event (Android/Chrome)
     const handleBeforeInstallPrompt = (e: Event) => {
+      console.log('PWA Install Prompt: beforeinstallprompt event fired');
       e.preventDefault();
       setDeferredPrompt(e as BeforeInstallPromptEvent);
       
       // Show prompt after 3 seconds delay
       setTimeout(() => {
+        console.log('PWA Install Prompt: Showing prompt after delay');
         setShowInstallPrompt(true);
       }, 3000);
     };
 
     window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+    console.log('PWA Install Prompt: Added beforeinstallprompt listener');
 
-    // For iOS, show install prompt after delay since it doesn't support beforeinstallprompt
-    if (iOS && !standalone) {
-      const timer = setTimeout(() => {
-        setShowInstallPrompt(true);
-      }, 3000);
-      return () => clearTimeout(timer);
-    }
+    // For all devices, show install prompt after delay
+    // This will work for iOS and any other browser that doesn't support beforeinstallprompt
+    const timer = setTimeout(() => {
+      console.log('PWA Install Prompt: Timer fired, showing prompt');
+      setShowInstallPrompt(true);
+    }, 3000);
 
     return () => {
+      console.log('PWA Install Prompt: Cleaning up');
+      clearTimeout(timer);
       window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
     };
   }, []);
 
   const handleInstallClick = async () => {
+    console.log('PWA Install Prompt: Install button clicked');
     if (deferredPrompt) {
+      console.log('PWA Install Prompt: Using deferred prompt');
       // Show the install prompt
       deferredPrompt.prompt();
       
@@ -72,29 +86,45 @@ const PWAInstallPrompt = () => {
       
       setDeferredPrompt(null);
       setShowInstallPrompt(false);
+    } else {
+      console.log('PWA Install Prompt: No deferred prompt available');
     }
   };
 
   const handleDismiss = () => {
+    console.log('PWA Install Prompt: Dismissed');
     setShowInstallPrompt(false);
     // Remember user's choice for this session
     localStorage.setItem('pwa-install-dismissed', 'true');
   };
 
+  console.log('PWA Install Prompt render:', {
+    isStandalone,
+    showInstallPrompt,
+    dismissed: localStorage.getItem('pwa-install-dismissed'),
+    isIOS,
+    deferredPrompt: !!deferredPrompt
+  });
+
   // Don't show if already installed
   if (isStandalone) {
+    console.log('PWA Install Prompt: Returning null - standalone');
     return null;
   }
 
   // Don't show if user previously dismissed
   if (localStorage.getItem('pwa-install-dismissed') === 'true') {
+    console.log('PWA Install Prompt: Returning null - dismissed');
     return null;
   }
 
   // Don't show if prompt is not ready
   if (!showInstallPrompt) {
+    console.log('PWA Install Prompt: Returning null - not showing');
     return null;
   }
+
+  console.log('PWA Install Prompt: Rendering prompt!');
 
   return (
     <Card className="fixed bottom-4 left-4 right-4 z-50 mx-auto max-w-sm shadow-lg border-primary/20 bg-background">
