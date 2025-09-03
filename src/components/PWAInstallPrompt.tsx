@@ -10,31 +10,40 @@ interface BeforeInstallPromptEvent extends Event {
 }
 
 const PWAInstallPrompt = () => {
-  const { language, t } = useLanguage();
+  const { language } = useLanguage();
   const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
   const [showInstallPrompt, setShowInstallPrompt] = useState(false);
   const [isIOS, setIsIOS] = useState(false);
-  const [isInStandaloneMode, setIsInStandaloneMode] = useState(false);
+  const [isStandalone, setIsStandalone] = useState(false);
 
   useEffect(() => {
+    // Check if running in standalone mode (already installed)
+    const standalone = window.matchMedia('(display-mode: standalone)').matches;
+    setIsStandalone(standalone);
+    
     // Check if it's iOS
     const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
     setIsIOS(iOS);
 
-    // Check if app is already installed (standalone mode)
-    const standalone = window.matchMedia('(display-mode: standalone)').matches;
-    setIsInStandaloneMode(standalone);
+    // Don't show prompt if already installed
+    if (standalone) {
+      return;
+    }
 
-    // Listen for the beforeinstallprompt event
+    // Listen for the beforeinstallprompt event (Android/Chrome)
     const handleBeforeInstallPrompt = (e: Event) => {
       e.preventDefault();
       setDeferredPrompt(e as BeforeInstallPromptEvent);
-      setShowInstallPrompt(true);
+      
+      // Show prompt after 3 seconds delay
+      setTimeout(() => {
+        setShowInstallPrompt(true);
+      }, 3000);
     };
 
     window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
 
-    // For iOS, show install prompt after a delay if not in standalone mode
+    // For iOS, show install prompt after delay since it doesn't support beforeinstallprompt
     if (iOS && !standalone) {
       const timer = setTimeout(() => {
         setShowInstallPrompt(true);
@@ -69,29 +78,32 @@ const PWAInstallPrompt = () => {
   const handleDismiss = () => {
     setShowInstallPrompt(false);
     // Remember user's choice for this session
-    sessionStorage.setItem('pwa-install-dismissed', 'true');
+    localStorage.setItem('pwa-install-dismissed', 'true');
   };
 
-  // Don't show if already in standalone mode
-  if (isInStandaloneMode) {
+  // Don't show if already installed
+  if (isStandalone) {
     return null;
   }
 
-  // Don't show if user dismissed in this session
-  if (sessionStorage.getItem('pwa-install-dismissed') === 'true') {
+  // Don't show if user previously dismissed
+  if (localStorage.getItem('pwa-install-dismissed') === 'true') {
     return null;
   }
 
-  if (!showInstallPrompt) return null;
+  // Don't show if prompt is not ready
+  if (!showInstallPrompt) {
+    return null;
+  }
 
   return (
-    <Card className="fixed bottom-4 left-4 right-4 z-50 mx-auto max-w-sm shadow-lg border-primary/20">
+    <Card className="fixed bottom-4 left-4 right-4 z-50 mx-auto max-w-sm shadow-lg border-primary/20 bg-background">
       <CardContent className="p-4">
         <div className="flex items-start justify-between mb-3">
           <div className="flex items-center gap-2">
             <Smartphone className="w-5 h-5 text-primary" />
             <h3 className="font-semibold text-sm">
-              {isIOS ? 'تثبيت التطبيق' : t('installApp') || 'تثبيت التطبيق'}
+              تثبيت التطبيق
             </h3>
           </div>
           <Button
