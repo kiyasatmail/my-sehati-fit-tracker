@@ -1,7 +1,7 @@
 {
-  "name": "QiyasaT",
+  "name": "QiyasaT - Fitness Tracker",
   "short_name": "QiyasaT",
-  "description": "تطبيق قياساتي الشامل لحساب السعرات الحرارية وتتبع قياسات الجسم",
+  "description": "QiyasaT comprehensive app for calorie calculation and body measurements tracking",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#f0f9f4",
