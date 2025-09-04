@@ -31,7 +31,7 @@ export const MobileHeader: React.FC<MobileHeaderProps> = ({
           <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
             <span className="text-white font-bold text-lg">Q</span>
           </div>
-          <h1 className="text-xl font-bold text-gray-900 dark:text-white">{t('appName')}</h1>
+          <h1 className="text-xl font-bold text-gray-900 dark:text-white">QiyasaT</h1>
         </div>
 
         {/* Menu Button */}
