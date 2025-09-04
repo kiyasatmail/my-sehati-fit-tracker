@@ -100,17 +100,17 @@ export const MobileDashboard: React.FC<MobileDashboardProps> = ({ onViewChange }
                 onClick={() => onViewChange(service.key as any)}
               >
                 <CardContent className="p-0 h-full">
-                  <div className={`${service.color} p-4 text-white h-full flex flex-col justify-between`}>
-                    <div className={`flex ${isRTL ? 'flex-row-reverse' : 'flex-row'} justify-between items-start mb-2`}>
+                  <div className={`${service.color} p-3 text-white h-full flex flex-col`}>
+                    <div className={`flex ${isRTL ? 'flex-row-reverse justify-start' : 'flex-row justify-end'} items-start mb-3`}>
                       <div className={`p-2 rounded-lg ${service.iconBg}`}>
-                        <Icon className={`h-6 w-6 ${service.iconColor}`} />
+                        <Icon className={`h-5 w-5 ${service.iconColor}`} />
                       </div>
                     </div>
-                    <div className={`${isRTL ? 'text-right' : 'text-left'}`}>
-                      <h3 className="font-bold text-lg mb-1 leading-tight">
+                    <div className={`flex-1 flex flex-col justify-end ${isRTL ? 'text-right' : 'text-left'}`}>
+                      <h3 className="font-bold text-base mb-1 leading-tight text-white drop-shadow-sm">
                         {service.title}
                       </h3>
-                      <p className="text-white/90 text-sm leading-relaxed">
+                      <p className="text-white text-xs leading-relaxed drop-shadow-sm opacity-95">
                         {service.subtitle}
                       </p>
                     </div>
