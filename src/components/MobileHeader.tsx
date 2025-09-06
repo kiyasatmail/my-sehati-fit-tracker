@@ -22,7 +22,13 @@ export const MobileHeader: React.FC<MobileHeaderProps> = ({
   } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleLanguage = () => {
-    setLanguage(language === 'ar' ? 'en' : 'ar');
+    if (language === 'ar') {
+      setLanguage('en');
+    } else if (language === 'en') {
+      setLanguage('fr');
+    } else {
+      setLanguage('ar');
+    }
   };
   return <header className="bg-white dark:bg-gray-900 shadow-sm border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50">
       <div className="flex items-center justify-between px-4 py-3">
@@ -55,17 +61,19 @@ export const MobileHeader: React.FC<MobileHeaderProps> = ({
               {/* Settings */}
               <div className="space-y-3">
                 <h3 className="font-semibold text-gray-700 dark:text-gray-300 text-sm uppercase tracking-wide">
-                  {isRTL ? 'الإعدادات' : 'Settings'}
+                  {language === 'ar' ? 'الإعدادات' : language === 'en' ? 'Settings' : 'Paramètres'}
                 </h3>
                 
                 <Button variant="ghost" size="lg" onClick={toggleTheme} className="justify-start gap-3 h-12 text-base w-full">
                   {theme === 'light' ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
-                  {theme === 'light' ? isRTL ? 'الوضع الليلي' : 'Dark Mode' : isRTL ? 'الوضع النهاري' : 'Light Mode'}
+                  {theme === 'light' 
+                    ? (language === 'ar' ? 'الوضع الليلي' : language === 'en' ? 'Dark Mode' : 'Mode Sombre')
+                    : (language === 'ar' ? 'الوضع النهاري' : language === 'en' ? 'Light Mode' : 'Mode Clair')}
                 </Button>
 
                 <Button variant="ghost" size="lg" onClick={toggleLanguage} className="justify-start gap-3 h-12 text-base w-full">
                   <Globe className="h-5 w-5" />
-                  {language === 'ar' ? 'English' : 'العربية'}
+                  {language === 'ar' ? 'English' : language === 'en' ? 'Français' : 'العربية'}
                 </Button>
 
                 <Button variant="ghost" size="lg" onClick={() => {
