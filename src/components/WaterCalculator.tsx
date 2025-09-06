@@ -18,12 +18,12 @@ export const WaterCalculator = () => {
     
     // Input validation for security and reliability
     if (!weightNum || weightNum <= 0 || weightNum > 500) {
-      alert(t('invalidWeight'));
+      alert(isRTL ? 'يرجى إدخال وزن صحيح (1-500 كغ)' : 'Please enter a valid weight (1-500 kg)');
       return;
     }
     
     if (exerciseNum < 0 || exerciseNum > 24) {
-      alert(t('invalidExercise'));
+      alert(isRTL ? 'يرجى إدخال ساعات تمرين صحيحة (0-24 ساعة)' : 'Please enter valid exercise hours (0-24 hours)');
       return;
     }
     
@@ -43,32 +43,32 @@ export const WaterCalculator = () => {
 
   const urineInfo = [
     {
-      color: t('clearVeryLightYellow'),
-      status: t('excellentOptimalHydration'),
+      color: isRTL ? 'شفاف/أصفر فاتح جداً' : 'Clear/Very Light Yellow',
+      status: isRTL ? 'ممتاز - ترطيب مثالي' : 'Excellent - Optimal Hydration',
       icon: '💧',
       bgColor: 'bg-green-50 border-green-200'
     },
     {
-      color: t('lightYellow'),
-      status: t('goodAdequateHydration'),
+      color: isRTL ? 'أصفر فاتح' : 'Light Yellow',
+      status: isRTL ? 'جيد - ترطيب كافي' : 'Good - Adequate Hydration',
       icon: '✅',
       bgColor: 'bg-green-50 border-green-200'
     },
     {
-      color: t('mediumYellow'),
-      status: t('drinkMoreWater'),
+      color: isRTL ? 'أصفر متوسط' : 'Medium Yellow',
+      status: isRTL ? 'اشرب المزيد من الماء' : 'Drink More Water',
       icon: '⚠️',
       bgColor: 'bg-yellow-50 border-yellow-200'
     },
     {
-      color: t('darkYellow'),
-      status: t('mildDehydration'),
+      color: isRTL ? 'أصفر داكن' : 'Dark Yellow',
+      status: isRTL ? 'جفاف خفيف - اشرب الماء فوراً' : 'Mild Dehydration - Drink Water Now',
       icon: '🚨',
       bgColor: 'bg-orange-50 border-orange-200'
     },
     {
-      color: t('brownOrange'),
-      status: t('severeDehydration'),
+      color: isRTL ? 'بني/برتقالي' : 'Brown/Orange',
+      status: isRTL ? 'جفاف شديد - استشر طبيب' : 'Severe Dehydration - Consult Doctor',
       icon: '🏥',
       bgColor: 'bg-red-50 border-red-200'
     }
@@ -81,11 +81,14 @@ export const WaterCalculator = () => {
           <div className="flex items-center justify-center gap-3 mb-4">
             <Droplets className="h-8 w-8 text-blue-500" />
             <h1 className="text-3xl font-bold text-gray-900">
-              {t('waterCalculator')}
+              {isRTL ? 'حاسبة الماء' : 'Water Calculator'}
             </h1>
           </div>
           <p className="text-gray-600 text-lg">
-            {t('waterCalculatorDesc')}
+            {isRTL 
+              ? 'احسب كمية الماء التي تحتاجها يومياً حسب وزنك ونشاطك البدني'
+              : 'Calculate your daily water intake based on your weight and physical activity'
+            }
           </p>
         </div>
 
@@ -95,23 +98,26 @@ export const WaterCalculator = () => {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Calculator className="h-5 w-5 text-blue-500" />
-                {t('waterNeedsCalculator')}
+                {isRTL ? 'حاسبة احتياجك من الماء' : 'Your Water Needs Calculator'}
               </CardTitle>
               <CardDescription>
-                {t('waterNeedsCalculatorDesc')}
+                {isRTL 
+                  ? 'أدخل وزنك وساعات التمرين لحساب احتياجك اليومي من الماء'
+                  : 'Enter your weight and exercise hours to calculate your daily water needs'
+                }
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="space-y-2">
                 <Label htmlFor="weight">
-                  {t('weightKg')}
+                  {isRTL ? 'الوزن (كيلوغرام)' : 'Weight (kg)'}
                 </Label>
                 <Input
                   id="weight"
                   type="number"
                   min="1"
                   max="500"
-                  placeholder={t('enterWeight')}
+                  placeholder={isRTL ? 'أدخل وزنك' : 'Enter your weight'}
                   value={weight}
                   onChange={(e) => setWeight(e.target.value)}
                   className="text-lg"
@@ -120,7 +126,7 @@ export const WaterCalculator = () => {
 
               <div className="space-y-2">
                 <Label htmlFor="exercise">
-                  {t('dailyExerciseHours')}
+                  {isRTL ? 'ساعات التمرين اليومية' : 'Daily Exercise Hours'}
                 </Label>
                 <Input
                   id="exercise"
@@ -128,7 +134,7 @@ export const WaterCalculator = () => {
                   min="0"
                   max="24"
                   step="0.5"
-                  placeholder={t('enterExerciseHours')}
+                  placeholder={isRTL ? 'أدخل ساعات التمرين' : 'Enter exercise hours'}
                   value={exerciseHours}
                   onChange={(e) => setExerciseHours(e.target.value)}
                   className="text-lg"
@@ -142,29 +148,29 @@ export const WaterCalculator = () => {
                   disabled={!weight}
                 >
                   <Droplets className="h-4 w-4 mr-2" />
-                  {t('calculate')}
+                  {isRTL ? 'احسب' : 'Calculate'}
                 </Button>
                 <Button 
                   onClick={resetCalculator} 
                   variant="outline"
                   className="px-6"
                 >
-                  {t('reset')}
+                  {isRTL ? 'إعادة تعيين' : 'Reset'}
                 </Button>
               </div>
 
               {waterNeeded && (
                 <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 text-center">
                   <div className="text-3xl font-bold text-blue-600 mb-2">
-                    {waterNeeded.toLocaleString()} {t('ml')}
+                    {waterNeeded.toLocaleString()} {isRTL ? 'مل' : 'ml'}
                   </div>
                   <div className="text-lg text-gray-700 mb-2">
-                    {t('yourDailyWaterIntake')}
+                    {isRTL ? 'احتياجك اليومي من الماء' : 'Your Daily Water Intake'}
                   </div>
                   <div className="text-sm text-gray-600">
                     {isRTL 
-                      ? `${Math.round(waterNeeded / 250)} ${t('glassesApprox')}`
-                      : `Approximately ${Math.round(waterNeeded / 250)} ${t('glassesApprox')}`
+                      ? `${Math.round(waterNeeded / 250)} كوب تقريباً (250 مل لكل كوب)`
+                      : `Approximately ${Math.round(waterNeeded / 250)} glasses (250ml each)`
                     }
                   </div>
                 </div>
@@ -175,9 +181,12 @@ export const WaterCalculator = () => {
                   <Info className="h-5 w-5 text-amber-600 mt-0.5" />
                   <div className="text-sm text-amber-800">
                     <div className="font-semibold mb-1">
-                      {t('note')}
+                      {isRTL ? 'ملاحظة:' : 'Note:'}
                     </div>
-                    {t('waterNote')}
+                    {isRTL 
+                      ? 'هذه حاسبة تقديرية. قد تحتاج المزيد من الماء في الطقس الحار أو عند المرض.'
+                      : 'This is an estimate. You may need more water in hot weather or when sick.'
+                    }
                   </div>
                 </div>
               </div>
@@ -189,10 +198,13 @@ export const WaterCalculator = () => {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <AlertCircle className="h-5 w-5 text-yellow-500" />
-                {t('urineColorGuide')}
+                {isRTL ? 'دليل لون البول' : 'Urine Color Guide'}
               </CardTitle>
               <CardDescription>
-                {t('urineColorGuideDesc')}
+                {isRTL 
+                  ? 'تحقق من حالة الترطيب من خلال لون البول'
+                  : 'Check your hydration status through urine color'
+                }
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -220,13 +232,13 @@ export const WaterCalculator = () => {
                   <Droplets className="h-5 w-5 text-blue-600 mt-0.5" />
                   <div className="text-sm text-blue-800">
                     <div className="font-semibold mb-1">
-                      {t('hydrationTips')}
+                      {isRTL ? 'نصائح للترطيب الأمثل:' : 'Tips for Optimal Hydration:'}
                     </div>
                     <ul className="space-y-1 text-xs">
-                      <li>• {t('hydrationTip1')}</li>
-                      <li>• {t('hydrationTip2')}</li>
-                      <li>• {t('hydrationTip3')}</li>
-                      <li>• {t('hydrationTip4')}</li>
+                      <li>• {isRTL ? 'اشرب الماء على مدار اليوم' : 'Drink water throughout the day'}</li>
+                      <li>• {isRTL ? 'اشرب المزيد قبل وأثناء وبعد التمرين' : 'Drink more before, during, and after exercise'}</li>
+                      <li>• {isRTL ? 'اشرب المزيد في الطقس الحار' : 'Increase intake in hot weather'}</li>
+                      <li>• {isRTL ? 'قلل من الكافيين والكحول' : 'Limit caffeine and alcohol'}</li>
                     </ul>
                   </div>
                 </div>
