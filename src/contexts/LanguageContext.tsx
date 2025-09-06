@@ -833,7 +833,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   }, [language, isRTL]);
 
   const t = (key: string): string => {
-    return translations[language][key as keyof typeof translations['ar']] || key;
+    return translations[language]?.[key as keyof typeof translations[typeof language]] || key;
   };
 
   const handleLanguageChange = (lang: Language) => {
