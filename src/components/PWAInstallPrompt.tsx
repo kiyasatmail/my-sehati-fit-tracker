@@ -107,8 +107,8 @@ const PWAInstallPrompt = () => {
         
         <p className="text-xs text-muted-foreground mb-3" dir={language === 'ar' ? 'rtl' : 'ltr'}>
           {isIOS 
-            ? 'أضف صحتي إلى الشاشة الرئيسية للوصول السريع'
-            : 'أضف صحتي إلى شاشتك الرئيسية للوصول السريع وتجربة أفضل'
+            ? 'أضف QiyasaT إلى الشاشة الرئيسية للوصول السريع'
+            : 'أضف QiyasaT إلى شاشتك الرئيسية للوصول السريع وتجربة أفضل'
           }
         </p>
 

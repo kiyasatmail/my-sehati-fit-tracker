@@ -14,6 +14,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('sehati-theme') as Theme;
+    const savedTheme = localStorage.getItem('qiyasat-theme') as Theme;
     if (savedTheme && ['light', 'dark'].includes(savedTheme)) {
       setTheme(savedTheme);
     } else {
@@ -25,6 +26,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   useEffect(() => {
     localStorage.setItem('sehati-theme', theme);
+    localStorage.setItem('qiyasat-theme', theme);
     document.documentElement.className = theme;
   }, [theme]);
 

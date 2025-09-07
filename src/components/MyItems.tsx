@@ -46,6 +46,7 @@ export const MyItems: React.FC = () => {
   // Load items from localStorage on component mount
   useEffect(() => {
     const savedItems = localStorage.getItem('sehati-workout-items');
+    const savedItems = localStorage.getItem('qiyasat-workout-items');
     if (savedItems) {
       try {
         setItems(JSON.parse(savedItems));
@@ -58,6 +59,7 @@ export const MyItems: React.FC = () => {
   // Save items to localStorage whenever items change
   useEffect(() => {
     localStorage.setItem('sehati-workout-items', JSON.stringify(items));
+    localStorage.setItem('qiyasat-workout-items', JSON.stringify(items));
   }, [items]);
 
   const addItem = () => {

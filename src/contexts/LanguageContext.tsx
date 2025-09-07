@@ -200,8 +200,10 @@ const translations = {
     privacyPolicy: 'سياسة الخصوصية',
     acceptanceOfTerms: 'قبول الشروط',
     acceptanceOfTermsText: 'باستخدام تطبيق "qiyasat"، فإنك توافق على الالتزام بجميع الشروط والأحكام المذكورة هنا. إذا كنت لا توافق على أي من هذه الشروط، يرجى عدم استخدام التطبيق.',
+    acceptanceOfTermsText: 'باستخدام تطبيق "QiyasaT"، فإنك توافق على الالتزام بجميع الشروط والأحكام المذكورة هنا. إذا كنت لا توافق على أي من هذه الشروط، يرجى عدم استخدام التطبيق.',
     serviceDescription: 'وصف الخدمة',
     serviceDescriptionText: 'تطبيق "qiyasat" هو أداة مساعدة لتتبع الصحة واللياقة البدنية تتضمن حاسبة السعرات الحرارية، قياسات الجسم، محول الكارديو، البرامج الأسبوعية، وتتبع الأغراض الرياضية.',
+    serviceDescriptionText: 'تطبيق "QiyasaT" هو أداة مساعدة لتتبع الصحة واللياقة البدنية تتضمن حاسبة السعرات الحرارية، قياسات الجسم، محول الكارديو، البرامج الأسبوعية، وتتبع الأغراض الرياضية.',
     userResponsibilities: 'مسؤوليات المستخدم',
     userResponsibilitiesText: 'كمستخدم لهذا التطبيق، فإنك توافق على:',
     userResp1: 'استخدام التطبيق للأغراض الشخصية والصحية فقط',
@@ -432,8 +434,10 @@ const translations = {
     privacyPolicy: 'Privacy Policy',
     acceptanceOfTerms: 'Acceptance of Terms',
     acceptanceOfTermsText: 'By using the "Sehati" app, you agree to comply with all the terms and conditions mentioned here. If you do not agree to any of these terms, please do not use the app.',
+    acceptanceOfTermsText: 'By using the "QiyasaT" app, you agree to comply with all the terms and conditions mentioned here. If you do not agree to any of these terms, please do not use the app.',
     serviceDescription: 'Service Description',
     serviceDescriptionText: 'The "Sehati" app is a health and fitness tracking tool that includes calorie calculator, body measurements, cardio converter, weekly programs, and sports items tracking.',
+    serviceDescriptionText: 'The "QiyasaT" app is a health and fitness tracking tool that includes calorie calculator, body measurements, cardio converter, weekly programs, and sports items tracking.',
     userResponsibilities: 'User Responsibilities',
     userResponsibilitiesText: 'As a user of this app, you agree to:',
     userResp1: 'Use the app for personal and health purposes only',
@@ -484,6 +488,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
   useEffect(() => {
     const savedLanguage = localStorage.getItem('sehati-language') as Language;
+    const savedLanguage = localStorage.getItem('qiyasat-language') as Language;
     if (savedLanguage && ['ar', 'en'].includes(savedLanguage)) {
       setLanguage(savedLanguage);
     }
@@ -491,6 +496,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
   useEffect(() => {
     localStorage.setItem('sehati-language', language);
+    localStorage.setItem('qiyasat-language', language);
     document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
     document.documentElement.lang = language;
   }, [language, isRTL]);

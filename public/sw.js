@@ -98,6 +98,7 @@ self.addEventListener('fetch', event => {
                   <div class="offline">
                     <div class="icon">📱</div>
                     <h1>تطبيق صحتي</h1>
+                    <h1>تطبيق QiyasaT</h1>
                     <p>أنت غير متصل بالإنترنت حالياً</p>
                     <p>بعض الميزات قد تكون محدودة</p>
                     <button onclick="window.location.reload()" style="background: #22c55e; color: white; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer; margin-top: 20px;">حاول مرة أخرى</button>
