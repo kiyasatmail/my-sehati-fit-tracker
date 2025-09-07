@@ -1,9 +1,30 @@
-const CACHE_NAME = 'sehati-v4';
-const STATIC_CACHE = 'sehati-static-v4';
-const urlsToCache = [
+// QiyasaT Health App Service Worker - Enhanced for SEO and Performance
+const CACHE_NAME = 'qiyasat-v2024.12.07';
+const STATIC_CACHE = 'qiyasat-static-v1';
+const DYNAMIC_CACHE = 'qiyasat-dynamic-v1';
+
+// Critical resources for offline functionality and SEO
+const CRITICAL_RESOURCES = [
   '/',
   '/manifest.json',
-  '/lovable-uploads/a6dfe1c6-1bfc-44c5-9886-ffe941b7c0a5.png'
+  '/sitemap.xml',
+  '/robots.txt',
+  '/humans.txt',
+  '/security.txt',
+  '/lovable-uploads/a6dfe1c6-1bfc-44c5-9886-ffe941b7c0a5.png',
+  'https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap'
+];
+
+// Dynamic content patterns for caching
+const CACHEABLE_PATTERNS = [
+  /\/calories/,
+  /\/measurements/,
+  /\/cardio/,
+  /\/program/,
+  /\/water/,
+  /\/wakeup/,
+  /\/items/,
+  /\/terms/
 ];
 
 // Install event - cache essential resources
@@ -13,7 +34,7 @@ self.addEventListener('install', event => {
     caches.open(CACHE_NAME)
       .then(cache => {
         console.log('Caching essential resources');
-        return cache.addAll(urlsToCache);
+        return cache.addAll(CRITICAL_RESOURCES);
       })
       .then(() => {
         // Force the waiting service worker to become the active service worker

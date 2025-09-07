@@ -1,14 +1,44 @@
+# QiyasaT Health App - Robots.txt
+
+# Google
 User-agent: Googlebot
 Allow: /
+Crawl-delay: 1
 
+# Bing
 User-agent: Bingbot
 Allow: /
+Crawl-delay: 1
 
+# Yandex
+User-agent: Yandex
+Allow: /
+Crawl-delay: 2
+
+# DuckDuckGo
+User-agent: DuckDuckBot
+Allow: /
+
+# Social Media Bots
 User-agent: Twitterbot
 Allow: /
 
 User-agent: facebookexternalhit
 Allow: /
 
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+# General crawlers
 User-agent: *
 Allow: /
+Crawl-delay: 2
+
+# Sitemaps
+Sitemap: https://qiyasat.com/sitemap.xml
+
+# Host
+Host: qiyasat.com

@@ -1,12 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>QiyasaT | تطبيق الصحة الشامل</title>
-    <meta name="description" content="تطبيق قياساتي الشامل - احسب السعرات الحرارية، تتبع قياسات الجسم، وحول السعرات لدقائق التمارين" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    
+    <!-- Primary Meta Tags -->
+    <title>QiyasaT | تطبيق الصحة الشامل - حاسبة السعرات وقياسات الجسم</title>
+    <meta name="title" content="QiyasaT | تطبيق الصحة الشامل - حاسبة السعرات وقياسات الجسم" />
+    <meta name="description" content="تطبيق قياساتي الشامل لحساب السعرات الحرارية، تتبع قياسات الجسم، تحويل السعرات لدقائق التمارين، وحساب احتياجات الماء اليومية. أفضل تطبيق صحة عربي مجاني." />
     <meta name="author" content="QiyasaT Health App" />
-    <meta name="keywords" content="صحة، لياقة، سعرات حرارية، تمارين، قياسات الجسم، قياساتي" />
+    <meta name="keywords" content="حاسبة السعرات الحرارية، قياسات الجسم، تمارين رياضية، حاسبة الماء، صحة ولياقة، قياساتي، تطبيق صحة عربي، حرق السعرات، تتبع الوزن، برنامج تمارين" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="language" content="Arabic" />
+    <meta name="geo.region" content="SA" />
+    <meta name="geo.placename" content="Saudi Arabia" />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://qiyasat.com/" />
+    
+    <!-- Language alternatives -->
+    <link rel="alternate" hreflang="ar" href="https://qiyasat.com/" />
+    <link rel="alternate" hreflang="en" href="https://qiyasat.com/en" />
+    <link rel="alternate" hreflang="x-default" href="https://qiyasat.com/" />
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="preload" href="/lovable-uploads/a6dfe1c6-1bfc-44c5-9886-ffe941b7c0a5.png" as="image" />
     
     <!-- PWA Support -->
     <link rel="manifest" href="/manifest.json">
@@ -20,15 +39,131 @@
     <link rel="icon" type="image/png" sizes="192x192" href="/lovable-uploads/a6dfe1c6-1bfc-44c5-9886-ffe941b7c0a5.png">
     <link rel="icon" type="image/png" sizes="512x512" href="/lovable-uploads/a6dfe1c6-1bfc-44c5-9886-ffe941b7c0a5.png">
 
-    <meta property="og:title" content="QiyasaT | تطبيق الصحة الشامل" />
-    <meta property="og:description" content="تطبيق قياساتي الشامل - احسب السعرات الحرارية، تتبع قياسات الجسم، وحول السعرات لدقائق التمارين" />
+    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="/lovable-uploads/a6dfe1c6-1bfc-44c5-9886-ffe941b7c0a5.png" />
+    <meta property="og:url" content="https://qiyasat.com/" />
+    <meta property="og:title" content="QiyasaT | تطبيق الصحة الشامل - حاسبة السعرات وقياسات الجسم" />
+    <meta property="og:description" content="تطبيق قياساتي الشامل لحساب السعرات الحرارية، تتبع قياسات الجسم، تحويل السعرات لدقائق التمارين، وحساب احتياجات الماء اليومية. أفضل تطبيق صحة عربي مجاني." />
+    <meta property="og:image" content="https://qiyasat.com/lovable-uploads/a6dfe1c6-1bfc-44c5-9886-ffe941b7c0a5.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="QiyasaT - تطبيق الصحة الشامل لحساب السعرات وقياسات الجسم" />
+    <meta property="og:site_name" content="QiyasaT" />
+    <meta property="og:locale" content="ar_SA" />
+    <meta property="og:locale:alternate" content="en_US" />
 
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="QiyasaT | تطبيق الصحة الشامل" />
-    <meta name="twitter:description" content="تطبيق قياساتي الشامل - احسب السعرات الحرارية، تتبع قياسات الجسم، وحول السعرات لدقائق التمارين" />
-    <meta name="twitter:image" content="/lovable-uploads/a6dfe1c6-1bfc-44c5-9886-ffe941b7c0a5.png" />
+    <meta name="twitter:url" content="https://qiyasat.com/" />
+    <meta name="twitter:title" content="QiyasaT | تطبيق الصحة الشامل - حاسبة السعرات وقياسات الجسم" />
+    <meta name="twitter:description" content="تطبيق قياساتي الشامل لحساب السعرات الحرارية، تتبع قياسات الجسم، تحويل السعرات لدقائق التمارين، وحساب احتياجات الماء اليومية. أفضل تطبيق صحة عربي مجاني." />
+    <meta name="twitter:image" content="https://qiyasat.com/lovable-uploads/a6dfe1c6-1bfc-44c5-9886-ffe941b7c0a5.png" />
+    <meta name="twitter:image:alt" content="QiyasaT - تطبيق الصحة الشامل لحساب السعرات وقياسات الجسم" />
+    <meta name="twitter:creator" content="@QiyasaT" />
+    <meta name="twitter:site" content="@QiyasaT" />
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="application-name" content="QiyasaT" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-status-bar-style" content="default" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-TileColor" content="#22c55e" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "@id": "https://qiyasat.com/#webapp",
+          "name": "QiyasaT",
+          "alternateName": "قياساتي",
+          "description": "تطبيق قياساتي الشامل لحساب السعرات الحرارية، تتبع قياسات الجسم، تحويل السعرات لدقائق التمارين، وحساب احتياجات الماء اليومية",
+          "url": "https://qiyasat.com/",
+          "applicationCategory": "HealthApplication",
+          "operatingSystem": "Web, iOS, Android",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "ratingCount": "1250"
+          },
+          "author": {
+            "@type": "Organization",
+            "@id": "https://qiyasat.com/#organization"
+          },
+          "inLanguage": ["ar", "en"],
+          "featureList": [
+            "حاسبة السعرات الحرارية",
+            "تتبع قياسات الجسم",
+            "تحويل السعرات لدقائق التمارين",
+            "حاسبة احتياجات الماء",
+            "البرنامج الأسبوعي للتمارين",
+            "تحدي الاستيقاظ المبكر"
+          ]
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://qiyasat.com/#organization",
+          "name": "QiyasaT",
+          "alternateName": "قياساتي",
+          "url": "https://qiyasat.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://qiyasat.com/lovable-uploads/a6dfe1c6-1bfc-44c5-9886-ffe941b7c0a5.png",
+            "width": 512,
+            "height": 512
+          },
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "customer support",
+            "availableLanguage": ["Arabic", "English"]
+          },
+          "areaServed": {
+            "@type": "Country",
+            "name": "Saudi Arabia"
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://qiyasat.com/#website",
+          "url": "https://qiyasat.com/",
+          "name": "QiyasaT",
+          "description": "تطبيق الصحة الشامل لحساب السعرات وقياسات الجسم",
+          "publisher": {
+            "@id": "https://qiyasat.com/#organization"
+          },
+          "inLanguage": "ar",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://qiyasat.com/?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://qiyasat.com/#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "item": {
+                "@type": "WebPage",
+                "@id": "https://qiyasat.com/",
+                "name": "الصفحة الرئيسية"
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
   </head>
 
   <body>

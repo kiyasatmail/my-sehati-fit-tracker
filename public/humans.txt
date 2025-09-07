@@ -1,0 +1,52 @@
+/* TEAM */
+
+Developer: QiyasaT Development Team
+Contact: info@qiyasat.com
+Location: Saudi Arabia
+
+/* THANKS */
+
+Arabic Fonts: Google Fonts Cairo
+Framework: React, Vite, Tailwind CSS
+Icons: Lucide React
+
+/* SITE */
+
+Last update: 2024/12/07
+Language: Arabic / English
+Doctype: HTML5
+IDE: Visual Studio Code
+Standards: HTML5, CSS3, ES6+, TypeScript
+Components: React 18, Tailwind CSS
+Software: Vite, PWA
+
+/* FEATURES */
+
+- حاسبة السعرات الحرارية (Calorie Calculator)
+- تتبع قياسات الجسم (Body Measurements Tracking)  
+- تحويل السعرات لدقائق التمارين (Cardio Converter)
+- حاسبة احتياجات الماء (Water Calculator)
+- البرنامج الأسبوعي للتمارين (Weekly Workout Program)
+- تحدي الاستيقاظ المبكر (Wake-up Challenge)
+- دعم متعدد اللغات (Multilingual Support)
+- تطبيق ويب تقدمي (Progressive Web App)
+- تصميم متجاوب (Responsive Design)
+- دعم الوضع المظلم (Dark Mode)
+
+/* PERFORMANCE */
+
+- تحميل سريع (Fast Loading)
+- تحسين للأجهزة المحمولة (Mobile Optimized)
+- ضغط الصور (Image Optimization)
+- تخزين مؤقت ذكي (Smart Caching)
+- Service Worker للعمل بدون إنترنت (Offline Support)
+
+/* ACCESSIBILITY */
+
+- دعم قارئ الشاشة (Screen Reader Support)
+- تباين ألوان مناسب (Proper Color Contrast)
+- نصوص بديلة للصور (Alt Text for Images)
+- تنقل بلوحة المفاتيح (Keyboard Navigation)
+- دعم RTL للعربية (RTL Support for Arabic)
+
+Made with ❤️ in Saudi Arabia

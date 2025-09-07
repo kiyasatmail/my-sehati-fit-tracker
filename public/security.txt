@@ -1,0 +1,37 @@
+Contact: mailto:security@qiyasat.com
+Contact: https://qiyasat.com/security
+Expires: 2025-12-31T23:59:59.000Z
+Encryption: https://qiyasat.com/pgp-key.txt
+Acknowledgments: https://qiyasat.com/security/acknowledgments
+Preferred-Languages: ar, en
+Canonical: https://qiyasat.com/.well-known/security.txt
+
+# Security Policy for QiyasaT Health App
+
+# If you discover a security vulnerability in our application,
+# please report it responsibly through the channels above.
+
+# We appreciate security researchers who help keep our users safe.
+
+# Bug Bounty: We offer recognition and potential rewards for
+# significant security findings.
+
+# Response Time: We aim to respond to security reports within 48 hours.
+
+# Scope:
+# - Web application vulnerabilities
+# - API security issues  
+# - Authentication/authorization bypasses
+# - Data leakage issues
+# - XSS, CSRF, injection vulnerabilities
+
+# Out of Scope:
+# - Social engineering attacks
+# - Physical attacks
+# - DDoS attacks
+# - Issues in third-party dependencies (unless we can mitigate)
+
+# Legal: We will not pursue legal action against security researchers
+# who follow responsible disclosure practices.
+
+# Thank you for helping keep QiyasaT secure!

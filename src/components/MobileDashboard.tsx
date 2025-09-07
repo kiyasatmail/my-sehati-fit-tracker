@@ -77,20 +77,20 @@ export const MobileDashboard: React.FC<MobileDashboardProps> = ({ onViewChange }
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <main className="min-h-screen bg-gray-50 dark:bg-gray-900" role="main" aria-label={isRTL ? 'لوحة التحكم الرئيسية' : 'Main Dashboard'}>
       {/* Welcome Section */}
-      <div className="px-4 py-6">
-        <div className="mb-6">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-            {isRTL ? 'مرحباً بك' : 'Welcome'}
-          </h2>
-          <p className="text-gray-600 dark:text-gray-400">
-            {isRTL ? 'اختر الخدمة التي تريدها' : 'Choose the service you need'}
+      <section className="px-4 py-6" aria-labelledby="welcome-heading">
+        <header className="mb-6">
+          <h1 id="welcome-heading" className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+            {isRTL ? 'مرحباً بك في قياساتي' : 'Welcome to QiyasaT'}
+          </h1>
+          <p className="text-gray-600 dark:text-gray-400" role="doc-subtitle">
+            {isRTL ? 'اختر الخدمة التي تريدها من تطبيق الصحة الشامل' : 'Choose the health service you need from our comprehensive app'}
           </p>
-        </div>
+        </header>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-2 gap-4">
+        <nav className="grid grid-cols-2 gap-4" role="navigation" aria-label={isRTL ? 'خدمات التطبيق' : 'App Services'}>
           {services.map((service) => {
             const Icon = service.icon;
             return (
@@ -98,29 +98,38 @@ export const MobileDashboard: React.FC<MobileDashboardProps> = ({ onViewChange }
                 key={service.key}
                 className="border-0 shadow-card hover:shadow-hero transition-smooth hover:-translate-y-1 cursor-pointer overflow-hidden h-32"
                 onClick={() => onViewChange(service.key as any)}
+                role="button"
+                tabIndex={0}
+                aria-label={`${service.title} - ${service.subtitle}`}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    onViewChange(service.key as any);
+                  }
+                }}
               >
                 <CardContent className="p-0 h-full">
-                  <div className={`${service.color} p-3 text-white h-full flex flex-col`}>
+                  <article className={`${service.color} p-3 text-white h-full flex flex-col`}>
                     <div className={`flex ${isRTL ? 'flex-row-reverse justify-start' : 'flex-row justify-end'} items-start mb-3`}>
-                      <div className={`p-2 rounded-lg ${service.iconBg}`}>
-                        <Icon className={`h-5 w-5 ${service.iconColor}`} />
+                      <div className={`p-2 rounded-lg ${service.iconBg}`} role="img" aria-label={`${service.title} icon`}>
+                        <Icon className={`h-5 w-5 ${service.iconColor}`} aria-hidden="true" />
                       </div>
                     </div>
                     <div className={`flex-1 flex flex-col justify-end ${isRTL ? 'text-right' : 'text-left'}`}>
-                      <h3 className="font-bold text-base mb-1 leading-tight text-white drop-shadow-sm">
+                      <h2 className="font-bold text-base mb-1 leading-tight text-white drop-shadow-sm">
                         {service.title}
-                      </h3>
+                      </h2>
                       <p className="text-white text-xs leading-relaxed drop-shadow-sm opacity-95">
                         {service.subtitle}
                       </p>
                     </div>
-                  </div>
+                  </article>
                 </CardContent>
               </Card>
             );
           })}
-        </div>
-      </div>
-    </div>
+        </nav>
+      </section>
+    </main>
   );
 };
