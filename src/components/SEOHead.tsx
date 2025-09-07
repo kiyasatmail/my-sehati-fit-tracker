@@ -139,7 +139,7 @@ function updateStructuredData(title?: string, description?: string, canonical?: 
       "about": {
         "@type": "HealthAndFitnessApplication",
         "name": "QiyasaT",
-        "description": "تطبيق قياساتي الشامل للصحة واللياقة"
+        "description": "تطبيق QiyasaT الشامل للصحة واللياقة"
       },
       "breadcrumb": {
         "@type": "BreadcrumbList",
