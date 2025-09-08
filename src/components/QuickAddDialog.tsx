@@ -89,7 +89,7 @@ export const QuickServicesDialog: React.FC<QuickServicesDialogProps> = ({
             <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-lg">ص</span>
             </div>
-            {isRTL ? 'خدمات QiyasaT' : 'Qiyasat Services'}
+            {isRTL ? 'خدمات QiyasaT' : 'QiyasaT Services'}
             {isRTL ? 'خدمات QiyasaT' : 'QiyasaT Services'}
           </DialogTitle>
         </DialogHeader>
