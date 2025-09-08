@@ -487,7 +487,6 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const isRTL = language === 'ar';
 
   useEffect(() => {
-    const savedLanguage = localStorage.getItem('sehati-language') as Language;
     const savedLanguage = localStorage.getItem('qiyasat-language') as Language;
     if (savedLanguage && ['ar', 'en'].includes(savedLanguage)) {
       setLanguage(savedLanguage);
@@ -495,7 +494,6 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('sehati-language', language);
     localStorage.setItem('qiyasat-language', language);
     document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
     document.documentElement.lang = language;

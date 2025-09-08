@@ -61,7 +61,6 @@ export const CalorieCalculator: React.FC = () => {
 
   // Load saved calculations from localStorage
   useEffect(() => {
-    const saved = localStorage.getItem('sehati-calorie-calculations');
     const saved = localStorage.getItem('qiyasat-calorie-calculations');
     if (saved) {
       try {
@@ -74,7 +73,6 @@ export const CalorieCalculator: React.FC = () => {
 
   // Save calculations to localStorage
   useEffect(() => {
-    localStorage.setItem('sehati-calorie-calculations', JSON.stringify(savedCalculations));
     localStorage.setItem('qiyasat-calorie-calculations', JSON.stringify(savedCalculations));
   }, [savedCalculations]);
 
