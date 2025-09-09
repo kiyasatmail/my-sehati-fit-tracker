@@ -17,9 +17,8 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     if (savedTheme && ['light', 'dark'].includes(savedTheme)) {
       setTheme(savedTheme);
     } else {
-      // Check system preference
-      const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      setTheme(systemPrefersDark ? 'dark' : 'light');
+      // Default to light theme for all new users
+      setTheme('light');
     }
   }, []);
 
